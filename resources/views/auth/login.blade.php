@@ -33,7 +33,7 @@
 
                                                     <h4 class="mb-3"><i
                                                             class="bx bxs-quote-alt-left text-primary h1 align-middle me-3"></i><span
-                                                            class="text-primary">5k</span>+ Satisfied clients</h4>
+                                                            class="text-primary">5k</span>+ Satisfied clients super_admin@test.com dev@12345</h4>
 
                                                     <div dir="ltr">
                                                         <div class="owl-carousel owl-theme auth-review-carousel"

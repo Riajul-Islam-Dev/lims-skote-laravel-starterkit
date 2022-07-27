@@ -1,11 +1,11 @@
 @extends('layouts.master')
 
-@section('title') @lang('translation.Dashboards') @endsection
+@section('title') Home @endsection
 
 @section('content')
 
     @component('components.breadcrumb')
-        @slot('li_1') Dashboards @endslot
+        @slot('li_1') LIMS @endslot
         @slot('title') Dashboard @endslot
     @endcomponent
 

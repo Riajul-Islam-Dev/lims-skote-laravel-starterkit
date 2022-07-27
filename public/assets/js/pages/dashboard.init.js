@@ -10,9 +10,12 @@ Contact: themesbrand@gmail.com
 File: Dashboard Init Js File
 */
 //  subscribe modal
-setTimeout(function () {
-  $('#subscribeModal').modal('show');
-}, 2000); // stacked column chart
+
+// setTimeout(function () {
+//   $('#subscribeModal').modal('show');
+// }, 2000);
+
+// stacked column chart
 
 var options = {
   chart: {

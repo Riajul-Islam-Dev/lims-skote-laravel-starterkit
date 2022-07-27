@@ -3,18 +3,24 @@
 
 <head>
     <meta charset="utf-8" />
-    <title> @yield('title') | Home</title>
+    <title> @yield('title') | LIMS</title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta content="Premium Multipurpose Admin & Dashboard Template" name="description" />
     <meta content="Themesbrand" name="author" />
     <!-- App favicon -->
     <link rel="shortcut icon" href="{{ URL::asset('assets/images/favicon.ico') }}">
     @include('layouts.head-css')
+    @yield('css')
+
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.1/css/all.min.css"
+        integrity="sha512-KfkfwYDsLkIlwQp6LFnl8zNdLGxu9YAA1QvwINks4PhcElQSvqcyVLLD9aMhXd13uQjoXtEKNosOWaZqXgel0g=="
+        crossorigin="anonymous" referrerpolicy="no-referrer" />
 </head>
 
 @section('body')
+
     <body data-topbar="dark" data-layout="horizontal">
-@show
+    @show
 
     <!-- Begin page -->
     <div id="layout-wrapper">
@@ -36,10 +42,6 @@
         <!-- ============================================================== -->
     </div>
     <!-- END wrapper -->
-
-    <!-- Right Sidebar -->
-    @include('layouts.right-sidebar')
-    <!-- END Right Sidebar -->
 
     @include('layouts.vendor-scripts')
 </body>
