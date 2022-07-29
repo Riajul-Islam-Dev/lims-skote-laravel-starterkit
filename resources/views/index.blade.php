@@ -1,55 +1,95 @@
 @extends('layouts.master')
 
-@section('title') Home @endsection
+@section('title')
+    Home
+@endsection
+
+@section('css')
+    <!-- owl.carousel css -->
+    <link rel="stylesheet" href="{{ URL::asset('/assets/libs/owl.carousel/owl.carousel.min.css') }}">
+@endsection
 
 @section('content')
-
     @component('components.breadcrumb')
-        @slot('li_1') LIMS @endslot
-        @slot('title') Dashboard @endslot
+        @slot('li_1')
+            LIMS
+        @endslot
+        @slot('title')
+            Dashboard
+        @endslot
     @endcomponent
 
-    <!-- subscribeModal -->
-    <div class="modal fade" id="subscribeModal" tabindex="-1" aria-labelledby="subscribeModalLabel" aria-hidden="true">
-        <div class="modal-dialog modal-dialog-centered">
-            <div class="modal-content">
-                <div class="modal-header border-bottom-0">
-                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                </div>
-                <div class="modal-body">
-                    <div class="text-center mb-4">
-                        <div class="avatar-md mx-auto mb-4">
-                            <div class="avatar-title bg-light rounded-circle text-primary h1">
-                                <i class="mdi mdi-email-open"></i>
+    <div class="row">
+        <div class="col-md-8">
+            <div class="text-center">
+
+                <h4 class="mb-3"><i class="bx bxs-quote-alt-left text-primary h1 align-middle me-3"></i><span
+                        class="text-primary">5k</span>+ Satisfied clients</h4>
+
+                <div dir="ltr">
+                    <div class="owl-carousel owl-theme auth-review-carousel" id="auth-review-carousel">
+                        <div class="item">
+                            <div class="py-3">
+                                <p class="font-size-16 mb-4">" Fantastic theme with a
+                                    ton of options. If you just want the HTML to
+                                    integrate with your project, then this is the
+                                    package. You can find the files in the 'dist'
+                                    folder...no need to install git and all the other
+                                    stuff the documentation talks about. "</p>
+
+                                <div>
+                                    <h4 class="font-size-16 text-primary">Riajul Islam</h4>
+                                    <p class="font-size-14 mb-0">- Developer</p>
+                                </div>
                             </div>
+
                         </div>
 
-                        <div class="row justify-content-center">
-                            <div class="col-xl-10">
-                                <h4 class="text-primary">Subscribe !</h4>
-                                <p class="text-muted font-size-14 mb-4">Subscribe our newletter and get notification to stay
-                                    update.</p>
+                        <div class="item">
+                            <div class="py-3">
+                                <p class="font-size-16 mb-4">" If Every Vendor on Envato
+                                    are as supportive as Themesbrand, Development with
+                                    be a nice experience. You guys are Wonderful. Keep
+                                    us the good work. "</p>
 
-                                <div class="input-group bg-light rounded">
-                                    <input type="email" class="form-control bg-transparent border-0"
-                                        placeholder="Enter Email address" aria-label="Recipient's username"
-                                        aria-describedby="button-addon2">
-
-                                    <button class="btn btn-primary" type="button" id="button-addon2">
-                                        <i class="bx bxs-paper-plane"></i>
-                                    </button>
-
+                                <div>
+                                    <h4 class="font-size-16 text-primary">Riajul Islam</h4>
+                                    <p class="font-size-14 mb-0">- Developer</p>
                                 </div>
-
                             </div>
+
                         </div>
                     </div>
                 </div>
             </div>
         </div>
-    </div>
-    <!-- end modal -->
+        <div class="col-md-4">
+            <div class="mapouter">
+                <div class="gmap_canvas"><iframe width="350" height="300" id="gmap_canvas"
+                        src="https://maps.google.com/maps?q=leotechbd&t=&z=15&ie=UTF8&iwloc=&output=embed" frameborder="0"
+                        scrolling="no" marginheight="0" marginwidth="0"></iframe><a
+                        href="https://fmovies-online.net"></a><br>
+                    <style>
+                        .mapouter {
+                            position: relative;
+                            text-align: right;
+                            height: 300px;
+                            width: 350px;
+                        }
+                    </style>
+                    <style>
+                        .gmap_canvas {
+                            overflow: hidden;
+                            background: none !important;
+                            height: 300px;
+                            width: 350px;
+                        }
+                    </style>
+                </div>
+            </div>
+        </div>
 
+    </div>
 @endsection
 @section('script')
     <!-- apexcharts -->
@@ -57,4 +97,9 @@
 
     <!-- dashboard init -->
     <script src="{{ URL::asset('/assets/js/pages/dashboard.init.js') }}"></script>
+
+    <!-- owl.carousel js -->
+    <script src="{{ URL::asset('/assets/libs/owl.carousel/owl.carousel.min.js') }}"></script>
+    <!-- auth-2-carousel init -->
+    <script src="{{ URL::asset('/assets/js/pages/auth-2-carousel.init.js') }}"></script>
 @endsection
