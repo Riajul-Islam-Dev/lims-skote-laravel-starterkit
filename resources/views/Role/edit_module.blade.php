@@ -27,7 +27,7 @@
                         <div class="row">
                             <div class="col-md-6">
                                 <div class="mb-3 position-relative">
-                                    <label for="name" class="form-label">Module Name <span style="color: red">*</span></label>
+                                    <label for="name" class="form-label">Name <span style="color: red">*</span></label>
                                     <input type="text" class="form-control" id="name" name="name" value="{{ $edit_module_data->name }}"
                                         placeholder="Name" required>
                                     <div class="valid-tooltip">
@@ -64,7 +64,7 @@
                         </div>
 
                         <div>
-                            <button class="btn btn-primary mt-5" type="submit" value="submit">Submit</button>
+                            <button class="btn btn-primary mt-5" type="submit" value="submit">Submit form</button>
                         </div>
                     </form>
                 </div>

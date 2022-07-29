@@ -5,7 +5,7 @@
             <div class="navbar-brand-box">
                 <a href="index" class="logo logo-light">
                     <span class="logo-sm">
-                        <img src="{{ URL::asset('/assets/images/leotech-logo.svg') }}" alt="" height="43">
+                        <img src="{{ URL::asset('/assets/images/leotech-logo.png') }}" alt="" height="43">
                     </span>
                     <span class="logo-lg">
                         <img src="{{ URL::asset('/assets/images/leotech-logo.png') }}" alt="" height="40">

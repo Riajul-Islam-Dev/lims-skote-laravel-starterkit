@@ -1,7 +1,7 @@
 @extends('layouts.master')
 
 @section('title')
-    Edit Module
+    Add Module
 @endsection
 
 @section('content')
@@ -10,7 +10,7 @@
             LIMS
         @endslot
         @slot('title')
-            Edit Module
+            Add Module
         @endslot
     @endcomponent
 
@@ -18,17 +18,17 @@
         <div class="col-12">
             <div class="card">
                 <div class="card-body">
-                    <h4 class="card-title">Edit Module Form:</h4>
-                    <p class="card-title-desc">Please fill up the edit Module form carefully. Fields marked with <span
+                    <h4 class="card-title">New Module Form:</h4>
+                    <p class="card-title-desc">Please fill up the new Module form carefully. Fields marked with <span
                             style="color: red">*</span> are required.
                     </p>
-                    <form action="{{ url('/update_module/' . $edit_module_data->id) }}" method="POST" class="needs-validation" novalidate>
+                    <form action="{{ url('/save_module') }}" method="POST" class="needs-validation" novalidate>
                         @csrf
                         <div class="row">
                             <div class="col-md-6">
                                 <div class="mb-3 position-relative">
-                                    <label for="name" class="form-label">Module Name <span style="color: red">*</span></label>
-                                    <input type="text" class="form-control" id="name" name="name" value="{{ $edit_module_data->name }}"
+                                    <label for="name" class="form-label">Name <span style="color: red">*</span></label>
+                                    <input type="text" class="form-control" id="name" name="name"
                                         placeholder="Name" required>
                                     <div class="valid-tooltip">
                                         Looks good!
@@ -42,7 +42,7 @@
                                 <div class="mb-3 position-relative">
                                     <label for="module_folder" class="form-label">Module Folder <span
                                             style="color: red">*</span></label>
-                                    <input type="text" class="form-control" id="module_folder" name="module_folder" value="{{ $edit_module_data->module_folder }}"
+                                    <input type="text" class="form-control" id="module_folder" name="module_folder"
                                         placeholder="Module Folder" required>
                                     <div class="valid-tooltip">
                                         Looks good!
@@ -64,7 +64,7 @@
                         </div>
 
                         <div>
-                            <button class="btn btn-primary mt-5" type="submit" value="submit">Submit</button>
+                            <button class="btn btn-primary mt-5" type="submit" value="submit">Submit form</button>
                         </div>
                     </form>
                 </div>

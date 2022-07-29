@@ -1,7 +1,7 @@
 @extends('layouts.master')
 
 @section('title')
-    Show User
+    Show Module
 @endsection
 
 @section('css')
@@ -15,7 +15,7 @@
             LIMS
         @endslot
         @slot('title')
-            Show User
+            Show Module
         @endslot
     @endcomponent
 
@@ -24,18 +24,17 @@
             <div class="card">
                 <div class="card-body">
 
-                    <h4 class="card-title">User List:</h4>
-                    <p class="card-title-desc">All Users are listed in the data table here.
+                    <h4 class="card-title">Module List:</h4>
+                    <p class="card-title-desc">All Modules are listed in the data table here.
                     </p>
 
                     <table id="datatable-buttons" class="table table-bordered dt-responsive nowrap w-100">
-                        <a href="{{ url('/add_user') }}" class="btn btn-success my-3"><i
-                                class="fa-solid fa-circle-plus"></i> Add new User</a>
+                        <a href="{{ url('/add_module') }}" class="btn btn-success my-3"><i class="fa-solid fa-circle-plus"></i> Add new Module</a>
                         <thead>
                             <tr>
                                 <th>ID</th>
-                                <th>User Name</th>
-                                <th>User Email</th>
+                                <th>Module Name</th>
+                                <th>Module Folder</th>
                                 <th>Status</th>
                                 <th>Action</th>
                             </tr>
@@ -43,17 +42,16 @@
 
 
                         <tbody>
-                            @foreach ($show_user_data as $key => $data)
+                            @foreach ($show_module_data as $key => $data)
                                 <tr>
                                     <th scope="row">{{ $key + 1 }}</th>
                                     <td>{{ $data->name }}</td>
-                                    <td>{{ $data->email }}</td>
-                                    {{-- <td>{{ $data->status }}</td> --}}
-                                    <td>Status pending</td>
+                                    <td>{{ $data->module_folder }}</td>
+                                    <td>{{ $data->status }}</td>
                                     <td>
-                                        <a href="{{ url('/edit_user/' . $data->id) }}" class="btn btn-warning"><i
+                                        <a href="{{ url('/edit_module/' . $data->id) }}" class="btn btn-warning"><i
                                                 class="fa-solid fa-pen-to-square"></i> Edit</a>
-                                        <a href="{{ url('/delete_user/' . $data->id) }}" class="btn btn-danger"
+                                        <a href="{{ url('/delete_module/' . $data->id) }}" class="btn btn-danger"
                                             onclick="return confirm('Delete Data?')"><i class="fa-solid fa-trash-can"></i>
                                             Delete</a>
                                     </td>

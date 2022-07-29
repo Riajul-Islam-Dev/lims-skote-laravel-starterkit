@@ -67,13 +67,13 @@ class RegisterController extends Controller
      */
     protected function create(array $data)
     {
-        if (request()->has('avatar')) {            
+        if (request()->has('avatar')) {
             $avatar = request()->file('avatar');
             $avatarName = time() . '.' . $avatar->getClientOriginalExtension();
             $avatarPath = public_path('/images/');
             $avatar->move($avatarPath, $avatarName);
         }
-        
+
         return User::create([
             'name' => $data['name'],
             'email' => $data['email'],

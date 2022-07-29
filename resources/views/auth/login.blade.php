@@ -1,7 +1,7 @@
 @extends('layouts.master-without-nav')
 
 @section('title')
-    @lang('translation.Login') 2
+    Login
 @endsection
 
 @section('css')
@@ -15,7 +15,6 @@
     @endsection
 
     @section('content')
-
         <div>
             <div class="container-fluid p-0">
                 <div class="row g-0">
@@ -33,14 +32,15 @@
 
                                                     <h4 class="mb-3"><i
                                                             class="bx bxs-quote-alt-left text-primary h1 align-middle me-3"></i><span
-                                                            class="text-primary">5k</span>+ Satisfied clients super_admin@test.com dev@12345</h4>
+                                                            class="text-primary">5k</span>+ Satisfied clients</h4>
 
                                                     <div dir="ltr">
                                                         <div class="owl-carousel owl-theme auth-review-carousel"
                                                             id="auth-review-carousel">
                                                             <div class="item">
                                                                 <div class="py-3">
-                                                                    <p class="font-size-16 mb-4">" Fantastic theme with a
+                                                                    <p class="font-size-16 mb-4">" super_admin@test.com
+                                                                        dev@12345. Fantastic theme with a
                                                                         ton of options. If you just want the HTML to
                                                                         integrate with your project, then this is the
                                                                         package. You can find the files in the 'dist'
@@ -48,8 +48,9 @@
                                                                         stuff the documentation talks about. "</p>
 
                                                                     <div>
-                                                                        <h4 class="font-size-16 text-primary">Abs1981</h4>
-                                                                        <p class="font-size-14 mb-0">- Skote User</p>
+                                                                        <h4 class="font-size-16 text-primary">Riajul Islam
+                                                                        </h4>
+                                                                        <p class="font-size-14 mb-0">- Developer</p>
                                                                     </div>
                                                                 </div>
 
@@ -63,8 +64,10 @@
                                                                         us the good work. "</p>
 
                                                                     <div>
-                                                                        <h4 class="font-size-16 text-primary">nezerious</h4>
-                                                                        <p class="font-size-14 mb-0">- Skote User</p>
+                                                                        <h4 class="font-size-16 text-primary">Riajul Islam
+                                                                        </h4>
+                                                                        <p class="font-size-14 mb-0">- Software Developer
+                                                                        </p>
                                                                     </div>
                                                                 </div>
 
@@ -88,17 +91,17 @@
                                 <div class="d-flex flex-column h-100">
                                     <div class="mb-4 mb-md-5">
                                         <a href="index" class="d-block auth-logo">
-                                            <img src="{{ URL::asset('/assets/images/logo-dark.png') }}" alt="" height="18"
-                                                class="auth-logo-dark">
-                                            <img src="{{ URL::asset('/assets/images/logo-light.png') }}" alt="" height="18"
-                                                class="auth-logo-light">
+                                            <img src="{{ URL::asset('/assets/images/leotech-logo.png') }}" alt=""
+                                                height="43" class="auth-logo-dark">
+                                            <img src="{{ URL::asset('/assets/images/leotech-logo.png') }}" alt=""
+                                                height="40" class="auth-logo-light">
                                         </a>
                                     </div>
                                     <div class="my-auto">
 
                                         <div>
                                             <h5 class="text-primary">Welcome Back !</h5>
-                                            <p class="text-muted">Sign in to continue to Skote.</p>
+                                            <p class="text-muted">Sign in to continue.</p>
                                         </div>
 
                                         <div class="mt-4">
@@ -155,7 +158,7 @@
                                                         In</button>
                                                 </div>
 
-                                                <div class="mt-4 text-center">
+                                                {{-- <div class="mt-4 text-center">
                                                     <h5 class="font-size-14 mb-3">Sign in with</h5>
 
                                                     <ul class="list-inline">
@@ -178,21 +181,23 @@
                                                             </a>
                                                         </li>
                                                     </ul>
-                                                </div>
+                                                </div> --}}
                                             </form>
-                                            <div class="mt-5 text-center">
+                                            {{-- <div class="mt-5 text-center">
                                                 <p>Don't have an account ? <a href="{{ url('register') }}"
                                                         class="fw-medium text-primary"> Signup now </a> </p>
-                                            </div>
+                                            </div> --}}
                                         </div>
                                     </div>
 
                                     <div class="mt-4 mt-md-5 text-center">
-                                        <p class="mb-0">© <script>
+                                        <p class="mb-0">©
+                                            <script>
                                                 document.write(new Date().getFullYear())
-
-                                            </script> Skote. Crafted with <i class="mdi mdi-heart text-danger"></i> by
-                                            Themesbrand</p>
+                                            </script> Leotech. Crafted with <i
+                                                class="mdi mdi-heart text-danger"></i> by
+                                            Riajul Islam
+                                        </p>
                                     </div>
                                 </div>
 
@@ -206,7 +211,6 @@
             </div>
             <!-- end container-fluid -->
         </div>
-
     @endsection
     @section('script')
         <!-- owl.carousel js -->
