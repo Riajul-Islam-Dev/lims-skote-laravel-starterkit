@@ -70,7 +70,8 @@ class UserController extends Controller
             $avatar->move($avatarPath, $avatarName);
         }
 
-        $user = new User();
+        $user = User::find($id);
+
 
         $user->name = $request->name;
         $user->email = $request->email;
@@ -83,7 +84,8 @@ class UserController extends Controller
         } else {
             $request->status = "Inactive";
         }
-        // $user->status = $request->status;
+
+        $user->save();
 
         Session::flash('msg', 'User\'s Data updated successfully!');
 

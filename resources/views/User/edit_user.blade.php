@@ -29,7 +29,7 @@
                     <p class="card-title-desc">Please fill up the edit User form carefully. Fields marked with <span
                             style="color: red">*</span> are required.
                     </p>
-                    <form action="{{ url('/update_user') }}" method="POST" class="needs-validation" novalidate
+                    <form action="{{ url('/update_user/' . $edit_user_data->id) }}" method="POST" class="needs-validation" novalidate
                         enctype="multipart/form-data">
                         @csrf
                         <div class="row">
