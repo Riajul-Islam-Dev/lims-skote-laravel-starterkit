@@ -6,6 +6,7 @@ use App\Http\Controllers\ModuleController;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\RoleController;
 use App\Http\Controllers\RightController;
+use App\Http\Controllers\MenuController;
 
 /*
 |--------------------------------------------------------------------------
@@ -63,3 +64,11 @@ Route::post('/save_right', [RightController::class, 'saveRight']);
 Route::get('/edit_right/{id}', [RightController::class, 'editRight']);
 Route::post('/update_right/{id}', [RightController::class, 'updateRight']);
 Route::get('/delete_right/{id}', [RightController::class, 'deleteRight']);
+
+// Menu
+Route::get('/show_menu', [MenuController::class, 'showMenu']);
+Route::get('/add_menu', [MenuController::class, 'addMenu']);
+Route::post('/save_menu', [MenuController::class, 'saveMenu']);
+Route::get('/edit_menu/{id}', [MenuController::class, 'editMenu']);
+Route::post('/update_menu/{id}', [MenuController::class, 'updateMenu']);
+Route::get('/delete_menu/{id}', [MenuController::class, 'deleteMenu']);

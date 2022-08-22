@@ -886,6 +886,22 @@
                             <a class="dropdown-item" href="{{ url('/show_user') }}">{{ __('Users') }}</a>
                             <a class="dropdown-item" href="{{ url('/show_role') }}">{{ __('Roles') }}</a>
                             <a class="dropdown-item" href="{{ url('/show_right') }}">{{ __('Rights') }}</a>
+                            <a class="dropdown-item" href="{{ url('/show_menu') }}">{{ __('Menu') }}</a>
+                        </div>
+                    </li>
+
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle arrow-none" href="#" id="topnav-dynamic-menu"
+                            role="button">
+                            <i class="bx bx-layout me-2"></i><span key="t-layouts">Dynamic Menu</span>
+                            <div class="arrow-down"></div>
+                        </a>
+
+                        <div class="dropdown-menu" aria-labelledby="topnav-dynamic-menu">
+                            <a class="dropdown-item" href="{{ url('/show_module') }}">{{ __('Modules') }}</a>
+                            <a class="dropdown-item" href="{{ url('/show_user') }}">{{ __('Users') }}</a>
+                            <a class="dropdown-item" href="{{ url('/show_role') }}">{{ __('Roles') }}</a>
+                            <a class="dropdown-item" href="{{ url('/show_right') }}">{{ __('Rights') }}</a>
                         </div>
                     </li>
 
