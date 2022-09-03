@@ -50,12 +50,16 @@
                                     <label for="department_name" class="form-label">Department Name <span
                                             style="color: red">*</span></label>
                                     <select class="form-control select2" id="department_name" name="department_name"
-                                        value="{{ $edit_role_section_data->department_name }}"
                                         placeholder="Select Department Name" required>
                                         <option selected disabled>Select Department Name</option>
                                         @foreach ($department_data as $department_individual_data)
-                                            <option value="{{ $department_individual_data->id }}">
-                                                {{ $department_individual_data->department_name }}</option>
+                                            @if ($edit_role_section_data->department_name == $department_individual_data->id)
+                                                <option value="{{ $department_individual_data->id }}" selected>
+                                                    {{ $department_individual_data->department_name }}</option>
+                                            @else
+                                                <option value="{{ $department_individual_data->id }}">
+                                                    {{ $department_individual_data->department_name }}</option>
+                                            @endif
                                         @endforeach
                                     </select>
                                     <div class="valid-tooltip">
