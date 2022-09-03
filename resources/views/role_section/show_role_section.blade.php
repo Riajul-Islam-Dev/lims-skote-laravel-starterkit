@@ -34,8 +34,8 @@
                         <thead>
                             <tr>
                                 <th>ID</th>
-                                <th>Role Section Group Name</th>
                                 <th>Role Section Name</th>
+                                <th>Department Name</th>
                                 <th>Status</th>
                                 <th>Action</th>
                             </tr>
@@ -46,8 +46,8 @@
                             @foreach ($show_role_section_data as $key => $data)
                                 <tr>
                                     <th scope="row">{{ $key + 1 }}</th>
-                                    <td>{{ $data->role_section_group_name }}</td>
                                     <td>{{ $data->role_section_name }}</td>
+                                    <td>{{ $data->department_name }}</td>
                                     <td>{{ $data->status }}</td>
                                     <td>
                                         <a href="{{ url('/edit_role_section/' . $data->id) }}" class="btn btn-warning"><i

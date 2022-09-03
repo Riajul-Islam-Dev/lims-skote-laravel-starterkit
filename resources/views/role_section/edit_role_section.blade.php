@@ -32,32 +32,38 @@
                         <div class="row">
                             <div class="col-md-6">
                                 <div class="mb-3 position-relative">
-                                    <label for="role_section_group_name" class="form-label">Role Section Group Name <span
-                                            style="color: red">*</span></label>
-                                    <input type="text" class="form-control" id="role_section_group_name"
-                                        name="role_section_group_name"
-                                        value="{{ $edit_role_section_data->role_section_group_name }}"
-                                        placeholder="Role Section Group Name" required>
-                                    <div class="valid-tooltip">
-                                        Looks good!
-                                    </div>
-                                    <div class="invalid-tooltip">
-                                        Please enter new Role Section Group name!
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="col-md-6">
-                                <div class="mb-3 position-relative">
                                     <label for="role_section_name" class="form-label">Role Section Name <span
                                             style="color: red">*</span></label>
                                     <input type="text" class="form-control" id="role_section_name"
-                                        name="role_section_name" value="{{ $edit_role_section_data->role_section_name }}"
+                                        name="role_section_name"
+                                        value="{{ $edit_role_section_data->role_section_name }}"
                                         placeholder="Role Section Name" required>
                                     <div class="valid-tooltip">
                                         Looks good!
                                     </div>
                                     <div class="invalid-tooltip">
                                         Please enter new Role Section name!
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="mb-3 position-relative">
+                                    <label for="department_name" class="form-label">Department Name <span
+                                            style="color: red">*</span></label>
+                                    <select class="form-control select2" id="department_name" name="department_name"
+                                        value="{{ $edit_role_section_data->department_name }}"
+                                        placeholder="Select Department Name" required>
+                                        <option selected disabled>Select Department Name</option>
+                                        @foreach ($department_data as $department_name)
+                                            <option value="{{ $department_name }}">{{ Str::title($department_name) }}
+                                            </option>
+                                        @endforeach
+                                    </select>
+                                    <div class="valid-tooltip">
+                                        Looks good!
+                                    </div>
+                                    <div class="invalid-tooltip">
+                                        Select Department Name!
                                     </div>
                                 </div>
                             </div>

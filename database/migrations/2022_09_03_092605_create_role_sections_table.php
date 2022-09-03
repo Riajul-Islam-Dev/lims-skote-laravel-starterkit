@@ -15,8 +15,8 @@ class CreateRoleSectionsTable extends Migration
     {
         Schema::create('role_sections', function (Blueprint $table) {
             $table->id();
-            $table->string('role_section_group_name');
             $table->string('role_section_name');
+            $table->string('department_name');
             $table->string('status');
             $table->timestamps();
         });

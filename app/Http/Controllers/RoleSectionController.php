@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\RoleSection;
+use App\Models\Department;
 use Session;
 
 class RoleSectionController extends Controller
@@ -18,15 +19,17 @@ class RoleSectionController extends Controller
 
     public function addRoleSection()
     {
-        return view('role_section/add_role_section');
+        $department_data = Department::pluck('department_name')->toArray();
+        // dd($department_data);
+        return view('role_section/add_role_section', compact('department_data'));
     }
 
     public function saveRoleSection(Request $request)
     {
         $role_section = new RoleSection();
 
-        $role_section->role_section_group_name = $request->role_section_group_name;
         $role_section->role_section_name = $request->role_section_name;
+        $role_section->department_name = $request->department_name;
 
         if ($request->status == "on") {
             $request->status = "Active";
@@ -47,15 +50,17 @@ class RoleSectionController extends Controller
     public function editRoleSection($id = null)
     {
         $edit_role_section_data = RoleSection::find($id);
-        return view('role_section/edit_role_section', compact('edit_role_section_data'));
+        $department_data = Department::pluck('department_name')->toArray();
+
+        return view('role_section/edit_role_section', compact('edit_role_section_data', 'department_data'));
     }
 
     public function updateRoleSection(Request $request, $id)
     {
         $role_section = RoleSection::find($id);
 
-        $role_section->role_section_group_name = $request->role_section_group_name;
         $role_section->role_section_name = $request->role_section_name;
+        $role_section->department_name = $request->department_name;
 
         if ($request->status == "on") {
             $request->status = "Active";
