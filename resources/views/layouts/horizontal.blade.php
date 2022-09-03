@@ -888,6 +888,7 @@
                             <a class="dropdown-item" href="{{ url('/show_role_section') }}">{{ __('Role Sections') }}</a>
                             <a class="dropdown-item" href="{{ url('/show_right') }}">{{ __('Rights') }}</a>
                             <a class="dropdown-item" href="{{ url('/show_menu') }}">{{ __('Menu') }}</a>
+                            <a class="dropdown-item" href="{{ url('/show_department') }}">{{ __('Department') }}</a>
                         </div>
                     </li>
 

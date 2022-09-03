@@ -1,7 +1,7 @@
 @extends('layouts.master')
 
 @section('title')
-    Add Role Section
+    Edit Department
 @endsection
 
 @section('css')
@@ -14,7 +14,7 @@
             LIMS
         @endslot
         @slot('title')
-            Add Role Section
+            Edit Department
         @endslot
     @endcomponent
 
@@ -22,47 +22,39 @@
         <div class="col-12">
             <div class="card">
                 <div class="card-body">
-                    <h4 class="card-title">New Role Section Form:</h4>
-                    <p class="card-title-desc">Please fill up the new Role Section form carefully. Fields marked with <span
+                    <h4 class="card-title">Edit Department Form:</h4>
+                    <p class="card-title-desc">Please fill up the edit Department form carefully. Fields marked with <span
                             style="color: red">*</span> are required.
                     </p>
-                    <form action="{{ url('/save_role_section') }}" method="POST" class="needs-validation" novalidate>
+                    <form action="{{ url('/update_department/' . $edit_department_data->id) }}" method="POST"
+                        class="needs-validation" novalidate>
                         @csrf
                         <div class="row">
                             <div class="col-md-6">
                                 <div class="mb-3 position-relative">
-                                    <label for="role_section_group_name" class="form-label">Role Section Group Name <span
+                                    <label for="department_name" class="form-label">Department Name <span
                                             style="color: red">*</span></label>
-                                    <input type="text" class="form-control" id="role_section_group_name" name="role_section_group_name"
-                                        placeholder="Role Section Group Name" required>
+                                    <input type="text" class="form-control" id="department_name"
+                                        name="department_name" value="{{ $edit_department_data->department_name }}"
+                                        placeholder="Department Name" required>
                                     <div class="valid-tooltip">
                                         Looks good!
                                     </div>
                                     <div class="invalid-tooltip">
-                                        Please enter new Role Section Group name!
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="col-md-6">
-                                <div class="mb-3 position-relative">
-                                    <label for="role_section_name" class="form-label">Role Section Name <span
-                                            style="color: red">*</span></label>
-                                    <input type="text" class="form-control" id="role_section_name" name="role_section_name"
-                                        placeholder="Role Section Name" required>
-                                    <div class="valid-tooltip">
-                                        Looks good!
-                                    </div>
-                                    <div class="invalid-tooltip">
-                                        Please enter new Role Section name!
+                                        Please enter new Department name!
                                     </div>
                                 </div>
                             </div>
                         </div>
                         <div class="row mt-3">
                             <div class="col-md-6">
-                                <p>Role Active: </p>
+                                <p>Department Active: </p>
                                 <div>
-                                    <input type="checkbox" id="status" name="status" switch="bool" checked />
+                                    @if ($edit_department_data->status == 'Active')
+                                        <input type="checkbox" id="status" name="status" switch="bool" checked />
+                                    @else
+                                        <input type="checkbox" id="status" name="status" switch="bool" />
+                                    @endif
                                     <label for="status" data-on-label="Yes" data-off-label="No"></label>
                                 </div>
                             </div>

@@ -8,6 +8,7 @@ use App\Http\Controllers\RoleController;
 use App\Http\Controllers\RoleSectionController;
 use App\Http\Controllers\RightController;
 use App\Http\Controllers\MenuController;
+use App\Http\Controllers\DepartmentController;
 
 /*
 |--------------------------------------------------------------------------
@@ -81,3 +82,11 @@ Route::post('/save_menu', [MenuController::class, 'saveMenu']);
 Route::get('/edit_menu/{id}', [MenuController::class, 'editMenu']);
 Route::post('/update_menu/{id}', [MenuController::class, 'updateMenu']);
 Route::get('/delete_menu/{id}', [MenuController::class, 'deleteMenu']);
+
+// Department
+Route::get('/show_department', [DepartmentController::class, 'showDepartment']);
+Route::get('/add_department', [DepartmentController::class, 'addDepartment']);
+Route::post('/save_department', [DepartmentController::class, 'saveDepartment']);
+Route::get('/edit_department/{id}', [DepartmentController::class, 'editDepartment']);
+Route::post('/update_department/{id}', [DepartmentController::class, 'updateDepartment']);
+Route::get('/delete_department/{id}', [DepartmentController::class, 'deleteDepartment']);
