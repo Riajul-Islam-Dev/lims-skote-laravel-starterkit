@@ -51,9 +51,7 @@
                                         placeholder="Select Module Name" required>
                                         <option selected disabled>Select Module Name</option>
                                         @foreach ($module_data as $module_name)
-                                            {
                                             <option value="{{ $module_name }}">{{ $module_name }}</option>
-                                            }
                                         @endforeach
                                     </select>
                                     <div class="valid-tooltip">

@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\User;
+use App\Models\Menu;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
@@ -36,6 +37,9 @@ class HomeController extends Controller
 
     public function root()
     {
+        // $menu_data = Menu::pluck('name')->toArray();
+        // dd($menu_data);
+        // return view('index', compact('menu_data'));
         return view('index');
     }
 
@@ -106,7 +110,7 @@ class HomeController extends Controller
             return response()->json([
                 'isSuccess' => false,
                 'Message' => "Your Current password does not matches with the password you provided. Please try again."
-            ], 200); // Status code 
+            ], 200); // Status code
         } else {
             $user = User::find($id);
             $user->password = Hash::make($request->get('password'));

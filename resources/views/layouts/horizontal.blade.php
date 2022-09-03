@@ -885,6 +885,7 @@
                             <a class="dropdown-item" href="{{ url('/show_module') }}">{{ __('Modules') }}</a>
                             <a class="dropdown-item" href="{{ url('/show_user') }}">{{ __('Users') }}</a>
                             <a class="dropdown-item" href="{{ url('/show_role') }}">{{ __('Roles') }}</a>
+                            <a class="dropdown-item" href="{{ url('/show_role_section') }}">{{ __('Role Sections') }}</a>
                             <a class="dropdown-item" href="{{ url('/show_right') }}">{{ __('Rights') }}</a>
                             <a class="dropdown-item" href="{{ url('/show_menu') }}">{{ __('Menu') }}</a>
                         </div>
@@ -896,12 +897,16 @@
                             <i class="bx bx-layout me-2"></i><span key="t-layouts">Dynamic Menu</span>
                             <div class="arrow-down"></div>
                         </a>
+                        @php
+
+                            $menu_data = App\Models\Menu::pluck('name')->toArray();
+
+                        @endphp
 
                         <div class="dropdown-menu" aria-labelledby="topnav-dynamic-menu">
-                            <a class="dropdown-item" href="{{ url('/show_module') }}">{{ __('Modules') }}</a>
-                            <a class="dropdown-item" href="{{ url('/show_user') }}">{{ __('Users') }}</a>
-                            <a class="dropdown-item" href="{{ url('/show_role') }}">{{ __('Roles') }}</a>
-                            <a class="dropdown-item" href="{{ url('/show_right') }}">{{ __('Rights') }}</a>
+                            @foreach ($menu_data as $menu_name)
+                                <a class="dropdown-item" href="{{ url('/' . $menu_name) }}">{{ $menu_name }}</a>
+                            @endforeach
                         </div>
                     </li>
 

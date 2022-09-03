@@ -5,6 +5,7 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\ModuleController;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\RoleController;
+use App\Http\Controllers\RoleSectionController;
 use App\Http\Controllers\RightController;
 use App\Http\Controllers\MenuController;
 
@@ -22,7 +23,7 @@ use App\Http\Controllers\MenuController;
 Auth::routes();
 
 Route::get('/', [App\Http\Controllers\HomeController::class, 'root'])->name('root');
-Route::get('/index', [App\Http\Controllers\HomeController::class, 'root'])->name('root');
+// Route::get('/index', [App\Http\Controllers\HomeController::class, 'root'])->name('root');
 
 //Update User Details
 Route::post('/update-profile/{id}', [App\Http\Controllers\HomeController::class, 'updateProfile'])->name('updateProfile');
@@ -56,6 +57,14 @@ Route::post('/save_role', [RoleController::class, 'saveRole']);
 Route::get('/edit_role/{id}', [RoleController::class, 'editRole']);
 Route::post('/update_role/{id}', [RoleController::class, 'updateRole']);
 Route::get('/delete_role/{id}', [RoleController::class, 'deleteRole']);
+
+// Role Section
+Route::get('/show_role_section', [RoleSectionController::class, 'showRoleSection']);
+Route::get('/add_role_section', [RoleSectionController::class, 'addRoleSection']);
+Route::post('/save_role_section', [RoleSectionController::class, 'saveRoleSection']);
+Route::get('/edit_role_section/{id}', [RoleSectionController::class, 'editRoleSection']);
+Route::post('/update_role_section/{id}', [RoleSectionController::class, 'updateRoleSection']);
+Route::get('/delete_role_section/{id}', [RoleSectionController::class, 'deleteRoleSection']);
 
 // Right
 Route::get('/show_right', [RightController::class, 'showRight']);

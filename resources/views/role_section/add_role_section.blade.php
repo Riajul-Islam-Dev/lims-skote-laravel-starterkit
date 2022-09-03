@@ -1,7 +1,7 @@
 @extends('layouts.master')
 
 @section('title')
-    Edit Menu
+    Add Role Section
 @endsection
 
 @section('css')
@@ -14,7 +14,7 @@
             LIMS
         @endslot
         @slot('title')
-            Edit Menu
+            Add Role Section
         @endslot
     @endcomponent
 
@@ -22,78 +22,55 @@
         <div class="col-12">
             <div class="card">
                 <div class="card-body">
-                    <h4 class="card-title">Edit Menu Form:</h4>
-                    <p class="card-title-desc">Please fill up the edit Menu form carefully. Fields marked with <span
+                    <h4 class="card-title">New Role Section Form:</h4>
+                    <p class="card-title-desc">Please fill up the new Role Section form carefully. Fields marked with <span
                             style="color: red">*</span> are required.
                     </p>
-                    <form action="{{ url('/update_menu/' . $edit_menu_data->id) }}" method="POST" class="needs-validation"
-                        novalidate>
+                    <form action="{{ url('/save_role_section') }}" method="POST" class="needs-validation" novalidate>
                         @csrf
                         <div class="row">
                             <div class="col-md-6">
                                 <div class="mb-3 position-relative">
-                                    <label for="name" class="form-label">Menu Name <span
+                                    <label for="role_section_group_name" class="form-label">Role Section Group Name <span
                                             style="color: red">*</span></label>
-                                    <input type="text" class="form-control" id="name" name="name"
-                                        value="{{ $edit_menu_data->name }}" placeholder="Name" required>
+                                    <input type="text" class="form-control" id="role_section_group_name" name="role_section_group_name"
+                                        placeholder="Role Section Group Name" required>
                                     <div class="valid-tooltip">
                                         Looks good!
                                     </div>
                                     <div class="invalid-tooltip">
-                                        Please enter new Menu name!
+                                        Please enter new Role Section Group name!
                                     </div>
                                 </div>
                             </div>
                             <div class="col-md-6">
                                 <div class="mb-3 position-relative">
-                                    <label for="module_name" class="form-label">Module Name <span
+                                    <label for="role_section_name" class="form-label">Role Section Name <span
                                             style="color: red">*</span></label>
-                                    <select class="form-control select2" id="module_name" name="module_name"
-                                        value="{{ $edit_menu_data->module_name }}" placeholder="Select Module Name"
-                                        required>
-                                        <option selected disabled>Select Module Name</option>
-                                        @foreach ($module_data as $module_name)
-                                            <option value="{{ $module_name }}">{{ Str::title($module_name) }}</option>
-                                        @endforeach
-                                    </select>
+                                    <input type="text" class="form-control" id="role_section_name" name="role_section_name"
+                                        placeholder="Role Section Name" required>
                                     <div class="valid-tooltip">
                                         Looks good!
                                     </div>
                                     <div class="invalid-tooltip">
-                                        Select Module Name!
+                                        Please enter new Role Section name!
                                     </div>
                                 </div>
                             </div>
                         </div>
                         <div class="row mt-3">
                             <div class="col-md-6">
-                                <div class="mb-3 position-relative">
-                                    <label for="icon" class="form-label">Icon <span style="color: red">*</span></label>
-                                    <input type="text" class="form-control" id="icon" name="icon"
-                                        value="{{ $edit_menu_data->icon }}" placeholder="Icon" required>
-                                    <div class="valid-tooltip">
-                                        Looks good!
-                                    </div>
-                                    <div class="invalid-tooltip">
-                                        Please select Icon!
-                                    </div>
-                                </div>
-                            </div>
                             <div class="col-md-6">
-                                <p>Menu Active: </p>
+                                <p>Role Active: </p>
                                 <div>
-                                    @if ($edit_menu_data->status == 'Active')
-                                        <input type="checkbox" id="status" name="status" switch="bool" checked />
-                                    @else
-                                        <input type="checkbox" id="status" name="status" switch="bool" />
-                                    @endif
+                                    <input type="checkbox" id="status" name="status" switch="bool" checked />
                                     <label for="status" data-on-label="Yes" data-off-label="No"></label>
                                 </div>
                             </div>
                         </div>
 
                         <div>
-                            <button class="btn btn-primary mt-5" type="submit" value="submit">Submit</button>
+                            <button class="btn btn-primary mt-5" type="submit" value="submit">Submit form</button>
                         </div>
                     </form>
                 </div>
