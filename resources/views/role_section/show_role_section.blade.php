@@ -47,13 +47,20 @@
                                 <tr>
                                     <th scope="row">{{ $key + 1 }}</th>
                                     <td>{{ $data->role_section_name }}</td>
-                                    <td>{{ $data->department_name }}</td>
+                                    
+                                    @foreach ($department_data as $department_individual_data)
+                                        @if ($data->department_name == $department_individual_data->id)
+                                            <td>{{ $department_individual_data->department_name }}</td>
+                                        @endif
+                                    @endforeach
+
                                     <td>{{ $data->status }}</td>
                                     <td>
                                         <a href="{{ url('/edit_role_section/' . $data->id) }}" class="btn btn-warning"><i
                                                 class="fa-solid fa-pen-to-square"></i> Edit</a>
                                         <a href="{{ url('/delete_role_section/' . $data->id) }}" class="btn btn-danger"
-                                            onclick="return confirm('Delete Role Section?')"><i class="fa-solid fa-trash-can"></i>
+                                            onclick="return confirm('Delete Role Section?')"><i
+                                                class="fa-solid fa-trash-can"></i>
                                             Delete</a>
                                     </td>
                                 </tr>

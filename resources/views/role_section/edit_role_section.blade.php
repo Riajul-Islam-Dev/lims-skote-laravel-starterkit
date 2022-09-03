@@ -35,8 +35,7 @@
                                     <label for="role_section_name" class="form-label">Role Section Name <span
                                             style="color: red">*</span></label>
                                     <input type="text" class="form-control" id="role_section_name"
-                                        name="role_section_name"
-                                        value="{{ $edit_role_section_data->role_section_name }}"
+                                        name="role_section_name" value="{{ $edit_role_section_data->role_section_name }}"
                                         placeholder="Role Section Name" required>
                                     <div class="valid-tooltip">
                                         Looks good!
@@ -54,9 +53,9 @@
                                         value="{{ $edit_role_section_data->department_name }}"
                                         placeholder="Select Department Name" required>
                                         <option selected disabled>Select Department Name</option>
-                                        @foreach ($department_data as $department_name)
-                                            <option value="{{ $department_name }}">{{ Str::title($department_name) }}
-                                            </option>
+                                        @foreach ($department_data as $department_individual_data)
+                                            <option value="{{ $department_individual_data->id }}">
+                                                {{ $department_individual_data->department_name }}</option>
                                         @endforeach
                                     </select>
                                     <div class="valid-tooltip">

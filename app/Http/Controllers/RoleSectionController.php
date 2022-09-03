@@ -12,14 +12,16 @@ class RoleSectionController extends Controller
     public function showRoleSection()
     {
         $show_role_section_data = RoleSection::all();
+        $department_data = Department::all();
         // $show_role_section_data = RoleSection::paginate(3);
         // $show_role_section_data = RoleSection::simplePaginate(3);
-        return view('role_section/show_role_section', compact('show_role_section_data'));
+        return view('role_section/show_role_section', compact('show_role_section_data', 'department_data'));
     }
 
     public function addRoleSection()
     {
-        $department_data = Department::pluck('department_name')->toArray();
+        $department_data = Department::all();
+        // $department_data = Department::pluck('department_name')->toArray();
         // dd($department_data);
         return view('role_section/add_role_section', compact('department_data'));
     }
@@ -50,7 +52,8 @@ class RoleSectionController extends Controller
     public function editRoleSection($id = null)
     {
         $edit_role_section_data = RoleSection::find($id);
-        $department_data = Department::pluck('department_name')->toArray();
+        // $department_data = Department::pluck('department_name')->toArray();
+        $department_data = Department::all();
 
         return view('role_section/edit_role_section', compact('edit_role_section_data', 'department_data'));
     }

@@ -50,8 +50,9 @@
                                     <select class="form-control select2" id="department_name" name="department_name"
                                         placeholder="Select Department Name" required>
                                         <option selected disabled>Select Department Name</option>
-                                        @foreach ($department_data as $department_name)
-                                            <option value="{{ $department_name }}">{{ $department_name }}</option>
+                                        @foreach ($department_data as $department_individual_data)
+                                            <option value="{{ $department_individual_data->id }}">
+                                                {{ $department_individual_data->department_name }}</option>
                                         @endforeach
                                     </select>
                                     <div class="valid-tooltip">
