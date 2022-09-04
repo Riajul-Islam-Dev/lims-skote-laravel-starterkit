@@ -50,21 +50,16 @@
                                     <select class="form-control select2" id="role_section" name="role_section"
                                         placeholder="Select Role Section" required>
                                         <option selected disabled>Select Role Section</option>
-                                        <optgroup label="IT">
-                                            <option value="Web Development">Web Development</option>
-                                            <option value="Android Development">Android Development</option>
-                                            <option value="IOS Development">IOS Development</option>
-                                            <option value=".NET Core">.NET Core</option>
-                                        </optgroup>
-                                        <optgroup label="SQA">
-                                            <option value="Front End">Front End</option>
-                                            <option value="Back End">Back End</option>
-                                        </optgroup>
-                                        <optgroup label="Management">
-                                            <option value="CEO">CEO</option>
-                                            <option value="Manager">Manager</option>
-                                            <option value="Emplyee">Emplyee</option>
-                                        </optgroup>
+                                        @foreach ($department_data as $department_individual_data)
+                                            <optgroup label={{ $department_individual_data->department_name }}>
+                                                @foreach ($role_section_data as $role_section_individual_data)
+                                                    @if ($role_section_individual_data->department_name == $department_individual_data->id)
+                                                        <option value="{{ $role_section_individual_data->id }}">
+                                                            {{ $role_section_individual_data->role_section_name }}</option>
+                                                    @endif
+                                                @endforeach
+                                            </optgroup>
+                                        @endforeach
                                     </select>
                                     <div class="valid-tooltip">
                                         Looks good!
@@ -76,28 +71,6 @@
                             </div>
                         </div>
                         <div class="row mt-3">
-                            <div class="col-md-6">
-                                <div class="mb-3 position-relative">
-                                    <label for="role_access_level" class="form-label">Role Access Level <span
-                                            style="color: red">*</span></label>
-                                    <select class="form-control select2" id="role_access_level" name="role_access_level"
-                                        placeholder="Select Role Access Level" required>
-                                        <option selected disabled>Select Role Access Level</option>
-                                        <option value="Administrator">Administrator</option>
-                                        <option value="Manager">Manager</option>
-                                        <option value="Team Lead">Team Lead</option>
-                                        <option value="Senior">Senior</option>
-                                        <option value="Junior">Junior</option>
-                                        <option value="Intern">Intern</option>
-                                    </select>
-                                    <div class="valid-tooltip">
-                                        Looks good!
-                                    </div>
-                                    <div class="invalid-tooltip">
-                                        Select Role Section!
-                                    </div>
-                                </div>
-                            </div>
                             <div class="col-md-6">
                                 <p>Role Active: </p>
                                 <div>

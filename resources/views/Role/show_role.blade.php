@@ -36,7 +36,6 @@
                                 <th>ID</th>
                                 <th>Role Name</th>
                                 <th>Role Section</th>
-                                <th>Role Access Level</th>
                                 <th>Status</th>
                                 <th>Action</th>
                             </tr>
@@ -48,8 +47,13 @@
                                 <tr>
                                     <th scope="row">{{ $key + 1 }}</th>
                                     <td>{{ $data->role_name }}</td>
-                                    <td>{{ $data->role_section }}</td>
-                                    <td>{{ $data->role_access_level }}</td>
+
+                                    @foreach ($role_section_data as $role_section_individual_data)
+                                        @if ($data->role_section == $role_section_individual_data->id)
+                                            <td>{{ $role_section_individual_data->role_section_name }}</td>
+                                        @endif
+                                    @endforeach
+
                                     <td>{{ $data->status }}</td>
                                     <td>
                                         <a href="{{ url('/edit_role/' . $data->id) }}" class="btn btn-warning"><i

@@ -2,8 +2,10 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Department;
 use Illuminate\Http\Request;
 use App\Models\Role;
+use App\Models\RoleSection;
 use Session;
 
 class RoleController extends Controller
@@ -11,14 +13,18 @@ class RoleController extends Controller
     public function showRole()
     {
         $show_role_data = Role::all();
+        $role_section_data = RoleSection::all();
         // $show_role_data = Role::paginate(3);
         // $show_role_data = Role::simplePaginate(3);
-        return view('role/show_role', compact('show_role_data'));
+        return view('role/show_role', compact('show_role_data', 'role_section_data'));
     }
 
     public function addRole()
     {
-        return view('role/add_role');
+        $role_section_data = RoleSection::all();
+        $department_data = Department::all();
+        // dd($role_section_data);
+        return view('role/add_role', compact('role_section_data', 'department_data'));
     }
 
     public function saveRole(Request $request)
@@ -27,7 +33,6 @@ class RoleController extends Controller
 
         $role->role_name = $request->role_name;
         $role->role_section = $request->role_section;
-        $role->role_access_level = $request->role_access_level;
 
         if ($request->status == "on") {
             $request->status = "Active";
@@ -48,7 +53,9 @@ class RoleController extends Controller
     public function editRole($id = null)
     {
         $edit_role_data = Role::find($id);
-        return view('role/edit_role', compact('edit_role_data'));
+        $role_section_data = RoleSection::all();
+        $department_data = Department::all();
+        return view('role/edit_role', compact('edit_role_data', 'role_section_data', 'department_data'));
     }
 
     public function updateRole(Request $request, $id)
@@ -57,7 +64,6 @@ class RoleController extends Controller
 
         $role->role_name = $request->role_name;
         $role->role_section = $request->role_section;
-        $role->role_access_level = $request->role_access_level;
 
         if ($request->status == "on") {
             $request->status = "Active";
