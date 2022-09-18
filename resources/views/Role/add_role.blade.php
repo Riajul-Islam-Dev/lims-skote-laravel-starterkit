@@ -30,10 +30,18 @@
                         @csrf
                         <div class="row">
                             <div class="col-md-6">
-                                <x-input.text label="Name" />
-                            </div>
-                            <div class="col-md-6">
-                                <x-input.text label="Business Name" />
+                                <div class="mb-3 position-relative">
+                                    <label for="role_name" class="form-label">Role Name <span
+                                            style="color: red">*</span></label>
+                                    <input type="text" class="form-control" id="role_name" name="role_name"
+                                        placeholder="Role Name" required>
+                                    <div class="valid-tooltip">
+                                        Looks good!
+                                    </div>
+                                    <div class="invalid-tooltip">
+                                        Please enter new Role name!
+                                    </div>
+                                </div>
                             </div>
                             <div class="col-md-6">
                                 <div class="mb-3 position-relative">
