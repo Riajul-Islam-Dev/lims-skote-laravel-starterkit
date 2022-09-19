@@ -2,13 +2,13 @@
 
 use Illuminate\Support\Facades\Route;
 
-// use App\Http\Controllers\ModuleController;
-// use App\Http\Controllers\UserController;
-// use App\Http\Controllers\RoleController;
-// use App\Http\Controllers\RoleSectionController;
-// use App\Http\Controllers\RightController;
-// use App\Http\Controllers\MenuController;
-// use App\Http\Controllers\DepartmentController;
+use App\Http\Controllers\ModuleController;
+use App\Http\Controllers\UserController;
+use App\Http\Controllers\RoleController;
+use App\Http\Controllers\RoleSectionController;
+use App\Http\Controllers\RightController;
+use App\Http\Controllers\MenuController;
+use App\Http\Controllers\DepartmentController;
 
 // LIMS Routes
 
