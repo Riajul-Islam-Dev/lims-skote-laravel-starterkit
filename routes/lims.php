@@ -1,15 +1,14 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
-use Illuminate\Support\Facades\Auth;
 
-use App\Http\Controllers\ModuleController;
-use App\Http\Controllers\UserController;
-use App\Http\Controllers\RoleController;
-use App\Http\Controllers\RoleSectionController;
-use App\Http\Controllers\RightController;
-use App\Http\Controllers\MenuController;
-use App\Http\Controllers\DepartmentController;
+use App\Http\Controllers\Lims\ModuleController;
+use App\Http\Controllers\Lims\UserController;
+use App\Http\Controllers\Lims\RoleController;
+use App\Http\Controllers\Lims\RoleSectionController;
+use App\Http\Controllers\Lims\RightController;
+use App\Http\Controllers\Lims\MenuController;
+use App\Http\Controllers\Lims\DepartmentController;
 
 // LIMS Routes
 
