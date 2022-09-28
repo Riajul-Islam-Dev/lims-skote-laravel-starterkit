@@ -882,13 +882,15 @@
                         </a>
 
                         <div class="dropdown-menu" aria-labelledby="topnav-admin">
-                            <a class="dropdown-item" href="{{ url('/show_module') }}">{{ __('Modules') }}</a>
-                            <a class="dropdown-item" href="{{ url('/show_user') }}">{{ __('Users') }}</a>
-                            <a class="dropdown-item" href="{{ url('/show_role') }}">{{ __('Roles') }}</a>
-                            <a class="dropdown-item" href="{{ url('/show_role_section') }}">{{ __('Role Sections') }}</a>
-                            <a class="dropdown-item" href="{{ url('/show_right') }}">{{ __('Rights') }}</a>
-                            <a class="dropdown-item" href="{{ url('/show_menu') }}">{{ __('Menu') }}</a>
-                            <a class="dropdown-item" href="{{ url('/show_department') }}">{{ __('Department') }}</a>
+                            {{-- <a href="{{ route('posts.edit', ['id' => $post->id]) }}">Link</a> --}}
+                            <a class="dropdown-item" href="{{ route('showModule') }}">{{ __('Modules') }}</a>
+                            <a class="dropdown-item" href="{{ route('showUser') }}">{{ __('Users') }}</a>
+                            <a class="dropdown-item" href="{{ route('showRole') }}">{{ __('Roles') }}</a>
+                            <a class="dropdown-item"
+                                href="{{ route('showRoleSection') }}">{{ __('Role Sections') }}</a>
+                            <a class="dropdown-item" href="{{ route('showRight') }}">{{ __('Rights') }}</a>
+                            <a class="dropdown-item" href="{{ route('showMenu') }}">{{ __('Menu') }}</a>
+                            <a class="dropdown-item" href="{{ route('showDepartment') }}">{{ __('Department') }}</a>
                         </div>
                     </li>
 
