@@ -4,8 +4,8 @@ namespace App\Http\Controllers\Lims;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
-use App\Models\Menu;
-use App\Models\Module;
+use App\Models\Lims\Menu;
+use App\Models\Lims\Module;
 use Session;
 
 class MenuController extends Controller

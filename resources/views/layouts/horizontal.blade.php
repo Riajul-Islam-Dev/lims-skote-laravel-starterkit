@@ -902,7 +902,7 @@
                         </a>
                         @php
 
-                            $menu_data = App\Models\Menu::pluck('name')->toArray();
+                            $menu_data = App\Models\Lims\Menu::pluck('name')->toArray();
 
                         @endphp
 
