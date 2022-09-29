@@ -4,7 +4,7 @@ namespace App\Http\Controllers\Lims;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
-use App\Models\User;
+use App\Models\Lims\User;
 use Illuminate\Support\Facades\Hash;
 use Session;
 
