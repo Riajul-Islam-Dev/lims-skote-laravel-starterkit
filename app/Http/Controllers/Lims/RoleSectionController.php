@@ -4,8 +4,8 @@ namespace App\Http\Controllers\Lims;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
-use App\Models\RoleSection;
-use App\Models\Department;
+use App\Models\Lims\RoleSection;
+use App\Models\Lims\Department;
 use Session;
 
 class RoleSectionController extends Controller

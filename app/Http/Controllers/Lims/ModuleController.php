@@ -4,7 +4,7 @@ namespace App\Http\Controllers\Lims;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
-use App\Models\Module;
+use App\Models\Lims\Module;
 use Session;
 
 class ModuleController extends Controller

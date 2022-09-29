@@ -3,10 +3,10 @@
 namespace App\Http\Controllers\Lims;
 
 use App\Http\Controllers\Controller;
-use App\Models\Department;
 use Illuminate\Http\Request;
-use App\Models\Role;
-use App\Models\RoleSection;
+use App\Models\Lims\Department;
+use App\Models\Lims\Role;
+use App\Models\Lims\RoleSection;
 use Session;
 
 class RoleController extends Controller

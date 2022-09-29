@@ -4,7 +4,7 @@ namespace App\Http\Controllers\Lims;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
-use App\Models\Right;
+use App\Models\Lims\Right;
 use Session;
 
 class RightController extends Controller
