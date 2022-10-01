@@ -14,12 +14,12 @@ class RightController extends Controller
         $show_right_data = Right::all();
         // $show_right_data = Right::paginate(3);
         // $show_right_data = Right::simplePaginate(3);
-        return view('right/show_right', compact('show_right_data'));
+        return view('Lims/right/show_right', compact('show_right_data'));
     }
 
     public function addRight()
     {
-        return view('right/add_right');
+        return view('Lims/right/add_right');
     }
 
     public function saveRight(Request $request)
@@ -42,13 +42,13 @@ class RightController extends Controller
 
         // return $request->all();
         // return redirect()->back();
-        return redirect('/show_right');
+        return redirect()->route('showRight');
     }
 
     public function editRight($id = null)
     {
         $edit_right_data = Right::find($id);
-        return view('right/edit_right', compact('edit_right_data'));
+        return view('Lims/right/edit_right', compact('edit_right_data'));
     }
 
     public function updateRight(Request $request, $id)
@@ -71,7 +71,7 @@ class RightController extends Controller
 
         // return $request->all();
         // return redirect()->back();
-        return redirect('/show_right');
+        return redirect()->route('showRight');
     }
 
     public function deleteRight($id = null)
@@ -81,6 +81,6 @@ class RightController extends Controller
 
         Session::flash('msg', 'Right\'s Data deleted successfully!');
 
-        return redirect('/show_right');
+        return redirect()->route('showRight');
     }
 }

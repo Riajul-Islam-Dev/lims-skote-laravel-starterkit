@@ -15,12 +15,12 @@ class UserController extends Controller
         $show_user_data = User::all();
         // $show_user_data = User::paginate(3);
         // $show_user_data = User::simplePaginate(3);
-        return view('user/show_user', compact('show_user_data'));
+        return view('Lims/user/show_user', compact('show_user_data'));
     }
 
     public function addUser()
     {
-        return view('user/add_user');
+        return view('Lims/user/add_user');
     }
 
     public function saveUser(Request $request)
@@ -53,13 +53,13 @@ class UserController extends Controller
 
         // return $request->all();
         // return redirect()->back();
-        return redirect('/show_user');
+                return redirect()->route('showUser');
     }
 
     public function editUser($id = null)
     {
         $edit_user_data = User::find($id);
-        return view('user/edit_user', compact('edit_user_data'));
+        return view('Lims/user/edit_user', compact('edit_user_data'));
     }
 
     public function updateUser(Request $request, $id)
@@ -92,7 +92,7 @@ class UserController extends Controller
 
         // return $request->all();
         // return redirect()->back();
-        return redirect('/show_user');
+                return redirect()->route('showUser');
     }
 
     public function deleteUser($id = null)
@@ -102,6 +102,6 @@ class UserController extends Controller
 
         Session::flash('msg', 'User\'s Data deleted successfully!');
 
-        return redirect('/show_user');
+                return redirect()->route('showUser');
     }
 }

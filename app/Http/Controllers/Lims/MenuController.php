@@ -16,15 +16,15 @@ class MenuController extends Controller
         // $show_menu_data = Menu::paginate(3);
 
         // $show_menu_data = Menu::simplePaginate(3);
-        return view('menu/show_menu', compact('show_menu_data'));
-        // return view('menu/show_menu');
+        return view('Lims/menu/show_menu', compact('show_menu_data'));
+        // return view('Lims/menu/show_menu');
     }
 
     public function addMenu()
     {
         $module_data = Module::pluck('name')->toArray();
         // dd($module_data);
-        return view('menu/add_menu', compact('module_data'));
+        return view('Lims/menu/add_menu', compact('module_data'));
     }
 
     public function saveMenu(Request $request)
@@ -48,7 +48,7 @@ class MenuController extends Controller
 
         // return $request->all();
         // return redirect()->back();
-        return redirect('/show_menu');
+        return redirect()->route('showMenu');
     }
 
     public function editMenu($id = null)
@@ -56,7 +56,7 @@ class MenuController extends Controller
         $edit_menu_data = Menu::find($id);
         $module_data = Module::pluck('name')->toArray();
 
-        return view('menu/edit_menu', compact('edit_menu_data', 'module_data'));
+        return view('Lims/menu/edit_menu', compact('edit_menu_data', 'module_data'));
     }
 
     public function updateMenu(Request $request, $id)
@@ -80,7 +80,7 @@ class MenuController extends Controller
 
         // return $request->all();
         // return redirect()->back();
-        return redirect('/show_menu');
+        return redirect()->route('showMenu');
     }
 
     public function deleteMenu($id = null)
@@ -90,6 +90,6 @@ class MenuController extends Controller
 
         Session::flash('msg', 'Data deleted successfully!');
 
-        return redirect('/show_menu');
+        return redirect()->route('showMenu');
     }
 }

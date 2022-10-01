@@ -14,12 +14,12 @@ class DepartmentController extends Controller
         $show_department_data = Department::all();
         // $show_department_data = Department::paginate(3);
         // $show_department_data = Department::simplePaginate(3);
-        return view('department/show_department', compact('show_department_data'));
+        return view('Lims/department/show_department', compact('show_department_data'));
     }
 
     public function addDepartment()
     {
-        return view('department/add_department');
+        return view('Lims/department/add_department');
     }
 
     public function saveDepartment(Request $request)
@@ -41,13 +41,13 @@ class DepartmentController extends Controller
 
         // return $request->all();
         // return redirect()->back();
-        return redirect('/show_department');
+        return redirect()->route('showDepartment');
     }
 
     public function editDepartment($id = null)
     {
         $edit_department_data = Department::find($id);
-        return view('department/edit_department', compact('edit_department_data'));
+        return view('Lims/department/edit_department', compact('edit_department_data'));
     }
 
     public function updateDepartment(Request $request, $id)
@@ -69,7 +69,7 @@ class DepartmentController extends Controller
 
         // return $request->all();
         // return redirect()->back();
-        return redirect('/show_department');
+        return redirect()->route('showDepartment');
     }
 
     public function deleteDepartment($id = null)
@@ -79,6 +79,6 @@ class DepartmentController extends Controller
 
         Session::flash('msg', 'Department\'s Data deleted successfully!');
 
-        return redirect('/show_department');
+        return redirect()->route('showDepartment');
     }
 }

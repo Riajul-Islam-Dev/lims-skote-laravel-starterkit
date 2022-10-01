@@ -15,13 +15,13 @@ class ModuleController extends Controller
         // $show_module_data = Module::paginate(3);
 
         // $show_module_data = Module::simplePaginate(3);
-        return view('module/show_module', compact('show_module_data'));
-        // return view('module/show_module');
+        return view('Lims/module/show_module', compact('show_module_data'));
+        // return view('Lims/module/show_module');
     }
 
     public function addModule()
     {
-        return view('module/add_module');
+        return view('Lims/module/add_module');
     }
 
     public function saveModule(Request $request)
@@ -45,13 +45,13 @@ class ModuleController extends Controller
 
         // return $request->all();
         // return redirect()->back();
-        return redirect('/show_module');
+        return redirect()->route('showModule');
     }
 
     public function editModule($id = null)
     {
         $edit_module_data = Module::find($id);
-        return view('module/edit_module', compact('edit_module_data'));
+        return view('Lims/module/edit_module', compact('edit_module_data'));
     }
 
     public function updateModule(Request $request, $id)
@@ -74,7 +74,7 @@ class ModuleController extends Controller
 
         // return $request->all();
         // return redirect()->back();
-        return redirect('/show_module');
+        return redirect()->route('showModule');
     }
 
     public function deleteModule($id = null)
@@ -84,6 +84,6 @@ class ModuleController extends Controller
 
         Session::flash('msg', 'Data deleted successfully!');
 
-        return redirect('/show_module');
+        return redirect()->route('showModule');
     }
 }

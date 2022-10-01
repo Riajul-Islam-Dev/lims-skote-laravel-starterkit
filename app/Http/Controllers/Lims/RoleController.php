@@ -17,7 +17,7 @@ class RoleController extends Controller
         $role_section_data = RoleSection::all();
         // $show_role_data = Role::paginate(3);
         // $show_role_data = Role::simplePaginate(3);
-        return view('role/show_role', compact('show_role_data', 'role_section_data'));
+        return view('Lims/role/show_role', compact('show_role_data', 'role_section_data'));
     }
 
     public function addRole()
@@ -25,7 +25,7 @@ class RoleController extends Controller
         $role_section_data = RoleSection::all();
         $department_data = Department::all();
         // dd($role_section_data);
-        return view('role/add_role', compact('role_section_data', 'department_data'));
+        return view('Lims/role/add_role', compact('role_section_data', 'department_data'));
     }
 
     public function saveRole(Request $request)
@@ -48,7 +48,7 @@ class RoleController extends Controller
 
         // return $request->all();
         // return redirect()->back();
-        return redirect('/show_role');
+        return redirect()->route('showRole');
     }
 
     public function editRole($id = null)
@@ -56,7 +56,7 @@ class RoleController extends Controller
         $edit_role_data = Role::find($id);
         $role_section_data = RoleSection::all();
         $department_data = Department::all();
-        return view('role/edit_role', compact('edit_role_data', 'role_section_data', 'department_data'));
+        return view('Lims/role/edit_role', compact('edit_role_data', 'role_section_data', 'department_data'));
     }
 
     public function updateRole(Request $request, $id)
@@ -79,7 +79,7 @@ class RoleController extends Controller
 
         // return $request->all();
         // return redirect()->back();
-        return redirect('/show_role');
+        return redirect()->route('showRole');
     }
 
     public function deleteRole($id = null)
@@ -89,6 +89,6 @@ class RoleController extends Controller
 
         Session::flash('msg', 'Role\'s Data deleted successfully!');
 
-        return redirect('/show_role');
+        return redirect()->route('showRole');
     }
 }

@@ -16,7 +16,7 @@ class RoleSectionController extends Controller
         $department_data = Department::all();
         // $show_role_section_data = RoleSection::paginate(3);
         // $show_role_section_data = RoleSection::simplePaginate(3);
-        return view('role_section/show_role_section', compact('show_role_section_data', 'department_data'));
+        return view('Lims/role_section/show_role_section', compact('show_role_section_data', 'department_data'));
     }
 
     public function addRoleSection()
@@ -24,7 +24,7 @@ class RoleSectionController extends Controller
         $department_data = Department::all();
         // $department_data = Department::pluck('department_name')->toArray();
         // dd($department_data);
-        return view('role_section/add_role_section', compact('department_data'));
+        return view('Lims/role_section/add_role_section', compact('department_data'));
     }
 
     public function saveRoleSection(Request $request)
@@ -47,7 +47,7 @@ class RoleSectionController extends Controller
 
         // return $request->all();
         // return redirect()->back();
-        return redirect('/show_role_section');
+        return redirect()->route('showRoleSection');
     }
 
     public function editRoleSection($id = null)
@@ -56,7 +56,7 @@ class RoleSectionController extends Controller
         // $department_data = Department::pluck('department_name')->toArray();
         $department_data = Department::all();
 
-        return view('role_section/edit_role_section', compact('edit_role_section_data', 'department_data'));
+        return view('Lims/role_section/edit_role_section', compact('edit_role_section_data', 'department_data'));
     }
 
     public function updateRoleSection(Request $request, $id)
@@ -79,7 +79,7 @@ class RoleSectionController extends Controller
 
         // return $request->all();
         // return redirect()->back();
-        return redirect('/show_role_section');
+        return redirect()->route('showRoleSection');
     }
 
     public function deleteRoleSection($id = null)
@@ -89,6 +89,6 @@ class RoleSectionController extends Controller
 
         Session::flash('msg', 'Role Section\'s Data deleted successfully!');
 
-        return redirect('/show_role_section');
+        return redirect()->route('showRoleSection');
     }
 }
