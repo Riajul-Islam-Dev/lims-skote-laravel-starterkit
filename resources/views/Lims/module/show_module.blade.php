@@ -44,7 +44,7 @@
                         <tbody>
                             @foreach ($show_module_data as $key => $data)
                                 <tr>
-                                    <th scope="row">{{ $key + 1 }}</th>
+                                    <th scope="row">{{ $loop->iteration }}</th>
                                     <td>{{ $data->name }}</td>
                                     <td>{{ $data->module_folder }}</td>
                                     <td>{{ $data->status }}</td>

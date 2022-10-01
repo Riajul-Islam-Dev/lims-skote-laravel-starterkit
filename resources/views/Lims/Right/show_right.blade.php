@@ -44,7 +44,7 @@
                         <tbody>
                             @foreach ($show_right_data as $key => $data)
                                 <tr>
-                                    <th scope="row">{{ $key + 1 }}</th>
+                                    <th scope="row">{{ $loop->iteration }}</th>
                                     <td>{{ $data->right_name }}</td>
                                     <td>{{ $data->right_code }}</td>
                                     <td>{{ $data->status }}</td>

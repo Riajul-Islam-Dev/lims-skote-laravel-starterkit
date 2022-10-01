@@ -45,7 +45,7 @@
                         <tbody>
                             @foreach ($show_role_data as $key => $data)
                                 <tr>
-                                    <th scope="row">{{ $key + 1 }}</th>
+                                    <th scope="row">{{ $loop->iteration }}</th>
                                     <td>{{ $data->role_name }}</td>
 
                                     @foreach ($role_section_data as $role_section_individual_data)

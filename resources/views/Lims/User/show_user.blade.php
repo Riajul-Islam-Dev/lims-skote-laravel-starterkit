@@ -45,7 +45,7 @@
                         <tbody>
                             @foreach ($show_user_data as $key => $data)
                                 <tr>
-                                    <th scope="row">{{ $key + 1 }}</th>
+                                    <th scope="row">{{ $loop->iteration }}</th>
                                     <td>{{ $data->name }}</td>
                                     <td>{{ $data->email }}</td>
                                     {{-- <td>{{ $data->status }}</td> --}}

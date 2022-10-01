@@ -45,7 +45,7 @@
                         <tbody>
                             @foreach ($show_menu_data as $key => $data)
                                 <tr>
-                                    <th scope="row">{{ $key + 1 }}</th>
+                                    <th scope="row">{{ $loop->iteration }}</th>
                                     <td>{{ $data->name }}</td>
                                     <td>{{ $data->module_name }}</td>
                                     <td><i class="{{ $data->icon }}"></i></td>
