@@ -31,6 +31,11 @@
                     <table id="datatable-buttons" class="table table-bordered dt-responsive nowrap w-100">
                         <a href="{{ url('/add_user') }}" class="btn btn-success my-3"><i
                                 class="fa-solid fa-circle-plus"></i> Add new User</a>
+                        <!-- Button trigger modal -->
+                        <button type="button" class="btn btn-success my-3" data-bs-toggle="modal"
+                            data-bs-target="#addUserModal">
+                            <i class="fa-solid fa-circle-plus"></i> Add new User
+                        </button>
                         <thead>
                             <tr>
                                 <th>ID</th>
@@ -40,7 +45,6 @@
                                 <th>Action</th>
                             </tr>
                         </thead>
-
 
                         <tbody>
                             @foreach ($show_user_data as $key => $data)
@@ -65,6 +69,28 @@
             </div>
         </div> <!-- end col -->
     </div> <!-- end row -->
+
+
+
+    <!-- Add User Modal -->
+    <div class="modal fade" id="addUserModal" tabindex="-1" aria-labelledby="addUserModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-lg">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="addUserModalLabel">Modal title</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <x-lims.forms.input.text for="role_name" label="Name" name="role_name" id="role_name" type="text"
+                        placeholder="Role Name" required />
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                    <button type="button" class="btn btn-primary">Save changes</button>
+                </div>
+            </div>
+        </div>
+    </div>
 @endsection
 @section('script')
     <!-- apexcharts -->
