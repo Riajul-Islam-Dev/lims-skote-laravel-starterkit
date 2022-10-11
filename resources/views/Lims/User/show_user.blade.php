@@ -73,20 +73,46 @@
 
 
     <!-- Add User Modal -->
-    <div class="modal fade" id="addUserModal" tabindex="-1" aria-labelledby="addUserModalLabel" aria-hidden="true">
-        <div class="modal-dialog modal-lg">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <h5 class="modal-title" id="addUserModalLabel">Modal title</h5>
-                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                </div>
-                <div class="modal-body">
-                    <x-lims.forms.input.text for="role_name" label="Name" name="role_name" id="role_name" type="text"
-                        placeholder="Role Name" required />
-                </div>
-                <div class="modal-footer">
-                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                    <button type="button" class="btn btn-primary">Save changes</button>
+    <div class="container">
+        <div class="modal fade" id="addUserModal" tabindex="-1" aria-labelledby="addUserModalLabel" aria-hidden="true">
+            <div class="modal-dialog modal-lg">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="addUserModalLabel">Add new user:</h5>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    </div>
+                    <div class="modal-body">
+                        <div class="form">
+                            <div class="row my-2">
+                                <div class="col-6">
+                                    <x-lims.forms.input.label for="user_name" label="User Name" star="*" />
+                                    <x-lims.forms.input.text name="user_name" id="user_name" placeholder="User Name"
+                                        required />
+                                </div>
+                                <div class="col-6">
+                                    <x-lims.forms.input.label for="email" label="Email Address" star="*" />
+                                    <x-lims.forms.input.email name="email" id="email" placeholder="Email Address"
+                                        required />
+                                </div>
+                            </div>
+                            <div class="row my-2">
+                                <div class="col-6">
+                                    <x-lims.forms.input.label for="password" label="Password" star="*" />
+                                    <x-lims.forms.input.password name="password" id="password" placeholder="Password"
+                                        required />
+                                </div>
+                                <div class="col-6">
+                                    <x-lims.forms.input.label for="dob" label="Date of Birth" star="*" />
+                                    <x-lims.forms.input.date name="dob" id="dob" placeholder="Date of Birth"
+                                        required />
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="modal-footer col-12">
+                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                        <button type="button" class="btn btn-primary">Save changes</button>
+                    </div>
                 </div>
             </div>
         </div>
