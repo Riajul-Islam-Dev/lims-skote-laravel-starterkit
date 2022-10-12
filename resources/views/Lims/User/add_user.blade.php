@@ -99,7 +99,7 @@
                                 <div class="mb-3 position-relative">
                                     <label for="avatar">Profile Picture</label>
                                     <div class="input-group">
-                                        <input type="file" class="form-control id="avatar" name="avatar" autofocus
+                                        <input type="file" class="form-control" id="avatar" name="avatar" autofocus
                                             required>
                                         <label class="input-group-text" for="avatar">Upload</label>
                                         <div class="valid-tooltip">

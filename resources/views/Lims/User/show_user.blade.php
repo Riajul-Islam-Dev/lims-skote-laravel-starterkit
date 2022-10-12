@@ -7,6 +7,8 @@
 @section('css')
     <!-- DataTables -->
     <link href="{{ URL::asset('/assets/libs/datatables/datatables.min.css') }}" rel="stylesheet" type="text/css" />
+    <link href="{{ URL::asset('/assets/libs/bootstrap-datepicker/bootstrap-datepicker.min.css') }}" rel="stylesheet"
+        type="text/css">
 @endsection
 
 @section('content')
@@ -29,13 +31,15 @@
                     </p>
 
                     <table id="datatable-buttons" class="table table-bordered dt-responsive nowrap w-100">
-                        <a href="{{ url('/add_user') }}" class="btn btn-success my-3"><i
-                                class="fa-solid fa-circle-plus"></i> Add new User</a>
+                        {{-- <a href="{{ url('/add_user') }}" class="btn btn-success my-3"><i
+                                class="fa-solid fa-circle-plus"></i> Add new User</a> --}}
+                                
                         <!-- Button trigger modal -->
                         <button type="button" class="btn btn-success my-3" data-bs-toggle="modal"
                             data-bs-target="#addUserModal">
                             <i class="fa-solid fa-circle-plus"></i> Add new User
                         </button>
+
                         <thead>
                             <tr>
                                 <th>ID</th>
@@ -81,12 +85,15 @@
                         <h5 class="modal-title" id="addUserModalLabel">Add new user:</h5>
                         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                     </div>
+                    <h6 class="mt-2 ms-3">Please fill up the new User form carefully. Fields marked with <span
+                            style="color: red">*</span>
+                        are required.</h6>
                     <div class="modal-body">
                         <div class="form">
                             <div class="row my-2">
                                 <div class="col-6">
-                                    <x-lims.forms.input.label for="user_name" label="User Name" star="*" />
-                                    <x-lims.forms.input.text name="user_name" id="user_name" placeholder="User Name"
+                                    <x-lims.forms.input.label for="name" label="User Name" star="*" />
+                                    <x-lims.forms.input.text name="name" id="name" placeholder="User Name"
                                         required />
                                 </div>
                                 <div class="col-6">
@@ -107,11 +114,21 @@
                                         required />
                                 </div>
                             </div>
-                        </div>
+                            <div class="row my-2">
+                                <div class="col-6">
+                                    <x-lims.forms.input.label for="avatar" label="Upload Avatar" star="*" />
+                                    <x-lims.forms.input.file name="avatar" id="avatar" placeholder="Upload Avatar"
+                                        required />
+                                </div>
+                                <div class="col-6">
+                                    <x-lims.forms.input.label for="status" label="Status" star="*" />
+                                    <x-lims.forms.input.toggle name="status" id="status" required />
+                                </div>
+                            </div>
                     </div>
                     <div class="modal-footer col-12">
                         <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                        <button type="button" class="btn btn-primary">Save changes</button>
+                        <button type="button" class="btn btn-primary">Create User</button>
                     </div>
                 </div>
             </div>
@@ -131,4 +148,10 @@
     <script src="{{ URL::asset('/assets/libs/pdfmake/pdfmake.min.js') }}"></script>
     <!-- Datatable init js -->
     <script src="{{ URL::asset('/assets/js/pages/datatables.init.js') }}"></script>
+
+    <script src="{{ URL::asset('/assets/libs/bootstrap-datepicker/bootstrap-datepicker.min.js') }}"></script>
+
+    <script>
+
+    </script>
 @endsection

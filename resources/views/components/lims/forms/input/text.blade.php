@@ -1,3 +1,3 @@
 <div>
-    <input type="text" {{ $attributes->merge(['class' => 'form-control col-6']) }}>
+    <input type="text" {{ $attributes->merge(['class' => 'form-control']) }}>
 </div>
