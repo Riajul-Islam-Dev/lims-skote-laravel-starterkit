@@ -33,7 +33,7 @@
                     <table id="datatable-buttons" class="table table-bordered dt-responsive nowrap w-100">
                         {{-- <a href="{{ url('/add_user') }}" class="btn btn-success my-3"><i
                                 class="fa-solid fa-circle-plus"></i> Add new User</a> --}}
-                                
+
                         <!-- Button trigger modal -->
                         <button type="button" class="btn btn-success my-3" data-bs-toggle="modal"
                             data-bs-target="#addUserModal">
@@ -125,33 +125,47 @@
                                     <x-lims.forms.input.toggle name="status" id="status" required />
                                 </div>
                             </div>
-                    </div>
-                    <div class="modal-footer col-12">
-                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                        <button type="button" class="btn btn-primary">Create User</button>
+                        </div>
+                        <div class="modal-footer col-12">
+                            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                            <button type="button" class="btn btn-success" id="btn_create" onclick="create_user_info()">
+                                Create User
+                            </button>
+                        </div>
                     </div>
                 </div>
             </div>
         </div>
-    </div>
-@endsection
-@section('script')
-    <!-- apexcharts -->
-    <script src="{{ URL::asset('/assets/libs/apexcharts/apexcharts.min.js') }}"></script>
+    @endsection
+    @section('script')
+        <!-- apexcharts -->
+        <script src="{{ URL::asset('/assets/libs/apexcharts/apexcharts.min.js') }}"></script>
 
-    <!-- dashboard init -->
-    <script src="{{ URL::asset('/assets/js/pages/dashboard.init.js') }}"></script>
+        <!-- dashboard init -->
+        <script src="{{ URL::asset('/assets/js/pages/dashboard.init.js') }}"></script>
 
-    <!-- Required datatable js -->
-    <script src="{{ URL::asset('/assets/libs/datatables/datatables.min.js') }}"></script>
-    <script src="{{ URL::asset('/assets/libs/jszip/jszip.min.js') }}"></script>
-    <script src="{{ URL::asset('/assets/libs/pdfmake/pdfmake.min.js') }}"></script>
-    <!-- Datatable init js -->
-    <script src="{{ URL::asset('/assets/js/pages/datatables.init.js') }}"></script>
+        <!-- Required datatable js -->
+        <script src="{{ URL::asset('/assets/libs/datatables/datatables.min.js') }}"></script>
+        <script src="{{ URL::asset('/assets/libs/jszip/jszip.min.js') }}"></script>
+        <script src="{{ URL::asset('/assets/libs/pdfmake/pdfmake.min.js') }}"></script>
+        <!-- Datatable init js -->
+        <script src="{{ URL::asset('/assets/js/pages/datatables.init.js') }}"></script>
 
-    <script src="{{ URL::asset('/assets/libs/bootstrap-datepicker/bootstrap-datepicker.min.js') }}"></script>
+        <script src="{{ URL::asset('/assets/libs/bootstrap-datepicker/bootstrap-datepicker.min.js') }}"></script>
 
-    <script>
-
-    </script>
-@endsection
+        <script>
+            function create_user_info() {
+                var name = $("#name").val();
+                var email = $("#email").val();
+                // var password = $("#password").val();
+                var password = getElementById("password").value;
+                var dob = $("#dob").val();
+                var avatar = $("#avatar").val();
+                var status = $("#status").val();
+                alert(password);
+                alert(dob);
+                alert(avatar);
+                alert(status);
+            }
+        </script>
+    @endsection
