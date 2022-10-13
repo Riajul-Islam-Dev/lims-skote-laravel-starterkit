@@ -89,9 +89,10 @@
                             style="color: red">*</span>
                         are required.</h6>
                     <div class="modal-body">
-                        <div class="form">
+                        <form id="create_user_form" action="javascript:void(0)">
+                            @csrf
                             <div class="row my-2">
-                                <div class="col-6">
+                                <div class="col-6 test">
                                     <x-lims.forms.input.label for="name" label="User Name" star="*" />
                                     <x-lims.forms.input.text name="name" id="name" placeholder="User Name"
                                         required />
@@ -104,9 +105,9 @@
                             </div>
                             <div class="row my-2">
                                 <div class="col-6">
-                                    <x-lims.forms.input.label for="password" label="Password" star="*" />
-                                    <x-lims.forms.input.password name="password" id="password" placeholder="Password"
-                                        required />
+                                    <x-lims.forms.input.label for="user_password" label="Password" star="*" />
+                                    <x-lims.forms.input.password name="user_password" id="user_password"
+                                        placeholder="Password" required />
                                 </div>
                                 <div class="col-6">
                                     <x-lims.forms.input.label for="dob" label="Date of Birth" star="*" />
@@ -125,7 +126,7 @@
                                     <x-lims.forms.input.toggle name="status" id="status" required />
                                 </div>
                             </div>
-                        </div>
+                        </form>
                         <div class="modal-footer col-12">
                             <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
                             <button type="button" class="btn btn-success" id="btn_create" onclick="create_user_info()">
@@ -133,6 +134,21 @@
                             </button>
                         </div>
                     </div>
+                </div>
+            </div>
+        </div>
+
+        {{-- Toast message --}}
+        <div class="position-fixed bottom-0 end-0 p-3" style="z-index: 7000">
+            <div id="liveToast" class="toast" role="alert" aria-live="assertive" aria-atomic="true">
+                <div class="toast-header">
+                    {{-- <img src="..." class="rounded me-2" alt="..."> --}}
+                    <strong class="me-auto"><i class="fas fa-info-circle"></i> Caution</strong>
+                    <small>Just now</small>
+                    <button type="button" class="btn-close" data-bs-dismiss="toast" aria-label="Close"></button>
+                </div>
+                <div class="toast-body" id="toast-body">
+                    Hello, world! This is a toast message.
                 </div>
             </div>
         </div>
@@ -154,18 +170,82 @@
         <script src="{{ URL::asset('/assets/libs/bootstrap-datepicker/bootstrap-datepicker.min.js') }}"></script>
 
         <script>
+            var toastLiveExample = document.getElementById('liveToast')
+
             function create_user_info() {
                 var name = $("#name").val();
                 var email = $("#email").val();
-                // var password = $("#password").val();
-                var password = getElementById("password").value;
+                var password = $("#user_password").val();
                 var dob = $("#dob").val();
                 var avatar = $("#avatar").val();
                 var status = $("#status").val();
-                alert(password);
-                alert(dob);
-                alert(avatar);
-                alert(status);
+                // alert(name);
+                // alert(email);
+                // alert(password);
+                // alert(dob);
+                // alert(avatar);
+                // alert(status);
+                if (name == "") {
+                    var toast = new bootstrap.Toast(toastLiveExample);
+                    document.getElementById("toast-body").innerHTML = "Name can't be empty.";
+                    toast.show();
+                    document.getElementById("name").style.border = "solid 1px red";
+                    setTimeout(changeBorder, 3000);
+
+                    function changeBorder() {
+                        document.getElementById("name").style.border = "solid 1px rgb(206,212,218)";
+                    }
+                    $("#name").focus();
+                    return false;
+                } else if (email == "") {
+                    var toast = new bootstrap.Toast(toastLiveExample);
+                    document.getElementById("toast-body").innerHTML = "Email can't be empty.";
+                    toast.show();
+                    document.getElementById("email").style.border = "solid 1px red";
+                    setTimeout(changeBorder, 3000);
+
+                    function changeBorder() {
+                        document.getElementById("email").style.border = "solid 1px rgb(206,212,218)";
+                    }
+                    $("#email").focus();
+                    return false;
+                } else if (password == "") {
+                    var toast = new bootstrap.Toast(toastLiveExample);
+                    document.getElementById("toast-body").innerHTML = "Password can't be empty.";
+                    toast.show();
+                    document.getElementById("user_password").style.border = "solid 1px red";
+                    setTimeout(changeBorder, 3000);
+
+                    function changeBorder() {
+                        document.getElementById("user_password").style.border = "solid 1px rgb(206,212,218)";
+                    }
+                    $("#user_password").focus();
+                    return false;
+                } else if (dob == "") {
+                    var toast = new bootstrap.Toast(toastLiveExample);
+                    document.getElementById("toast-body").innerHTML = "Date of Birth can't be empty.";
+                    toast.show();
+                    document.getElementById("dob").style.border = "solid 1px red";
+                    setTimeout(changeBorder, 3000);
+
+                    function changeBorder() {
+                        document.getElementById("dob").style.border = "solid 1px rgb(206,212,218)";
+                    }
+                    $("#dob").focus();
+                    return false;
+                } else if (avatar == "") {
+                    var toast = new bootstrap.Toast(toastLiveExample);
+                    document.getElementById("toast-body").innerHTML = "Avatar can't be empty.";
+                    toast.show();
+                    document.getElementById("avatar").style.border = "solid 1px red";
+                    setTimeout(changeBorder, 3000);
+
+                    function changeBorder() {
+                        document.getElementById("avatar").style.border = "solid 1px rgb(206,212,218)";
+                    }
+                    $("#avatar").focus();
+                    return false;
+                }
             }
         </script>
     @endsection
