@@ -88,6 +88,7 @@
                     <h6 class="mt-2 ms-3">Please fill up the new User form carefully. Fields marked with <span
                             style="color: red">*</span>
                         are required.</h6>
+                    <h6 id="responseMessage"></h6>
                     <div class="modal-body">
                         <form id="create_user_form" action="javascript:void(0)">
                             @csrf
@@ -170,9 +171,8 @@
         <script src="{{ URL::asset('/assets/libs/bootstrap-datepicker/bootstrap-datepicker.min.js') }}"></script>
 
         <script>
-            var toastLiveExample = document.getElementById('liveToast')
-
             function create_user_info() {
+                event.preventDefault();
                 var name = $("#name").val();
                 var email = $("#email").val();
                 var password = $("#user_password").val();
@@ -185,9 +185,10 @@
                 // alert(dob);
                 // alert(avatar);
                 // alert(status);
+                var toastLiveExample = document.getElementById('liveToast')
                 if (name == "") {
                     var toast = new bootstrap.Toast(toastLiveExample);
-                    document.getElementById("toast-body").innerHTML = "Name can't be empty.";
+                    $('#toast-body').text('Name can\'t be empty.');
                     toast.show();
                     document.getElementById("name").style.border = "solid 1px red";
                     setTimeout(changeBorder, 3000);
@@ -199,7 +200,7 @@
                     return false;
                 } else if (email == "") {
                     var toast = new bootstrap.Toast(toastLiveExample);
-                    document.getElementById("toast-body").innerHTML = "Email can't be empty.";
+                    $('#toast-body').text('Email can\'t be empty.');
                     toast.show();
                     document.getElementById("email").style.border = "solid 1px red";
                     setTimeout(changeBorder, 3000);
@@ -211,7 +212,7 @@
                     return false;
                 } else if (password == "") {
                     var toast = new bootstrap.Toast(toastLiveExample);
-                    document.getElementById("toast-body").innerHTML = "Password can't be empty.";
+                    $('#toast-body').text('Password can\'t be empty.');
                     toast.show();
                     document.getElementById("user_password").style.border = "solid 1px red";
                     setTimeout(changeBorder, 3000);
@@ -223,7 +224,7 @@
                     return false;
                 } else if (dob == "") {
                     var toast = new bootstrap.Toast(toastLiveExample);
-                    document.getElementById("toast-body").innerHTML = "Date of Birth can't be empty.";
+                    $('#toast-body').text('Date of Birth can\'t be empty.');
                     toast.show();
                     document.getElementById("dob").style.border = "solid 1px red";
                     setTimeout(changeBorder, 3000);
@@ -235,7 +236,7 @@
                     return false;
                 } else if (avatar == "") {
                     var toast = new bootstrap.Toast(toastLiveExample);
-                    document.getElementById("toast-body").innerHTML = "Avatar can't be empty.";
+                    $('#toast-body').text('Avatar can\'t be empty.');
                     toast.show();
                     document.getElementById("avatar").style.border = "solid 1px red";
                     setTimeout(changeBorder, 3000);
@@ -246,6 +247,41 @@
                     $("#avatar").focus();
                     return false;
                 }
+
+                $.ajax({
+                    url: "{{ route('saveUser') }}",
+                    type: "POST",
+                    data: {
+                        "name": name,
+                        "email": email,
+                        "password": password,
+                        "dob": dob,
+                        "avatar": avatar,
+                        "status": status,
+                        "_token": "{{ csrf_token() }}",
+                    },
+                    success: function(response) {
+                        $('#name').text('');
+                        $('#email').text('');
+                        $('#password').text('');
+                        $('#avatar').text('');
+                        if (response.isSuccess == true) {
+                            $('#responseMessage').text(response.Message);
+                        }
+                        // if (response.isSuccess == false) {
+                        //     $('#current_passwordError').text(response.Message);
+                        // } else if (response.isSuccess == true) {
+                        //     setTimeout(function() {
+                        //         window.location.href = "{{ route('root') }}";
+                        //     }, 1000);
+                        // }
+                    },
+                    // error: function(response) {
+                    //     $('#current_passwordError').text(response.responseJSON.errors.current_password);
+                    //     $('#passwordError').text(response.responseJSON.errors.password);
+                    //     $('#password_confirmError').text(response.responseJSON.errors.password_confirmation);
+                    // }
+                });
             }
         </script>
     @endsection

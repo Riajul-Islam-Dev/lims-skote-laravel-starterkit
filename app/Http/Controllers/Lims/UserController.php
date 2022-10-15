@@ -25,12 +25,22 @@ class UserController extends Controller
 
     public function saveUser(Request $request)
     {
+        if (!empty($request->avatar)) {
+            return response()->json([
+                'isSuccess' => true,
+                'Message' => "Password" . $request->avatar
+            ], 200); // Status code here
+        }
+
+
+
         if (request()->has('avatar')) {
             $avatar = request()->file('avatar');
             $avatarName = time() . '.' . $avatar->getClientOriginalExtension();
             $avatarPath = public_path('/images/');
             $avatar->move($avatarPath, $avatarName);
         }
+
 
         $user = new User();
 
@@ -47,13 +57,21 @@ class UserController extends Controller
         }
         // $user->status = $request->status;
 
-        $user->save();
+        // $user->save();
 
-        Session::flash('msg', 'User Created successfully!');
+        if ($user->save()) {
+            return response()->json([
+                'isSuccess' => true,
+                'Message' => "Password" . $request->name
+            ], 200); // Status code here
+        }
+
+
+        // Session::flash('msg', 'User Created successfully!');
 
         // return $request->all();
         // return redirect()->back();
-                return redirect()->route('showUser');
+        // return redirect()->route('showUser');
     }
 
     public function editUser($id = null)
@@ -92,7 +110,7 @@ class UserController extends Controller
 
         // return $request->all();
         // return redirect()->back();
-                return redirect()->route('showUser');
+        return redirect()->route('showUser');
     }
 
     public function deleteUser($id = null)
@@ -102,6 +120,6 @@ class UserController extends Controller
 
         Session::flash('msg', 'User\'s Data deleted successfully!');
 
-                return redirect()->route('showUser');
+        return redirect()->route('showUser');
     }
 }
