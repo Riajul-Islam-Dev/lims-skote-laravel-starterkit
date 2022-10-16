@@ -88,52 +88,54 @@
                     <h6 class="mt-2 ms-3">Please fill up the new User form carefully. Fields marked with <span
                             style="color: red">*</span>
                         are required.</h6>
-                    <h6 id="responseMessage"></h6>
+                    <h6 id="message"></h6>
                     <div class="modal-body">
-                        <form id="create_user_form" action="javascript:void(0)">
+                        <form method="post" id="create_user_form" enctype="multipart/form-data">
                             @csrf
+                            <div>
+                                <input type="hidden" name="_token" value="{{ csrf_token() }}">
+                            </div>
+                            <div>
+                                <h6 id="mess"></h6>
+                            </div>
                             <div class="row my-2">
                                 <div class="col-6 test">
                                     <x-lims.forms.input.label for="name" label="User Name" star="*" />
-                                    <x-lims.forms.input.text name="name" id="name" placeholder="User Name"
-                                        required />
+                                    <x-lims.forms.input.text name="name" id="name" placeholder="User Name" />
                                 </div>
                                 <div class="col-6">
                                     <x-lims.forms.input.label for="email" label="Email Address" star="*" />
-                                    <x-lims.forms.input.email name="email" id="email" placeholder="Email Address"
-                                        required />
+                                    <x-lims.forms.input.email name="email" id="email" placeholder="Email Address" />
                                 </div>
                             </div>
                             <div class="row my-2">
                                 <div class="col-6">
                                     <x-lims.forms.input.label for="user_password" label="Password" star="*" />
                                     <x-lims.forms.input.password name="user_password" id="user_password"
-                                        placeholder="Password" required />
+                                        placeholder="Password" />
                                 </div>
                                 <div class="col-6">
                                     <x-lims.forms.input.label for="dob" label="Date of Birth" star="*" />
-                                    <x-lims.forms.input.date name="dob" id="dob" placeholder="Date of Birth"
-                                        required />
+                                    <x-lims.forms.input.date name="dob" id="dob" placeholder="Date of Birth" />
                                 </div>
                             </div>
                             <div class="row my-2">
                                 <div class="col-6">
                                     <x-lims.forms.input.label for="avatar" label="Upload Avatar" star="*" />
-                                    <x-lims.forms.input.file name="avatar" id="avatar" placeholder="Upload Avatar"
-                                        required />
+                                    <x-lims.forms.input.file name="avatar" id="avatar" placeholder="Upload Avatar" />
                                 </div>
                                 <div class="col-6">
                                     <x-lims.forms.input.label for="status" label="Status" star="*" />
-                                    <x-lims.forms.input.toggle name="status" id="status" required />
+                                    <x-lims.forms.input.toggle name="status" id="status" />
                                 </div>
                             </div>
+                            <div class="modal-footer col-12">
+                                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                                <button type="submit" class="btn btn-success" id="btn_create">
+                                    Create User
+                                </button>
+                            </div>
                         </form>
-                        <div class="modal-footer col-12">
-                            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                            <button type="button" class="btn btn-success" id="btn_create" onclick="create_user_info()">
-                                Create User
-                            </button>
-                        </div>
                     </div>
                 </div>
             </div>
@@ -171,117 +173,30 @@
         <script src="{{ URL::asset('/assets/libs/bootstrap-datepicker/bootstrap-datepicker.min.js') }}"></script>
 
         <script>
-            function create_user_info() {
-                event.preventDefault();
-                var name = $("#name").val();
-                var email = $("#email").val();
-                var password = $("#user_password").val();
-                var dob = $("#dob").val();
-                var avatar = $("#avatar").val();
-                var status = $("#status").val();
-                // alert(name);
-                // alert(email);
-                // alert(password);
-                // alert(dob);
-                // alert(avatar);
-                // alert(status);
-                var toastLiveExample = document.getElementById('liveToast')
-                if (name == "") {
-                    var toast = new bootstrap.Toast(toastLiveExample);
-                    $('#toast-body').text('Name can\'t be empty.');
-                    toast.show();
-                    document.getElementById("name").style.border = "solid 1px red";
-                    setTimeout(changeBorder, 3000);
+            $(document).ready(function() {
 
-                    function changeBorder() {
-                        document.getElementById("name").style.border = "solid 1px rgb(206,212,218)";
-                    }
-                    $("#name").focus();
-                    return false;
-                } else if (email == "") {
-                    var toast = new bootstrap.Toast(toastLiveExample);
-                    $('#toast-body').text('Email can\'t be empty.');
-                    toast.show();
-                    document.getElementById("email").style.border = "solid 1px red";
-                    setTimeout(changeBorder, 3000);
-
-                    function changeBorder() {
-                        document.getElementById("email").style.border = "solid 1px rgb(206,212,218)";
-                    }
-                    $("#email").focus();
-                    return false;
-                } else if (password == "") {
-                    var toast = new bootstrap.Toast(toastLiveExample);
-                    $('#toast-body').text('Password can\'t be empty.');
-                    toast.show();
-                    document.getElementById("user_password").style.border = "solid 1px red";
-                    setTimeout(changeBorder, 3000);
-
-                    function changeBorder() {
-                        document.getElementById("user_password").style.border = "solid 1px rgb(206,212,218)";
-                    }
-                    $("#user_password").focus();
-                    return false;
-                } else if (dob == "") {
-                    var toast = new bootstrap.Toast(toastLiveExample);
-                    $('#toast-body').text('Date of Birth can\'t be empty.');
-                    toast.show();
-                    document.getElementById("dob").style.border = "solid 1px red";
-                    setTimeout(changeBorder, 3000);
-
-                    function changeBorder() {
-                        document.getElementById("dob").style.border = "solid 1px rgb(206,212,218)";
-                    }
-                    $("#dob").focus();
-                    return false;
-                } else if (avatar == "") {
-                    var toast = new bootstrap.Toast(toastLiveExample);
-                    $('#toast-body').text('Avatar can\'t be empty.');
-                    toast.show();
-                    document.getElementById("avatar").style.border = "solid 1px red";
-                    setTimeout(changeBorder, 3000);
-
-                    function changeBorder() {
-                        document.getElementById("avatar").style.border = "solid 1px rgb(206,212,218)";
-                    }
-                    $("#avatar").focus();
-                    return false;
-                }
-
-                $.ajax({
-                    url: "{{ route('saveUser') }}",
-                    type: "POST",
-                    data: {
-                        "name": name,
-                        "email": email,
-                        "password": password,
-                        "dob": dob,
-                        "avatar": avatar,
-                        "status": status,
-                        "_token": "{{ csrf_token() }}",
-                    },
-                    success: function(response) {
-                        $('#name').text('');
-                        $('#email').text('');
-                        $('#password').text('');
-                        $('#avatar').text('');
-                        if (response.isSuccess == true) {
-                            $('#responseMessage').text(response.Message);
+                $('#create_user_form').on('submit', function(event) {
+                    event.preventDefault();
+                    $.ajax({
+                        url: "{{ route('saveUser') }}",
+                        method: "POST",
+                        data: new FormData(this),
+                        dataType: 'JSON',
+                        contentType: false,
+                        cache: false,
+                        processData: false,
+                        success: function(data) {
+                            alert(data.error);
+                            console.log(data.error)
+                            $('#message').html(data.error);
+                            // $('#message').css('display', 'block');
+                            // $('#message').html(data.Message);
+                            // $('#message').addClass(data.class_name);
+                            // $('#uploaded_image').html(data.uploaded_image);
                         }
-                        // if (response.isSuccess == false) {
-                        //     $('#current_passwordError').text(response.Message);
-                        // } else if (response.isSuccess == true) {
-                        //     setTimeout(function() {
-                        //         window.location.href = "{{ route('root') }}";
-                        //     }, 1000);
-                        // }
-                    },
-                    // error: function(response) {
-                    //     $('#current_passwordError').text(response.responseJSON.errors.current_password);
-                    //     $('#passwordError').text(response.responseJSON.errors.password);
-                    //     $('#password_confirmError').text(response.responseJSON.errors.password_confirmation);
-                    // }
+                    })
                 });
-            }
+
+            });
         </script>
     @endsection
