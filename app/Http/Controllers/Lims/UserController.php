@@ -64,7 +64,7 @@ class UserController extends Controller
             return response()->json([
                 'isSuccess' => true,
                 'Message' => "User Details Updated successfully!",
-                'error' => "No Errors"
+                'saveStatus' => 1
             ], 200); // Status code here
         } else {
             Session::flash('message', 'Something went wrong!');
@@ -72,6 +72,7 @@ class UserController extends Controller
             return response()->json([
                 'isSuccess' => true,
                 'Message' => "Something went wrong!",
+                'saveStatus' => 0,
                 'error' => $validator->errors()->toArray()
             ], 200); // Status code here
         }

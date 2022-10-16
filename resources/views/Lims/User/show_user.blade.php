@@ -57,12 +57,9 @@
                                     <td>{{ $data->name }}</td>
                                     <td>{{ $data->email }}</td>
                                     @if ($data->status == 1)
-                                        {
                                         <td>Active</td>
-                                        }
-                                    @else{
+                                    @else
                                         <td>Inactive</td>
-                                        }
                                     @endif
                                     <td>Status pending</td>
                                     <td>
@@ -102,19 +99,16 @@
                             <div>
                                 <input type="hidden" name="_token" value="{{ csrf_token() }}">
                             </div>
-                            <div>
-                                <h6 id="mess"></h6>
-                            </div>
                             <div class="row my-2">
                                 <div class="col-6 test">
                                     <x-lims.forms.input.label for="name" label="User Name" star="*" />
                                     <x-lims.forms.input.text name="name" id="name" placeholder="User Name" />
-                                    <h6 id="name_error_msg">Name can't be empty</h6>
+                                    <span class="text-danger error-text name_error"></span>
                                 </div>
                                 <div class="col-6">
                                     <x-lims.forms.input.label for="email" label="Email Address" star="*" />
                                     <x-lims.forms.input.email name="email" id="email" placeholder="Email Address" />
-                                    <h6 id="email_error_msg">Email can't be empty</h6>
+                                    <span class="text-danger error-text email_error"></span>
                                 </div>
                             </div>
                             <div class="row my-2">
@@ -122,19 +116,19 @@
                                     <x-lims.forms.input.label for="user_password" label="Password" star="*" />
                                     <x-lims.forms.input.password name="user_password" id="user_password"
                                         placeholder="Password" />
-                                    <h6 id="user_password_error_msg">Password can't be empty</h6>
+                                    <span class="text-danger error-text user_password_error"></span>
                                 </div>
                                 <div class="col-6">
                                     <x-lims.forms.input.label for="dob" label="Date of Birth" star="*" />
                                     <x-lims.forms.input.date name="dob" id="dob" placeholder="Date of Birth" />
-                                    <h6 id="dob_error_msg">Date of Birth can't be empty</h6>
+                                    <span class="text-danger error-text dob_error"></span>
                                 </div>
                             </div>
                             <div class="row my-2">
                                 <div class="col-6">
                                     <x-lims.forms.input.label for="avatar" label="Upload Avatar" star="*" />
                                     <x-lims.forms.input.file name="avatar" id="avatar" placeholder="Upload Avatar" />
-                                    <h6 id="avatar_error_msg">Avatar can't be empty</h6>
+                                    <span class="text-danger error-text avatar_error"></span>
                                 </div>
                                 <div class="col-6">
                                     <x-lims.forms.input.label for="status" label="Status" star="*" />
@@ -197,14 +191,26 @@
                         contentType: false,
                         cache: false,
                         processData: false,
+                        beforeSend: function() {
+                            $(document).find('span.error-text').text('');
+                        },
                         success: function(data) {
-                            alert(data.error);
-                            console.log(data.error)
-                            $('#message').html(data.error);
-                            // $('#message').css('display', 'block');
-                            // $('#message').html(data.Message);
-                            // $('#message').addClass(data.class_name);
-                            // $('#uploaded_image').html(data.uploaded_image);
+                            if (data.saveStatus == 1) {
+                                $('#create_user_form')[0].reset();
+                                alert(data.Message);
+                            } else if (data.saveStatus == 0) {
+                                $.each(data.error, function(prefix, val) {
+                                    $('span.' + prefix + '_error').text(val[0]);
+                                });
+                                alert(data.Message);
+                            }
+                            // alert(data.error);
+                            // console.log(data.error)
+                            // $('#message').html(data.error);
+                            // // $('#message').css('display', 'block');
+                            // // $('#message').html(data.Message);
+                            // // $('#message').addClass(data.class_name);
+                            // // $('#uploaded_image').html(data.uploaded_image);
                         }
                     })
                 });
