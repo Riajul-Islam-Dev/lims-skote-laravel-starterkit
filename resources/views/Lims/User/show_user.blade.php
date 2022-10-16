@@ -56,7 +56,14 @@
                                     <th scope="row">{{ $loop->iteration }}</th>
                                     <td>{{ $data->name }}</td>
                                     <td>{{ $data->email }}</td>
-                                    {{-- <td>{{ $data->status }}</td> --}}
+                                    @if ($data->status == 1)
+                                        {
+                                        <td>Active</td>
+                                        }
+                                    @else{
+                                        <td>Inactive</td>
+                                        }
+                                    @endif
                                     <td>Status pending</td>
                                     <td>
                                         <a href="{{ url('/edit_user/' . $data->id) }}" class="btn btn-warning"><i
@@ -102,10 +109,12 @@
                                 <div class="col-6 test">
                                     <x-lims.forms.input.label for="name" label="User Name" star="*" />
                                     <x-lims.forms.input.text name="name" id="name" placeholder="User Name" />
+                                    <h6 id="name_error_msg">Name can't be empty</h6>
                                 </div>
                                 <div class="col-6">
                                     <x-lims.forms.input.label for="email" label="Email Address" star="*" />
                                     <x-lims.forms.input.email name="email" id="email" placeholder="Email Address" />
+                                    <h6 id="email_error_msg">Email can't be empty</h6>
                                 </div>
                             </div>
                             <div class="row my-2">
@@ -113,16 +122,19 @@
                                     <x-lims.forms.input.label for="user_password" label="Password" star="*" />
                                     <x-lims.forms.input.password name="user_password" id="user_password"
                                         placeholder="Password" />
+                                    <h6 id="user_password_error_msg">Password can't be empty</h6>
                                 </div>
                                 <div class="col-6">
                                     <x-lims.forms.input.label for="dob" label="Date of Birth" star="*" />
                                     <x-lims.forms.input.date name="dob" id="dob" placeholder="Date of Birth" />
+                                    <h6 id="dob_error_msg">Date of Birth can't be empty</h6>
                                 </div>
                             </div>
                             <div class="row my-2">
                                 <div class="col-6">
                                     <x-lims.forms.input.label for="avatar" label="Upload Avatar" star="*" />
                                     <x-lims.forms.input.file name="avatar" id="avatar" placeholder="Upload Avatar" />
+                                    <h6 id="avatar_error_msg">Avatar can't be empty</h6>
                                 </div>
                                 <div class="col-6">
                                     <x-lims.forms.input.label for="status" label="Status" star="*" />

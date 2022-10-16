@@ -37,11 +37,34 @@ class UserController extends Controller
         ]);
 
         if ($validator->passes()) {
+            $avatar = $request->avatar;
+            $avatarName = time() . '.' . $avatar->getClientOriginalExtension();
+            $avatarPath = public_path('/images/');
+            $avatar->move($avatarPath, $avatarName);
+
+            $user = new User();
+
+            $user->name = $request->name;
+            $user->email = $request->email;
+            $user->password = Hash::make($request->user_password);
+            $user->dob = date('Y-m-d', strtotime($request->dob));
+            $user->avatar = "/images/" . $avatarName;
+
+            if ($request->status == "on") {
+                $request->status = "1";
+            } else {
+                $request->status = "0";
+            }
+            $user->status = $request->status;
+
+            $user->save();
+
             Session::flash('message', 'User Details Updated successfully!');
             Session::flash('alert-class', 'alert-success');
             return response()->json([
                 'isSuccess' => true,
-                'Message' => "User Details Updated successfully!"
+                'Message' => "User Details Updated successfully!",
+                'error' => "No Errors"
             ], 200); // Status code here
         } else {
             Session::flash('message', 'Something went wrong!');
@@ -52,163 +75,6 @@ class UserController extends Controller
                 'error' => $validator->errors()->toArray()
             ], 200); // Status code here
         }
-
-        if (1 == 1) {
-            Session::flash('message', 'User Details Updated successfully!');
-            Session::flash('alert-class', 'alert-success');
-            return response()->json([
-                'isSuccess' => true,
-                'Message' => "User Details Updated successfully!"
-            ], 200); // Status code here
-        } else {
-            Session::flash('message', 'Something went wrong!');
-            Session::flash('alert-class', 'alert-danger');
-            return response()->json([
-                'isSuccess' => true,
-                'Message' => "Something went wrong!",
-                'error' => this . errors()->toArray()
-            ], 200); // Status code here
-        }
-        return response()->json([
-            'success'   => 'Validation: ' . $validated,
-            // 'uploaded_image' => '<img src="/images/' . $input['image'] . '" class="img-thumbnail" width="300" />',
-            // 'class_name'  => 'alert-success'
-        ]);
-
-        // $validator = Validator::make($request->all(), [
-        //     'name' => ['required', 'string', 'max:255'],
-        //     'email' => ['required', 'string', 'email', 'max:255', 'unique:users'],
-        //     'password' => ['required', 'string', 'min:6', 'confirmed'],
-        //     'dob' => ['required', 'date', 'before:today'],
-        //     'avatar' => ['required', 'image', 'mimes:jpg,jpeg,png', 'max:1024'],
-        //     'status' => ['required', 'string'],
-        // ]);
-
-        // if ($validator->passes()) {
-        //     $avatar = $request->avatar;
-        //     $avatarName = time() . '.' . $avatar->getClientOriginalExtension();
-        //     $avatarPath = public_path('/images/');
-        //     $avatar->move($avatarPath, $avatarName);
-        // }
-        return response()->json(['error' => $validator->errors()->all()]);
-
-
-
-
-        return response()->json([
-            'success'   => 'Image Upload Successfully' . $avatarName,
-            // 'uploaded_image' => '<img src="/images/' . $input['image'] . '" class="img-thumbnail" width="300" />',
-            // 'class_name'  => 'alert-success'
-        ]);
-
-
-
-
-
-
-
-
-        // $avatarName = time() . '.' . $request->avatar->getClientOriginalExtension();
-
-        if ($request->file('avatar')) {
-            return response()->json([
-                'isSuccess' => true,
-                'Message' => "Password"
-            ], 200); // Status code here
-        }
-
-
-
-        if (request()->has('avatar')) {
-            $avatar = request()->file('avatar');
-            $avatarName = time() . '.' . $avatar->getClientOriginalExtension();
-            $avatarPath = public_path('/images/');
-            $avatar->move($avatarPath, $avatarName);
-        }
-
-
-        $user = new User();
-
-        $user->name = $request->name;
-        $user->email = $request->email;
-        $user->password = Hash::make($request->password);
-        $user->dob = date('Y-m-d', strtotime($request->dob));
-        $user->avatar = "/images/" . $avatarName;
-
-        if ($request->status == "on") {
-            $request->status = "Active";
-        } else {
-            $request->status = "Inactive";
-        }
-        // $user->status = $request->status;
-
-        // $user->save();
-
-        if ($user->save()) {
-            return response()->json([
-                'isSuccess' => true,
-                'Message' => "Password" . $request->name
-            ], 200); // Status code here
-        }
-
-
-        // Session::flash('msg', 'User Created successfully!');
-
-        // return $request->all();
-        // return redirect()->back();
-        // return redirect()->route('showUser');
-    }
-    public function saveUser_old(Request $request)
-    {
-        // $avatarName = time() . '.' . $request->avatar->getClientOriginalExtension();
-
-        if ($request->file('avatar')) {
-            return response()->json([
-                'isSuccess' => true,
-                'Message' => "Password"
-            ], 200); // Status code here
-        }
-
-
-
-        if (request()->has('avatar')) {
-            $avatar = request()->file('avatar');
-            $avatarName = time() . '.' . $avatar->getClientOriginalExtension();
-            $avatarPath = public_path('/images/');
-            $avatar->move($avatarPath, $avatarName);
-        }
-
-
-        $user = new User();
-
-        $user->name = $request->name;
-        $user->email = $request->email;
-        $user->password = Hash::make($request->password);
-        $user->dob = date('Y-m-d', strtotime($request->dob));
-        $user->avatar = "/images/" . $avatarName;
-
-        if ($request->status == "on") {
-            $request->status = "Active";
-        } else {
-            $request->status = "Inactive";
-        }
-        // $user->status = $request->status;
-
-        // $user->save();
-
-        if ($user->save()) {
-            return response()->json([
-                'isSuccess' => true,
-                'Message' => "Password" . $request->name
-            ], 200); // Status code here
-        }
-
-
-        // Session::flash('msg', 'User Created successfully!');
-
-        // return $request->all();
-        // return redirect()->back();
-        // return redirect()->route('showUser');
     }
 
     public function editUser($id = null)
