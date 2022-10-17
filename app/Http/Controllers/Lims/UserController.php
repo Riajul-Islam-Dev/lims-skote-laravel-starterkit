@@ -33,7 +33,7 @@ class UserController extends Controller
             'user_password' => ['required', 'string', 'min:6'],
             'dob' => ['required', 'date', 'before:today'],
             'avatar' => ['required', 'image', 'mimes:jpg,jpeg,png', 'max:1024'],
-            'status' => ['required', 'string'],
+            // 'status' => ['required', 'string'],
         ]);
 
         if ($validator->passes()) {

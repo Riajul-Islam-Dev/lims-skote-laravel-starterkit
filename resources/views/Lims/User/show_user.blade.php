@@ -24,7 +24,7 @@
     <div class="row">
         <div class="col-12">
             <div class="card">
-                <div class="card-body">
+                <div class="card-body" id="user_data_table">
 
                     <h4 class="card-title">User List:</h4>
                     <p class="card-title-desc">All Users are listed in the data table here.
@@ -61,7 +61,6 @@
                                     @else
                                         <td>Inactive</td>
                                     @endif
-                                    <td>Status pending</td>
                                     <td>
                                         <a href="{{ url('/edit_user/' . $data->id) }}" class="btn btn-warning"><i
                                                 class="fa-solid fa-pen-to-square"></i> Edit</a>
@@ -78,8 +77,6 @@
         </div> <!-- end col -->
     </div> <!-- end row -->
 
-
-
     <!-- Add User Modal -->
     <div class="container">
         <div class="modal fade" id="addUserModal" tabindex="-1" aria-labelledby="addUserModalLabel" aria-hidden="true">
@@ -93,14 +90,14 @@
                             style="color: red">*</span>
                         are required.</h6>
                     <h6 id="message"></h6>
-                    <div class="modal-body">
-                        <form method="post" id="create_user_form" enctype="multipart/form-data">
-                            @csrf
+                    <form method="post" id="create_user_form" enctype="multipart/form-data">
+                        @csrf
+                        <div class="modal-body">
                             <div>
                                 <input type="hidden" name="_token" value="{{ csrf_token() }}">
                             </div>
                             <div class="row my-2">
-                                <div class="col-6 test">
+                                <div class="col-6">
                                     <x-lims.forms.input.label for="name" label="User Name" star="*" />
                                     <x-lims.forms.input.text name="name" id="name" placeholder="User Name" />
                                     <span class="text-danger error-text name_error"></span>
@@ -135,86 +132,69 @@
                                     <x-lims.forms.input.toggle name="status" id="status" />
                                 </div>
                             </div>
-                            <div class="modal-footer col-12">
-                                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                                <button type="submit" class="btn btn-success" id="btn_create">
-                                    Create User
-                                </button>
-                            </div>
-                        </form>
-                    </div>
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                            <button type="submit" class="btn btn-success" id="btn_create">
+                                Create User
+                            </button>
+                        </div>
+                    </form>
                 </div>
             </div>
         </div>
+    </div>
+@endsection
 
-        {{-- Toast message --}}
-        <div class="position-fixed bottom-0 end-0 p-3" style="z-index: 7000">
-            <div id="liveToast" class="toast" role="alert" aria-live="assertive" aria-atomic="true">
-                <div class="toast-header">
-                    {{-- <img src="..." class="rounded me-2" alt="..."> --}}
-                    <strong class="me-auto"><i class="fas fa-info-circle"></i> Caution</strong>
-                    <small>Just now</small>
-                    <button type="button" class="btn-close" data-bs-dismiss="toast" aria-label="Close"></button>
-                </div>
-                <div class="toast-body" id="toast-body">
-                    Hello, world! This is a toast message.
-                </div>
-            </div>
-        </div>
-    @endsection
-    @section('script')
-        <!-- apexcharts -->
-        <script src="{{ URL::asset('/assets/libs/apexcharts/apexcharts.min.js') }}"></script>
+@section('script')
+    <!-- apexcharts -->
+    <script src="{{ URL::asset('/assets/libs/apexcharts/apexcharts.min.js') }}"></script>
 
-        <!-- dashboard init -->
-        <script src="{{ URL::asset('/assets/js/pages/dashboard.init.js') }}"></script>
+    <!-- dashboard init -->
+    <script src="{{ URL::asset('/assets/js/pages/dashboard.init.js') }}"></script>
 
-        <!-- Required datatable js -->
-        <script src="{{ URL::asset('/assets/libs/datatables/datatables.min.js') }}"></script>
-        <script src="{{ URL::asset('/assets/libs/jszip/jszip.min.js') }}"></script>
-        <script src="{{ URL::asset('/assets/libs/pdfmake/pdfmake.min.js') }}"></script>
-        <!-- Datatable init js -->
-        <script src="{{ URL::asset('/assets/js/pages/datatables.init.js') }}"></script>
+    <!-- Required datatable js -->
+    <script src="{{ URL::asset('/assets/libs/datatables/datatables.min.js') }}"></script>
+    <script src="{{ URL::asset('/assets/libs/jszip/jszip.min.js') }}"></script>
+    <script src="{{ URL::asset('/assets/libs/pdfmake/pdfmake.min.js') }}"></script>
+    <!-- Datatable init js -->
+    <script src="{{ URL::asset('/assets/js/pages/datatables.init.js') }}"></script>
 
-        <script src="{{ URL::asset('/assets/libs/bootstrap-datepicker/bootstrap-datepicker.min.js') }}"></script>
+    <script src="{{ URL::asset('/assets/libs/bootstrap-datepicker/bootstrap-datepicker.min.js') }}"></script>
 
-        <script>
-            $(document).ready(function() {
+    <script>
+        $(document).ready(function() {
 
-                $('#create_user_form').on('submit', function(event) {
-                    event.preventDefault();
-                    $.ajax({
-                        url: "{{ route('saveUser') }}",
-                        method: "POST",
-                        data: new FormData(this),
-                        dataType: 'JSON',
-                        contentType: false,
-                        cache: false,
-                        processData: false,
-                        beforeSend: function() {
-                            $(document).find('span.error-text').text('');
-                        },
-                        success: function(data) {
-                            if (data.saveStatus == 1) {
-                                $('#create_user_form')[0].reset();
-                                alert(data.Message);
-                            } else if (data.saveStatus == 0) {
-                                $.each(data.error, function(prefix, val) {
-                                    $('span.' + prefix + '_error').text(val[0]);
-                                });
-                                alert(data.Message);
-                            }
-                            // alert(data.error);
-                            // console.log(data.error)
-                            // $('#message').html(data.error);
-                            // // $('#message').css('display', 'block');
-                            // // $('#message').html(data.Message);
-                            // // $('#message').addClass(data.class_name);
-                            // // $('#uploaded_image').html(data.uploaded_image);
+            $('#create_user_form').on('submit', function(event) {
+                event.preventDefault();
+                $.ajax({
+                    url: "{{ route('saveUser') }}",
+                    method: "POST",
+                    data: new FormData(this),
+                    dataType: 'JSON',
+                    contentType: false,
+                    cache: false,
+                    processData: false,
+                    beforeSend: function() {
+                        $(document).find('span.error-text').text('');
+                    },
+                    success: function(data) {
+                        if (data.saveStatus == 1) {
+                            $('#create_user_form')[0].reset();
+                            $('#addUserModal').modal('toggle');
+                            $("#user_data_table").load(location.href + " #user_data_table");
+                            alert(data.Message);
+                        } else if (data.saveStatus == 0) {
+                            $.each(data.error, function(prefix, val) {
+                                $('span.' + prefix + '_error').text(val[0]);
+                            });
+                            alert(data.Message);
+                            // console.log(data.error);
                         }
-                    })
-                });
-
+                    }
+                })
             });
-        </script>
-    @endsection
+
+        });
+    </script>
+@endsection
