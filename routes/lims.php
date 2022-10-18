@@ -19,7 +19,7 @@ Route::group(['prefix' => '', 'middleware' => ['auth']], function () {
     Route::post('save_module', [ModuleController::class, 'saveModule'])->name('saveModule');
     Route::get('edit_module/{id}', [ModuleController::class, 'editModule'])->name('editModule');
     Route::post('update_module/{id}', [ModuleController::class, 'updateModule'])->name('updateModule');
-    Route::get('delete_module/{id}', [ModuleController::class, 'deleteModule'])->name('deleteModule');
+    Route::post('delete_module/{id}', [ModuleController::class, 'deleteModule'])->name('deleteModule');
 });
 
 // User
@@ -29,7 +29,7 @@ Route::group(['prefix' => '', 'middleware' => ['auth']], function () {
     Route::post('save_user', [UserController::class, 'saveUser'])->name('saveUser');
     Route::get('edit_user/{id}', [UserController::class, 'editUser'])->name('editUser');
     Route::post('update_user/{id}', [UserController::class, 'updateUser'])->name('updateUser');
-    Route::get('delete_user/{id}', [UserController::class, 'deleteUser'])->name('deleteUser');
+    Route::post('delete_user/{id}', [UserController::class, 'deleteUser'])->name('deleteUser');
 });
 
 // Role
@@ -39,7 +39,7 @@ Route::group(['prefix' => '', 'middleware' => ['auth']], function () {
     Route::post('save_role', [RoleController::class, 'saveRole'])->name('saveRole');
     Route::get('edit_role/{id}', [RoleController::class, 'editRole'])->name('editRole');
     Route::post('update_role/{id}', [RoleController::class, 'updateRole'])->name('updateRole');
-    Route::get('delete_role/{id}', [RoleController::class, 'deleteRole'])->name('deleteRole');
+    Route::post('delete_role/{id}', [RoleController::class, 'deleteRole'])->name('deleteRole');
 });
 
 // Role Section
@@ -49,7 +49,7 @@ Route::group(['prefix' => '', 'middleware' => ['auth']], function () {
     Route::post('save_role_section', [RoleSectionController::class, 'saveRoleSection'])->name('saveRoleSection');
     Route::get('edit_role_section/{id}', [RoleSectionController::class, 'editRoleSection'])->name('editRoleSection');
     Route::post('update_role_section/{id}', [RoleSectionController::class, 'updateRoleSection'])->name('updateRoleSection');
-    Route::get('delete_role_section/{id}', [RoleSectionController::class, 'deleteRoleSection'])->name('deleteRoleSection');
+    Route::post('delete_role_section/{id}', [RoleSectionController::class, 'deleteRoleSection'])->name('deleteRoleSection');
 });
 
 // Right
@@ -59,7 +59,7 @@ Route::group(['prefix' => '', 'middleware' => ['auth']], function () {
     Route::post('save_right', [RightController::class, 'saveRight'])->name('saveRight');
     Route::get('edit_right/{id}', [RightController::class, 'editRight'])->name('editRight');
     Route::post('update_right/{id}', [RightController::class, 'updateRight'])->name('updateRight');
-    Route::get('delete_right/{id}', [RightController::class, 'deleteRight'])->name('deleteRight');
+    Route::post('delete_right/{id}', [RightController::class, 'deleteRight'])->name('deleteRight');
 });
 
 // Menu
@@ -69,7 +69,7 @@ Route::group(['prefix' => '', 'middleware' => ['auth']], function () {
     Route::post('save_menu', [MenuController::class, 'saveMenu'])->name('saveMenu');
     Route::get('edit_menu/{id}', [MenuController::class, 'editMenu'])->name('editMenu');
     Route::post('update_menu/{id}', [MenuController::class, 'updateMenu'])->name('updateMenu');
-    Route::get('delete_menu/{id}', [MenuController::class, 'deleteMenu'])->name('deleteMenu');
+    Route::post('delete_menu/{id}', [MenuController::class, 'deleteMenu'])->name('deleteMenu');
 });
 
 // Department
@@ -79,5 +79,5 @@ Route::group(['prefix' => '', 'middleware' => ['auth']], function () {
     Route::post('save_department', [DepartmentController::class, 'saveDepartment'])->name('saveDepartment');
     Route::get('edit_department/{id}', [DepartmentController::class, 'editDepartment'])->name('editDepartment');
     Route::post('update_department/{id}', [DepartmentController::class, 'updateDepartment'])->name('updateDepartment');
-    Route::get('delete_department/{id}', [DepartmentController::class, 'deleteDepartment'])->name('deleteDepartment');
+    Route::post('delete_department/{id}', [DepartmentController::class, 'deleteDepartment'])->name('deleteDepartment');
 });

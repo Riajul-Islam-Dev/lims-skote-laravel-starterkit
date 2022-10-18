@@ -21,10 +21,10 @@
         @endslot
     @endcomponent
 
-    <div class="row">
+    <div class="row" id="user_data_table">
         <div class="col-12">
             <div class="card">
-                <div class="card-body" id="user_data_table">
+                <div class="card-body">
 
                     <h4 class="card-title">User List:</h4>
                     <p class="card-title-desc">All Users are listed in the data table here.
@@ -64,9 +64,12 @@
                                     <td>
                                         <a href="{{ url('/edit_user/' . $data->id) }}" class="btn btn-warning"><i
                                                 class="fa-solid fa-pen-to-square"></i> Edit</a>
-                                        <a href="{{ url('/delete_user/' . $data->id) }}" class="btn btn-danger"
+                                        {{-- <a href="{{ url('/delete_user/' . $data->id) }}" class="btn btn-danger"
                                             onclick="return confirm('Delete Data?')"><i class="fa-solid fa-trash-can"></i>
-                                            Delete</a>
+                                            Delete</a> --}}
+                                        <button type="submit" class="btn btn-danger delete_user"
+                                            data-id="{{ $data->id }}"><i class="fa-solid fa-trash-can"></i>
+                                            Delete</button>
                                     </td>
                                 </tr>
                             @endforeach
@@ -83,10 +86,10 @@
 
 @section('script')
     <!-- apexcharts -->
-    <script src="{{ URL::asset('/assets/libs/apexcharts/apexcharts.min.js') }}"></script>
+    {{-- <script src="{{ URL::asset('/assets/libs/apexcharts/apexcharts.min.js') }}"></script> --}}
 
     <!-- dashboard init -->
-    <script src="{{ URL::asset('/assets/js/pages/dashboard.init.js') }}"></script>
+    {{-- <script src="{{ URL::asset('/assets/js/pages/dashboard.init.js') }}"></script> --}}
 
     <!-- Required datatable js -->
     <script src="{{ URL::asset('/assets/libs/datatables/datatables.min.js') }}"></script>
@@ -99,7 +102,6 @@
 
     <script>
         $(document).ready(function() {
-
             $('#create_user_form').on('submit', function(event) {
                 event.preventDefault();
                 $.ajax({
@@ -124,12 +126,36 @@
                                 $('span.' + prefix + '_error').text(val[0]);
                             });
                             alert(data.Message);
-                            // console.log(data.error);
                         }
                     }
                 })
             });
+        });
 
+        $(document).ready(function() {
+            $('.delete_user').click(function(event) {
+                event.preventDefault();
+                if (confirm('Delete Data?')) {
+                    var id = $(this).data("id");
+                    var token = $("meta[name='csrf-token']").attr("content");
+                    $.ajax({
+                        url: "{{ url('delete_user') }}" + "/" + id,
+                        method: "POST",
+                        data: {
+                            "_token": token,
+                            "id": id,
+                        },
+                        success: function(response) {
+                            if (response.deleteStatus == 1) {
+                                $("#user_data_table").load(location.href + " #user_data_table");
+                                alert(response.Message);
+                            } else if (data.deleteStatus == 0) {
+                                alert(response.Message);
+                            }
+                        }
+                    })
+                }
+            });
         });
     </script>
 @endsection

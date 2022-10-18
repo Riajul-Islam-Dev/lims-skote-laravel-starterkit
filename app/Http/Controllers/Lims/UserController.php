@@ -120,10 +120,23 @@ class UserController extends Controller
     public function deleteUser($id = null)
     {
         $delete_user_data = User::find($id);
-        $delete_user_data->delete();
 
-        Session::flash('msg', 'User\'s Data deleted successfully!');
-
-        return redirect()->route('showUser');
+        if ($delete_user_data->delete()) {
+            Session::flash('message', 'User deleted successfully!');
+            Session::flash('alert-class', 'alert-success');
+            return response()->json([
+                'isSuccess' => true,
+                'Message' => 'User deleted successfully!',
+                'deleteStatus' => 1
+            ], 200); // Status code here
+        } else {
+            Session::flash('message', 'Something went wrong!');
+            Session::flash('alert-class', 'alert-danger');
+            return response()->json([
+                'isSuccess' => true,
+                'Message' => 'Something went wrong',
+                'deleteStatus' => 0
+            ], 200); // Status code here
+        }
     }
 }
