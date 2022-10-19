@@ -1,5 +1,12 @@
-<div class="row">
-    <div class="col-12">
+@push('css_data_table')
+    <!-- DataTables -->
+    {{-- <link href="{{ URL::asset('/assets/libs/bootstrap-datepicker/bootstrap-datepicker.min.css') }}" rel="stylesheet"
+        type="text/css"> --}}
+        <link href="{{ URL::asset('/assets/libs/datatables/datatables.min.css') }}" rel="stylesheet" type="text/css" />
+@endpush
+
+<div class="row" id="user_data_table">
+    <div class="col-12" id="user_data_table_col">
         <div class="card">
             <div class="card-body">
 
@@ -56,3 +63,12 @@
         </div>
     </div> <!-- end col -->
 </div> <!-- end row -->
+
+@push('js_data_table')
+    <!-- Required datatable js -->
+    <script src="{{ URL::asset('/assets/libs/datatables/datatables.min.js') }}"></script>
+    <script src="{{ URL::asset('/assets/libs/jszip/jszip.min.js') }}"></script>
+    <script src="{{ URL::asset('/assets/libs/pdfmake/pdfmake.min.js') }}"></script>
+    <!-- Datatable init js -->
+    <script src="{{ URL::asset('/assets/js/pages/datatables.init.js') }}"></script>
+@endpush

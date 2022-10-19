@@ -17,9 +17,11 @@
                     if (data.saveStatus == 1) {
                         $("#create_user_form")[0].reset();
                         $("#addUserModal").modal("toggle");
-                        $("#user_data_table").load(
-                            location.href + " #user_data_table"
-                        );
+                        // $("#user_data_table").hide();
+                        $("#user_data_table").load(" #user_data_table > *");
+                        // $("#datatable-buttons").load(
+                        //     location.href + " #datatable-buttons"
+                        // );
                         alert(data.Message);
                     } else if (data.saveStatus == 0) {
                         $.each(data.error, function(prefix, val) {
@@ -45,8 +47,8 @@
                     },
                     success: function(response) {
                         if (response.deleteStatus == 1) {
-                            $("#user_data_table").load(
-                                location.href + " #user_data_table"
+                            $("#datatable-buttons").load(
+                                location.href + " #datatable-buttons"
                             );
                             alert(response.Message);
                         } else if (data.deleteStatus == 0) {

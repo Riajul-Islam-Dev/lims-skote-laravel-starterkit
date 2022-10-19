@@ -5,10 +5,7 @@
 @endsection
 
 @section('css')
-    <!-- DataTables -->
-    <link href="{{ URL::asset('/assets/libs/datatables/datatables.min.css') }}" rel="stylesheet" type="text/css" />
-    <link href="{{ URL::asset('/assets/libs/bootstrap-datepicker/bootstrap-datepicker.min.css') }}" rel="stylesheet"
-        type="text/css">
+    @stack('css_data_table')
 @endsection
 
 @section('content')
@@ -22,7 +19,7 @@
     @endcomponent
 
     <!-- User Data Table -->
-    <div id="user_data_table">
+    <div>
         @include('Lims/user/user_data_table')
     </div>
 
@@ -49,12 +46,8 @@
     <!-- dashboard init -->
     {{-- <script src="{{ URL::asset('/assets/js/pages/dashboard.init.js') }}"></script> --}}
 
-    <!-- Required datatable js -->
-    <script src="{{ URL::asset('/assets/libs/datatables/datatables.min.js') }}"></script>
-    <script src="{{ URL::asset('/assets/libs/jszip/jszip.min.js') }}"></script>
-    <script src="{{ URL::asset('/assets/libs/pdfmake/pdfmake.min.js') }}"></script>
-    <!-- Datatable init js -->
-    <script src="{{ URL::asset('/assets/js/pages/datatables.init.js') }}"></script>
+    @stack('js_data_table')
+
 
     <script src="{{ URL::asset('/assets/libs/bootstrap-datepicker/bootstrap-datepicker.min.js') }}"></script>
 @endsection
