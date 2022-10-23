@@ -37,21 +37,6 @@
 @endsection
 
 @push('custom-scripts')
-    <!-- Date picker Js -->
-    <script src="{{ URL::asset('/assets/libs/bootstrap-datepicker/bootstrap-datepicker.min.js') }}"></script>
-
-    <!-- Required datatable js -->
-    <script src="{{ URL::asset('/assets/libs/datatables/datatables.min.js') }}"></script>
-    <script src="{{ URL::asset('/assets/libs/jszip/jszip.min.js') }}"></script>
-    <script src="{{ URL::asset('/assets/libs/pdfmake/pdfmake.min.js') }}"></script>
-    <!-- Datatable init js -->
-    <script src="{{ URL::asset('/assets/js/pages/datatables.init.js') }}"></script>
-
-    <!-- Sweet alert js -->
-    <script src="{{ URL::asset('assets/libs/sweetalert2/sweetalert2.min.js') }}"></script>
-    <!-- toastr js -->
-    <script src="{{ URL::asset('assets/libs/toastr/toastr.min.js') }}"></script>
-
     <!-- Developer's JS file -->
     @include('Lims.user.user_scripts')
 @endpush

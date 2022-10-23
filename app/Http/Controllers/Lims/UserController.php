@@ -38,12 +38,20 @@ class UserController extends Controller
             </thead>
             <tbody>';
             foreach ($show_user_data as $key => $data) {
+                if ($data->status == 1) {
+                    $status_var = "Active";
+                } else {
+                    $status_var = "Inactive";
+                }
                 $output .= '<tr>
                 <th scope="row">' . $data->id . ' </th>
                 <td>' . $data->name . ' </td>
                 <td>' . $data->email . '</td>
-                <td>' . $data->email . '</td>
-                <td>' . $data->email . '</td>
+                <td>' . $status_var . '</td>
+                <td>
+                <a href="/edit_user/' . $data->id . '" class="btn btn-warning"><i class="fa-solid fa-pen-to-square"></i> Edit</a>
+                <a href="#" id="test" class="btn btn-danger delete_user" data-id="' . $data->id . '"><i class="fa-solid fa-trash-can"></i> Delete</a>
+                </td>
                 </tr>';
             }
             $output .= '</tbody></table>';
