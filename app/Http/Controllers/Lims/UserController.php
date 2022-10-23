@@ -20,6 +20,39 @@ class UserController extends Controller
         return view('Lims/user/show_user', compact('show_user_data'));
     }
 
+    public function fetchAllUser()
+    {
+        $show_user_data = User::all();
+
+        $output = '';
+        if ($show_user_data->count() > 0) {
+            $output .= '<table id="datatable-buttons" class="table table-bordered dt-responsive nowrap w-100">
+            <thead>
+                <tr>
+                    <th>ID</th>
+                    <th>User Name</th>
+                    <th>User Email</th>
+                    <th>Status</th>
+                    <th>Action</th>
+                </tr>
+            </thead>
+            <tbody>';
+            foreach ($show_user_data as $key => $data) {
+                $output .= '<tr>
+                <th scope="row">' . $data->id . ' </th>
+                <td>' . $data->name . ' </td>
+                <td>' . $data->email . '</td>
+                <td>' . $data->email . '</td>
+                <td>' . $data->email . '</td>
+                </tr>';
+            }
+            $output .= '</tbody></table>';
+            echo $output;
+        } else {
+            echo '<h1 class="text-center text-secondary my-5">No record present in the database!</h1>';
+        }
+    }
+
     public function addUser()
     {
         return view('Lims/user/add_user');
@@ -57,22 +90,26 @@ class UserController extends Controller
             }
             $user->status = $request->status;
 
-            $user->save();
+            $query = $user->save();
 
-            Session::flash('message', 'User Details Updated successfully!');
-            Session::flash('alert-class', 'alert-success');
-            return response()->json([
-                'isSuccess' => true,
-                'Message' => "User Details Updated successfully!",
-                'saveStatus' => 1
-            ], 200); // Status code here
+            if ($query) {
+                return response()->json([
+                    'isSuccess' => true,
+                    'Message' => "User Details Saved successfully!",
+                    'code' => 1
+                ], 200); // Status code here
+            } else {
+                return response()->json([
+                    'isSuccess' => false,
+                    'Message' => "Something went wrong!",
+                    'code' => 0
+                ], 200); // Status code here
+            }
         } else {
-            Session::flash('message', 'Something went wrong!');
-            Session::flash('alert-class', 'alert-danger');
             return response()->json([
-                'isSuccess' => true,
-                'Message' => "Something went wrong!",
-                'saveStatus' => 0,
+                'isSuccess' => false,
+                'Message' => "Please check the inputs!",
+                'code' => 0,
                 'error' => $validator->errors()->toArray()
             ], 200); // Status code here
         }

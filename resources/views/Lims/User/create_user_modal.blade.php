@@ -9,13 +9,10 @@
                 <h6 class="mt-2 ms-3">Please fill up the new User form carefully. Fields marked with <span
                         style="color: red">*</span>
                     are required.</h6>
-                <h6 id="message"></h6>
-                <form method="post" id="create_user_form" enctype="multipart/form-data">
+                <form action="{{ route('saveUser') }}" method="POST" id="create_user_form"
+                    enctype="multipart/form-data">
                     @csrf
                     <div class="modal-body">
-                        <div>
-                            <input type="hidden" name="_token" value="{{ csrf_token() }}">
-                        </div>
                         <div class="row my-2">
                             <div class="col-6">
                                 <x-lims.forms.input.label for="name" label="User Name" star="*" />
@@ -55,7 +52,7 @@
                     </div>
                     <div class="modal-footer">
                         <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                        <button type="submit" class="btn btn-success" id="test">
+                        <button type="submit" class="btn btn-success">
                             Create User
                         </button>
                     </div>

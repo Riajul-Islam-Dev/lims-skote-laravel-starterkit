@@ -1,33 +1,56 @@
 <script>
     $(document).ready(function() {
-        $("#create_user_form").on("submit", function(event) {
-            event.preventDefault();
+        fetchAllUsers();
+
+        function fetchAllUsers() {
             $.ajax({
-                url: "{{ route('saveUser') }}",
-                method: "POST",
-                data: new FormData(this),
+                url: '{{ route('fetchAllUser') }}',
+                method: 'get',
+                success: function(response) {
+                    $("#show_all_employees").html(response);
+                    $("table").DataTable();
+                }
+            });
+        }
+
+        toastr.options.preventDuplicates = true;
+
+        $.ajaxSetup({
+            headers: {
+                'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+            }
+        })
+
+        $("#create_user_form").on("submit", function(e) {
+            e.preventDefault();
+            var form = this;
+            $.ajax({
+                url: $(form).attr('action'),
+                method: $(form).attr('method'),
+                data: new FormData(form),
+                processData: false,
                 dataType: "JSON",
                 contentType: false,
                 cache: false,
-                processData: false,
                 beforeSend: function() {
-                    $(document).find("span.error-text").text("");
+                    $(form).find("span.error-text").text("");
                 },
                 success: function(data) {
-                    if (data.saveStatus == 1) {
-                        $("#create_user_form")[0].reset();
-                        $("#addUserModal").modal("toggle");
-                        // $("#user_data_table").hide();
-                        $("#user_data_table").load(" #user_data_table > *");
-                        // $("#datatable-buttons").load(
-                        //     location.href + " #datatable-buttons"
-                        // );
-                        alert(data.Message);
-                    } else if (data.saveStatus == 0) {
+                    if (data.code == 0) {
                         $.each(data.error, function(prefix, val) {
-                            $("span." + prefix + "_error").text(val[0]);
+                            $(form).find("span." + prefix + "_error").text(val[0]);
                         });
-                        alert(data.Message);
+                        toastr.error(data.Message);
+                    } else if (data.code == 1) {
+                        $(form)[0].reset();
+                        $("#addUserModal").modal("toggle");
+                        Swal.fire(
+                            'Added!',
+                            'User Added Successfully!',
+                            'success'
+                        )
+                        fetchAllUsers();
+                        toastr.success(data.Message);
                     }
                 },
             });

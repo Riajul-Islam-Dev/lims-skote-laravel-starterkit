@@ -25,6 +25,7 @@ Route::group(['prefix' => '', 'middleware' => ['auth']], function () {
 // User
 Route::group(['prefix' => '', 'middleware' => ['auth']], function () {
     Route::get('show_user', [UserController::class, 'showUser'])->name('showUser');
+    Route::get('fetchalluser', [UserController::class, 'fetchAllUser'])->name('fetchAllUser');
     Route::get('add_user', [UserController::class, 'addUser'])->name('addUser');
     Route::post('save_user', [UserController::class, 'saveUser'])->name('saveUser');
     Route::get('edit_user/{id}', [UserController::class, 'editUser'])->name('editUser');
