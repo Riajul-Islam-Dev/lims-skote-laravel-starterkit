@@ -12,10 +12,13 @@
     <script src="{{ URL::asset('assets/libs/sweetalert2/sweetalert2.min.js') }}"></script>
     <!-- toastr js -->
     <script src="{{ URL::asset('assets/libs/toastr/toastr.min.js') }}"></script>
+
+
     <script>
         $(document).ready(function() {
             fetchAllUsers();
 
+            // Fetch all user ajax request
             function fetchAllUsers() {
                 $.ajax({
                     url: '{{ route('fetchAllUser') }}',
@@ -45,6 +48,7 @@
                 }
             })
 
+            // Create user ajax request
             $("#create_user_form").on("submit", function(e) {
                 e.preventDefault();
                 var form = this;
@@ -80,36 +84,52 @@
                 });
             });
 
-            $("#test").click(function() {
-                alert("The paragraph was clicked.");
-            });
-
-            $(".delete_users").click(function(event) {
-                var id = $(this).data("id");
-                alert(id);
-                event.preventDefault();
-                if (confirm("Delete Data?")) {
-                    var id = $(this).data("id");
-                    var token = $("meta[name='csrf-token']").attr("content");
-                    $.ajax({
-                        url: "{{ url('delete_user') }}" + "/" + id,
-                        method: "POST",
-                        data: {
-                            _token: token,
-                            id: id,
-                        },
-                        success: function(response) {
-                            if (response.deleteStatus == 1) {
-                                $("#datatable-buttons").load(
-                                    location.href + " #datatable-buttons"
-                                );
-                                alert(response.Message);
-                            } else if (data.deleteStatus == 0) {
-                                alert(response.Message);
+            // Delete user ajax request
+            $(document).on('click', '.delete_user', function(e) {
+                e.preventDefault();
+                let id = $(this).attr('id');
+                let csrf = '{{ csrf_token() }}';
+                Swal.fire({
+                    title: 'Are you sure?',
+                    text: "You won't be able to revert this!",
+                    icon: 'warning',
+                    showCancelButton: true,
+                    confirmButtonColor: '#d33',
+                    cancelButtonColor: '#34C38F',
+                    confirmButtonText: 'Yes, delete it!'
+                }).then((result) => {
+                    if (result.isConfirmed) {
+                        $.ajax({
+                            url: '{{ url('delete_user') }}',
+                            method: 'delete',
+                            data: {
+                                id: id,
+                                _token: csrf
+                            },
+                            success: function(response) {
+                                if (response.code == 0) {
+                                    console.log(response);
+                                    Swal.fire(
+                                        'Caution!',
+                                        'Something went wrong!',
+                                        'error'
+                                    )
+                                    fetchAllUsers();
+                                    toastr.error(response.Message);
+                                } else if (response.code == 1) {
+                                    console.log(response);
+                                    Swal.fire(
+                                        'Deleted!',
+                                        'Your file has been deleted.',
+                                        'success'
+                                    )
+                                    fetchAllUsers();
+                                    toastr.success(response.Message);
+                                }
                             }
-                        },
-                    });
-                }
+                        });
+                    }
+                })
             });
         });
     </script>

@@ -7,6 +7,7 @@ use Illuminate\Http\Request;
 use App\Models\Lims\User;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Session;
+use Illuminate\Support\Facades\File;
 use Validator;
 
 
@@ -32,6 +33,7 @@ class UserController extends Controller
                     <th>ID</th>
                     <th>User Name</th>
                     <th>User Email</th>
+                    <th>Date of Birth</th>
                     <th>Status</th>
                     <th>Action</th>
                 </tr>
@@ -47,10 +49,11 @@ class UserController extends Controller
                 <th scope="row">' . $data->id . ' </th>
                 <td>' . $data->name . ' </td>
                 <td>' . $data->email . '</td>
+                <td>' . $data->dob . '</td>
                 <td>' . $status_var . '</td>
                 <td>
                 <a href="/edit_user/' . $data->id . '" class="btn btn-warning"><i class="fa-solid fa-pen-to-square"></i> Edit</a>
-                <a href="#" id="test" class="btn btn-danger delete_user" data-id="' . $data->id . '"><i class="fa-solid fa-trash-can"></i> Delete</a>
+                <a href="#" class="btn btn-danger delete_user" id="' . $data->id . '"><i class="fa-solid fa-trash-can"></i> Delete</a>
                 </td>
                 </tr>';
             }
@@ -60,6 +63,7 @@ class UserController extends Controller
             echo '<h1 class="text-center text-secondary my-5">No record present in the database!</h1>';
         }
     }
+    // <a href="#" id="' . $emp->id . '" class="text-success mx-1 editIcon" data-bs-toggle="modal" data-bs-target="#editEmployeeModal"><i class="bi-pencil-square h4"></i></a>
 
     public function addUser()
     {
@@ -162,25 +166,32 @@ class UserController extends Controller
         return redirect()->route('showUser');
     }
 
-    public function deleteUser($id = null)
+    public function deleteUser(Request $request)
     {
+        $id = $request->id;
         $delete_user_data = User::find($id);
 
-        if ($delete_user_data->delete()) {
-            Session::flash('message', 'User deleted successfully!');
-            Session::flash('alert-class', 'alert-success');
-            return response()->json([
-                'isSuccess' => true,
-                'Message' => 'User deleted successfully!',
-                'deleteStatus' => 1
-            ], 200); // Status code here
+        $image_path = public_path() . $delete_user_data->avatar;  // Value is not URL but directory file path
+        if (File::exists($image_path)) {
+            if (File::delete($image_path)) {
+                User::destroy($id);
+                return response()->json([
+                    'isSuccess' => true,
+                    'Message' => 'User deleted successfully!',
+                    'code' => 1
+                ], 200); // Status code here
+            } else {
+                return response()->json([
+                    'isSuccess' => false,
+                    'Message' => 'Something went wrong!',
+                    'code' => 0
+                ], 200); // Status code here
+            }
         } else {
-            Session::flash('message', 'Something went wrong!');
-            Session::flash('alert-class', 'alert-danger');
             return response()->json([
-                'isSuccess' => true,
-                'Message' => 'Something went wrong',
-                'deleteStatus' => 0
+                'isSuccess' => false,
+                'Message' => 'No Avatar found!',
+                'code' => 0
             ], 200); // Status code here
         }
     }

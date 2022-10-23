@@ -48,8 +48,9 @@
     </script>
 
     <!-- owl.carousel js -->
-    <script src="http://127.0.0.1:8001/assets/libs/owl.carousel/owl.carousel.min.js"></script>
+    <script src="{{ URL::asset('assets/libs/owl.carousel/owl.carousel.min.js') }}"></script>
     <!-- auth-2-carousel init -->
-    <script src="http://127.0.0.1:8001/assets/js/pages/auth-2-carousel.init.js"></script>
+    <script src="{{ URL::asset('assets/js/pages/auth-2-carousel.init.js') }}"></script>
+
     <!-- App js -->
     <script src="{{ URL::asset('assets/js/app.min.js') }}"></script>

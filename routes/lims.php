@@ -30,7 +30,7 @@ Route::group(['prefix' => '', 'middleware' => ['auth']], function () {
     Route::post('save_user', [UserController::class, 'saveUser'])->name('saveUser');
     Route::get('edit_user/{id}', [UserController::class, 'editUser'])->name('editUser');
     Route::post('update_user/{id}', [UserController::class, 'updateUser'])->name('updateUser');
-    Route::post('delete_user/{id}', [UserController::class, 'deleteUser'])->name('deleteUser');
+    Route::delete('delete_user', [UserController::class, 'deleteUser'])->name('deleteUser');
 });
 
 // Role
