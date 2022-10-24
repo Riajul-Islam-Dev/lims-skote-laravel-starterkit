@@ -55,6 +55,7 @@
             $("#create_user_form").on("submit", function(e) {
                 e.preventDefault();
                 var form = this;
+                $("#add_user_btn").text('Updating...');
                 $.ajax({
                     url: $(form).attr('action'),
                     method: $(form).attr('method'),
@@ -74,7 +75,7 @@
                             toastr.error(data.Message);
                         } else if (data.code == 1) {
                             $(form)[0].reset();
-                            $("#addUserModal").modal("toggle");
+                            $("#addUserModal").modal("hide");
                             Swal.fire(
                                 'Added!',
                                 'User Added Successfully!',
@@ -83,11 +84,13 @@
                             fetchAllUsers();
                             toastr.success(data.Message);
                         }
+                        $("#add_user_btn").text('Create User');
+
                     },
                 });
             });
 
-            // Edit employee ajax request
+            // Edit user ajax request
             $(document).on('click', '.edit_user', function(e) {
                 e.preventDefault();
                 let id = $(this).attr('id');
@@ -99,7 +102,8 @@
                         _token: '{{ csrf_token() }}'
                     },
                     success: function(response) {
-                        console.log(response)
+                        // console.log(response)
+                        $("#e_user_id").val(id);
                         $("#e_name").val(response.name);
                         $("#e_email").val(response.email);
                         $("#e_user_password").val("");
@@ -113,6 +117,45 @@
                             $("#e_status").removeAttr("checked");
                         }
                     }
+                });
+            });
+
+            // Update user ajax request
+            $(document).on('submit', '#edit_user_form', function(e) {
+                e.preventDefault();
+                var form = this;
+                $("#edit_user_btn").text('Updating...');
+                $.ajax({
+                    url: $(form).attr('action'),
+                    method: $(form).attr('method'),
+                    data: new FormData(form),
+                    processData: false,
+                    dataType: "JSON",
+                    contentType: false,
+                    cache: false,
+                    beforeSend: function() {
+                        $(form).find("span.error-text").text("");
+                    },
+                    success: function(data) {
+                        if (data.code == 0) {
+                            $.each(data.error, function(prefix, val) {
+                                $(form).find("span." + prefix + "_error").text(val[0]);
+                            });
+                            toastr.error(data.Message);
+                        } else if (data.code == 1) {
+                            console.log(data.Message)
+                            // $(form)[0].reset();
+                            // $("#addUserModal").modal("hide");
+                            // Swal.fire(
+                            //     'Added!',
+                            //     'User Added Successfully!',
+                            //     'success'
+                            // )
+                            // fetchAllUsers();
+                            // toastr.success(data.Message);
+                        }
+                        $("#edit_user_btn").text('Update User');
+                    },
                 });
             });
 

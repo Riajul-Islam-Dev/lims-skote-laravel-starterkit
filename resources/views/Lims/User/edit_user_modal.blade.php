@@ -13,6 +13,7 @@
                     enctype="multipart/form-data">
                     @csrf
                     <div class="modal-body">
+                        <input type="hidden" id="e_user_id" name="e_user_id">
                         <div class="row my-2">
                             <div class="col-6">
                                 <x-lims.forms.input.label for="e_name" label="User Name" star="*" />
@@ -53,8 +54,8 @@
                     </div>
                     <div class="modal-footer">
                         <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                        <button type="submit" class="btn btn-success">
-                            Create User
+                        <button type="submit" class="btn btn-success" id="edit_user_btn">
+                            Update User
                         </button>
                     </div>
                 </form>

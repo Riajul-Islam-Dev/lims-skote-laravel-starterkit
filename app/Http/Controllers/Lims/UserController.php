@@ -133,7 +133,92 @@ class UserController extends Controller
         return response()->json($edit_user_data);
     }
 
-    public function updateUser(Request $request, $id)
+    // update user ajax request
+    public function updateUser(Request $request)
+    {
+        $validator = Validator::make($request->all(), [
+            'e_name' => ['required', 'string', 'max:255'],
+            'e_email' => ['required', 'string', 'email', 'max:255'],
+            'e_user_password' => ['nullable', 'string', 'min:6'],
+            'e_dob' => ['required', 'date', 'before:today'],
+            'e_avatar' => ['nullable', 'image', 'mimes:jpg,jpeg,png', 'max:1024'],
+            // 'status' => ['required', 'string'],
+        ]);
+
+        if ($validator->passes()) {
+
+            $user = new User();
+
+            $id = $request->e_user_id;
+            $user_old_data = User::find($id);
+            $user->id = $id;
+
+            if (!empty($request->e_avatar)) {
+                $image_path = public_path() . $user_old_data->avatar;  // Value is not URL but directory file path
+                if (File::exists($image_path)) {
+                    File::delete($image_path);
+                }
+                $avatar = $request->e_avatar;
+                $avatarName = time() . '.' . $avatar->getClientOriginalExtension();
+                $avatarPath = public_path('/images/');
+                $avatar->move($avatarPath, $avatarName);
+                $user->avatar = "/images/" . $avatarName;
+            } else {
+                $avatarName = $user_old_data->avatar;
+                $user->avatar = $avatarName;
+            }
+
+            if (!empty($request->e_user_password)) {
+                $user->test = Hash::make($request->e_user_password);
+            } else {
+                $user->test = $user_old_data->password;
+            }
+
+            $user->name = $request->e_name;
+            $user->email = $request->e_email;
+            $user->dob = date('Y-m-d', strtotime($request->e_dob));
+            // $user->avatar = "/images/" . $avatarName;
+
+            if ($request->e_status == "on") {
+                $request->e_status = "1";
+            } else {
+                $request->e_status = "0";
+            }
+            $user->status = $request->e_status;
+            // $user->timestamps = false;
+
+            return response()->json([
+                'isSuccess' => true,
+                'Message' => $user_old_data->update($user),
+                'code' => 1
+            ], 200); // Status code here
+
+            $query = $user->save();
+
+            if ($query) {
+                return response()->json([
+                    'isSuccess' => true,
+                    'Message' => "User Details Updated successfully!",
+                    'code' => 1
+                ], 200); // Status code here
+            } else {
+                return response()->json([
+                    'isSuccess' => false,
+                    'Message' => "Something went wrong!",
+                    'code' => 0
+                ], 200); // Status code here
+            }
+        } else {
+            return response()->json([
+                'isSuccess' => false,
+                'Message' => "Please check the inputs!",
+                'code' => 0,
+                'error' => $validator->errors()->toArray()
+            ], 200); // Status code here
+        }
+    }
+
+    public function updateUser_old(Request $request, $id)
     {
         if (request()->has('avatar')) {
             $avatar = request()->file('avatar');
