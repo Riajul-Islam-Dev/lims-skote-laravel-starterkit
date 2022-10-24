@@ -15,10 +15,7 @@ class UserController extends Controller
 {
     public function showUser()
     {
-        $show_user_data = User::all();
-        // $show_user_data = User::paginate(3);
-        // $show_user_data = User::simplePaginate(3);
-        return view('Lims/user/show_user', compact('show_user_data'));
+        return view('Lims/user/show_user');
     }
 
     public function fetchAllUser()
@@ -27,7 +24,7 @@ class UserController extends Controller
 
         $output = '';
         if ($show_user_data->count() > 0) {
-            $output .= '<table id="datatable-buttons" class="table table-bordered dt-responsive nowrap w-100">
+            $output .= '<table id="datatable-buttons" class="table table-bordered table-hover dt-responsive nowrap w-100">
             <thead>
                 <tr>
                     <th>ID</th>
@@ -52,8 +49,8 @@ class UserController extends Controller
                 <td>' . $data->dob . '</td>
                 <td>' . $status_var . '</td>
                 <td>
-                <a href="/edit_user/' . $data->id . '" class="btn btn-warning"><i class="fa-solid fa-pen-to-square"></i> Edit</a>
-                <a href="#" class="btn btn-danger delete_user" id="' . $data->id . '"><i class="fa-solid fa-trash-can"></i> Delete</a>
+                <a href="#" id="' . $data->id . '" class="btn btn-warning edit_user" data-bs-toggle="modal" data-bs-target="#editUserModal"><i class="fa-solid fa-pen-to-square"></i> Edit</a>
+                <a href="#" id="' . $data->id . '" class="btn btn-danger delete_user"><i class="fa-solid fa-trash-can"></i> Delete</a>
                 </td>
                 </tr>';
             }
@@ -63,7 +60,6 @@ class UserController extends Controller
             echo '<h1 class="text-center text-secondary my-5">No record present in the database!</h1>';
         }
     }
-    // <a href="#" id="' . $emp->id . '" class="text-success mx-1 editIcon" data-bs-toggle="modal" data-bs-target="#editEmployeeModal"><i class="bi-pencil-square h4"></i></a>
 
     public function addUser()
     {
@@ -127,10 +123,14 @@ class UserController extends Controller
         }
     }
 
-    public function editUser($id = null)
+    // handle edit an user ajax request
+    public function editUser(Request $request)
     {
+        $id = $request->id;
         $edit_user_data = User::find($id);
-        return view('Lims/user/edit_user', compact('edit_user_data'));
+        // $edit_user_data_pass = $edit_user_data->password;
+        // $edit_user_data->test = $edit_user_data_pass;
+        return response()->json($edit_user_data);
     }
 
     public function updateUser(Request $request, $id)

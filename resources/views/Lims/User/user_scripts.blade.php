@@ -31,7 +31,10 @@
                                 [10, 25, 50, -1],
                                 [10, 25, 50, 'All'],
                             ],
-                            buttons: ['copy', 'excel', 'pdf', 'colvis']
+                            buttons: ['copy', 'excel', 'pdf', 'colvis'],
+                            order: [
+                                [0, 'asc']
+                            ],
                         });
                         table.buttons().container().appendTo(
                             '#datatable-buttons_wrapper .col-md-6:eq(0)');
@@ -81,6 +84,35 @@
                             toastr.success(data.Message);
                         }
                     },
+                });
+            });
+
+            // Edit employee ajax request
+            $(document).on('click', '.edit_user', function(e) {
+                e.preventDefault();
+                let id = $(this).attr('id');
+                $.ajax({
+                    url: '{{ route('editUser') }}',
+                    method: 'get',
+                    data: {
+                        id: id,
+                        _token: '{{ csrf_token() }}'
+                    },
+                    success: function(response) {
+                        console.log(response)
+                        $("#e_name").val(response.name);
+                        $("#e_email").val(response.email);
+                        $("#e_user_password").val("");
+                        $("#e_dob").val(response.dob);
+                        $("#avatar_show").html('<img src="' + response.avatar +
+                            '" width="100" class="img-fluid img-thumbnail">'
+                        );
+                        if (response.status == 1) {
+                            $("#e_status").attr("checked", true);
+                        } else if (response.status == 0) {
+                            $("#e_status").removeAttr("checked");
+                        }
+                    }
                 });
             });
 
