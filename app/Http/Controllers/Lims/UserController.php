@@ -169,27 +169,27 @@ class UserController extends Controller
             }
 
             if (!empty($request->e_user_password)) {
-                $user->test = Hash::make($request->e_user_password);
+                $user->password = Hash::make($request->e_user_password);
             } else {
-                $user->test = $user_old_data->password;
+                $user->password = $user_old_data->password;
             }
 
             $user->name = $request->e_name;
             $user->email = $request->e_email;
             $user->dob = date('Y-m-d', strtotime($request->e_dob));
             // $user->avatar = "/images/" . $avatarName;
-
-            if ($request->e_status == "on") {
+            $e_status_check = $request->e_status;
+            if ($e_status_check == "on") {
                 $request->e_status = "1";
-            } else {
+            } else if ($e_status_check == null) {
                 $request->e_status = "0";
             }
             $user->status = $request->e_status;
-            // $user->timestamps = false;
-
+            $user_new_data = ['name' => $user->name, 'email' => $user->email, 'password' => $user->password, 'dob' => $user->dob, 'avatar' => $user->avatar, 'status' => $user->status];
             return response()->json([
                 'isSuccess' => true,
-                'Message' => $user_old_data->update($user),
+                'Message' => $user_old_data->update($user_new_data),
+                // 'Message' => $user,
                 'code' => 1
             ], 200); // Status code here
 
@@ -216,39 +216,6 @@ class UserController extends Controller
                 'error' => $validator->errors()->toArray()
             ], 200); // Status code here
         }
-    }
-
-    public function updateUser_old(Request $request, $id)
-    {
-        if (request()->has('avatar')) {
-            $avatar = request()->file('avatar');
-            $avatarName = time() . '.' . $avatar->getClientOriginalExtension();
-            $avatarPath = public_path('/images/');
-            $avatar->move($avatarPath, $avatarName);
-        }
-
-        $user = User::find($id);
-
-
-        $user->name = $request->name;
-        $user->email = $request->email;
-        $user->password = Hash::make($request->password);
-        $user->dob = date('Y-m-d', strtotime($request->dob));
-        $user->avatar = "/images/" . $avatarName;
-
-        if ($request->status == "on") {
-            $request->status = "Active";
-        } else {
-            $request->status = "Inactive";
-        }
-
-        $user->save();
-
-        Session::flash('msg', 'User\'s Data updated successfully!');
-
-        // return $request->all();
-        // return redirect()->back();
-        return redirect()->route('showUser');
     }
 
     public function deleteUser(Request $request)
