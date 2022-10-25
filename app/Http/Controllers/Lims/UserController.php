@@ -8,6 +8,7 @@ use App\Models\Lims\User;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Session;
 use Illuminate\Support\Facades\File;
+use Illuminate\Support\Facades\URL;
 use Validator;
 
 
@@ -28,6 +29,7 @@ class UserController extends Controller
             <thead>
                 <tr>
                     <th>ID</th>
+                    <th>Avatar</th>
                     <th>User Name</th>
                     <th>User Email</th>
                     <th>Date of Birth</th>
@@ -44,6 +46,11 @@ class UserController extends Controller
                 }
                 $output .= '<tr>
                 <th scope="row">' . $data->id . ' </th>
+                <td>
+                    <div>
+                        <img class="rounded-circle avatar-xs" src="' . URL::asset($data->avatar) . '" alt="user_avatar">
+                    </div>
+                </td>
                 <td>' . $data->name . ' </td>
                 <td>' . $data->email . '</td>
                 <td>' . $data->dob . '</td>
