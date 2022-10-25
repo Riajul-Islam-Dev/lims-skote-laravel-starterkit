@@ -7,9 +7,9 @@
                 </p>
 
                 <!-- Button trigger modal -->
-                <button type="button" class="btn btn-success my-3" data-bs-toggle="modal" data-bs-target="#addUserModal">
-                    <i class="fa-solid fa-circle-plus"></i> Add new User
-                </button>
+                <button type="button" class="btn btn-success my-3 waves-effect btn-label waves-light"
+                    data-bs-toggle="modal" data-bs-target="#addUserModal"><i class="bx bxs-user-plus label-icon"></i>
+                    Add new User</button>
 
                 <div id="show_all_employees"></div>
 

@@ -49,8 +49,8 @@ class UserController extends Controller
                 <td>' . $data->dob . '</td>
                 <td>' . $status_var . '</td>
                 <td>
-                <a href="#" id="' . $data->id . '" class="btn btn-warning edit_user" data-bs-toggle="modal" data-bs-target="#editUserModal"><i class="fa-solid fa-pen-to-square"></i> Edit</a>
-                <a href="#" id="' . $data->id . '" class="btn btn-danger delete_user"><i class="fa-solid fa-trash-can"></i> Delete</a>
+                <a href="#" id="' . $data->id . '" class="btn btn-warning waves-effect btn-label waves-light edit_user" data-bs-toggle="modal" data-bs-target="#editUserModal"><i class="bx bx-pencil label-icon"></i> Edit</a>
+                <a href="#" id="' . $data->id . '" class="btn btn-danger waves-effect btn-label waves-light delete_user"><i class="bx bx-trash label-icon"></i> Delete</a>
                 </td>
                 </tr>';
             }

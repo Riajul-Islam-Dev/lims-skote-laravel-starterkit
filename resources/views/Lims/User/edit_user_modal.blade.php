@@ -53,10 +53,10 @@
                         </div>
                     </div>
                     <div class="modal-footer">
-                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                        <button type="submit" class="btn btn-success" id="edit_user_btn">
-                            Update User
-                        </button>
+                        <button type="button" class="btn btn-danger waves-effect btn-label waves-light"
+                            data-bs-dismiss="modal"><i class="bx bx-block label-icon"></i> Close</button>
+                        <button type="submit" class="btn btn-success waves-effect btn-label waves-light"
+                            id="edit_user_btn"><i class="bx bx-check-double label-icon"></i> Update User</button>
                     </div>
                 </form>
             </div>
