@@ -147,11 +147,8 @@ class UserController extends Controller
 
         if ($validator->passes()) {
 
-            $user = new User();
-
             $id = $request->e_user_id;
             $user_old_data = User::find($id);
-            $user->id = $id;
 
             if (!empty($request->e_avatar)) {
                 $image_path = public_path() . $user_old_data->avatar;  // Value is not URL but directory file path
@@ -162,38 +159,25 @@ class UserController extends Controller
                 $avatarName = time() . '.' . $avatar->getClientOriginalExtension();
                 $avatarPath = public_path('/images/');
                 $avatar->move($avatarPath, $avatarName);
-                $user->avatar = "/images/" . $avatarName;
-            } else {
-                $avatarName = $user_old_data->avatar;
-                $user->avatar = $avatarName;
+                $user_old_data->avatar = "/images/" . $avatarName;
             }
 
             if (!empty($request->e_user_password)) {
-                $user->password = Hash::make($request->e_user_password);
-            } else {
-                $user->password = $user_old_data->password;
+                $user_old_data->password = Hash::make($request->e_user_password);
             }
 
-            $user->name = $request->e_name;
-            $user->email = $request->e_email;
-            $user->dob = date('Y-m-d', strtotime($request->e_dob));
-            // $user->avatar = "/images/" . $avatarName;
-            $e_status_check = $request->e_status;
-            if ($e_status_check == "on") {
+            $user_old_data->name = $request->e_name;
+            $user_old_data->email = $request->e_email;
+            $user_old_data->dob = date('Y-m-d', strtotime($request->e_dob));
+
+            if ($request->e_status == "on") {
                 $request->e_status = "1";
-            } else if ($e_status_check == null) {
+            } else {
                 $request->e_status = "0";
             }
-            $user->status = $request->e_status;
-            $user_new_data = ['name' => $user->name, 'email' => $user->email, 'password' => $user->password, 'dob' => $user->dob, 'avatar' => $user->avatar, 'status' => $user->status];
-            return response()->json([
-                'isSuccess' => true,
-                'Message' => $user_old_data->update($user_new_data),
-                // 'Message' => $user,
-                'code' => 1
-            ], 200); // Status code here
+            $user_old_data->status = $request->e_status;
 
-            $query = $user->save();
+            $query = $user_old_data->save();
 
             if ($query) {
                 return response()->json([

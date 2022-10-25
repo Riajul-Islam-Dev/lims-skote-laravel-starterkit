@@ -143,16 +143,16 @@
                             });
                             toastr.error(data.Message);
                         } else if (data.code == 1) {
-                            console.log(data.Message)
-                            // $(form)[0].reset();
-                            // $("#addUserModal").modal("hide");
-                            // Swal.fire(
-                            //     'Added!',
-                            //     'User Added Successfully!',
-                            //     'success'
-                            // )
-                            // fetchAllUsers();
-                            // toastr.success(data.Message);
+                            // console.log(data.Message)
+                            $(form)[0].reset();
+                            $("#editUserModal").modal("hide");
+                            Swal.fire(
+                                'Added!',
+                                'User Edited Successfully!',
+                                'success'
+                            )
+                            fetchAllUsers();
+                            toastr.success(data.Message);
                         }
                         $("#edit_user_btn").text('Update User');
                     },
