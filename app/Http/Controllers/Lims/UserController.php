@@ -48,7 +48,7 @@ class UserController extends Controller
                 <th scope="row">' . $data->id . ' </th>
                 <td>
                     <div>
-                        <img class="rounded-circle avatar-xs" src="' . URL::asset($data->avatar) . '" alt="user_avatar">
+                        <img class="rounded-circle avatar-xs" src="' . URL::asset($data->avatar) . '" alt="_not found">
                     </div>
                 </td>
                 <td>' . $data->name . ' </td>
