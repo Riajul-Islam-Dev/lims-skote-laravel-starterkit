@@ -1,12 +1,13 @@
 <div class="container">
-    <div class="modal fade" id="addUserModal" tabindex="-1" aria-labelledby="addUserModalLabel" aria-hidden="true">
+    <div class="modal fade" id="addCriminalCaseModal" tabindex="-1" aria-labelledby="addCriminalCaseModalLabel"
+        aria-hidden="true">
         <div class="modal-dialog modal-lg">
             <div class="modal-content">
                 <div class="modal-header">
-                    <h5 class="modal-title" id="addUserModalLabel">Add new User:</h5>
+                    <h5 class="modal-title" id="addCriminalCaseModalLabel">Add new Criminal Case:</h5>
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
-                <h6 class="mt-2 ms-3">Please fill up the new User form carefully. Fields marked with <span
+                <h6 class="mt-2 ms-3">Please fill up the new Criminal Case form carefully. Fields marked with <span
                         style="color: red">*</span>
                     are required.</h6>
                 <form action="{{ route('saveUser') }}" method="POST" id="create_user_form"

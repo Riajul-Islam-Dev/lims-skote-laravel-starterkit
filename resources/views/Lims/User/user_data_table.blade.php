@@ -11,7 +11,7 @@
                     data-bs-toggle="modal" data-bs-target="#addUserModal"><i class="bx bxs-user-plus label-icon"></i>
                     Add new User</button>
 
-                <div id="show_all_employees"></div>
+                <div id="show_all_users"></div>
 
             </div>
         </div>

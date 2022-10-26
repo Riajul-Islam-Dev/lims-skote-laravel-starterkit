@@ -1,7 +1,7 @@
 @extends('layouts.master')
 
 @section('title')
-    Show User
+    Show Criminal Case
 @endsection
 
 @push('custom-css')
@@ -22,23 +22,23 @@
             LIMS
         @endslot
         @slot('title')
-            Show User
+            Criminal Case
         @endslot
     @endcomponent
 
     <!-- User Data Table -->
     <div>
-        @include('Lims/user/user_data_table')
+        @include('Lims/Criminal_Case/criminal_case_data_table')
     </div>
 
     <!-- Add User Modal -->
-    @include('Lims/user/create_user_modal')
+    @include('Lims/Criminal_Case/create_criminal_case_modal')
 
     <!-- Edit User Modal -->
-    @include('Lims/user/edit_user_modal')
+    @include('Lims/Criminal_Case/edit_criminal_case_modal')
 @endsection
 
 @push('custom-scripts')
     <!-- Developer's JS file -->
-    @include('Lims.user.user_scripts')
+    @include('Lims.Criminal_Case.criminal_case_scripts')
 @endpush

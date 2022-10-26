@@ -9,6 +9,8 @@ use App\Http\Controllers\Lims\RoleSectionController;
 use App\Http\Controllers\Lims\RightController;
 use App\Http\Controllers\Lims\MenuController;
 use App\Http\Controllers\Lims\DepartmentController;
+use App\Http\Controllers\Lims\CriminalCaseController;
+use App\Http\Controllers\Lims\CivilCaseController;
 
 // LIMS Routes
 
@@ -26,7 +28,6 @@ Route::group(['prefix' => '', 'middleware' => ['auth']], function () {
 Route::group(['prefix' => '', 'middleware' => ['auth']], function () {
     Route::get('show_user', [UserController::class, 'showUser'])->name('showUser');
     Route::get('fetch_all_user', [UserController::class, 'fetchAllUser'])->name('fetchAllUser');
-    Route::get('add_user', [UserController::class, 'addUser'])->name('addUser');
     Route::post('save_user', [UserController::class, 'saveUser'])->name('saveUser');
     Route::get('edit_user', [UserController::class, 'editUser'])->name('editUser');
     Route::post('update_user', [UserController::class, 'updateUser'])->name('updateUser');
@@ -85,22 +86,21 @@ Route::group(['prefix' => '', 'middleware' => ['auth']], function () {
 
 // Criminal Case
 Route::group(['prefix' => '', 'middleware' => ['auth']], function () {
-    // Route::get('show_user', [UserController::class, 'showUser'])->name('showUser');
-    // Route::get('fetch_all_user', [UserController::class, 'fetchAllUser'])->name('fetchAllUser');
-    // Route::get('add_user', [UserController::class, 'addUser'])->name('addUser');
-    // Route::post('save_user', [UserController::class, 'saveUser'])->name('saveUser');
-    // Route::get('edit_user', [UserController::class, 'editUser'])->name('editUser');
-    // Route::post('update_user', [UserController::class, 'updateUser'])->name('updateUser');
-    // Route::delete('delete_user', [UserController::class, 'deleteUser'])->name('deleteUser');
+    Route::get('show_criminal_case', [CriminalCaseController::class, 'showCriminalCase'])->name('showCriminalCase');
+    Route::get('fetch_all_criminal_case', [CriminalCaseController::class, 'fetchAllCriminalCase'])->name('fetchAllCriminalCase');
+    Route::post('save_criminal_case', [CriminalCaseController::class, 'saveCriminalCase'])->name('saveCriminalCase');
+    Route::get('edit_criminal_case', [CriminalCaseController::class, 'editCriminalCase'])->name('editCriminalCase');
+    Route::post('update_criminal_case', [CriminalCaseController::class, 'updateCriminalCase'])->name('updateCriminalCase');
+    Route::delete('delete_criminal_case', [CriminalCaseController::class, 'deleteCriminalCase'])->name('deleteCriminalCase');
 });
 
 // Civil Case
 Route::group(['prefix' => '', 'middleware' => ['auth']], function () {
-    // Route::get('show_user', [UserController::class, 'showUser'])->name('showUser');
-    // Route::get('fetch_all_user', [UserController::class, 'fetchAllUser'])->name('fetchAllUser');
-    // Route::get('add_user', [UserController::class, 'addUser'])->name('addUser');
-    // Route::post('save_user', [UserController::class, 'saveUser'])->name('saveUser');
-    // Route::get('edit_user', [UserController::class, 'editUser'])->name('editUser');
-    // Route::post('update_user', [UserController::class, 'updateUser'])->name('updateUser');
-    // Route::delete('delete_user', [UserController::class, 'deleteUser'])->name('deleteUser');
+    Route::get('show_civil_case', [CivilCaseController::class, 'showCivilCase'])->name('showCivilCase');
+    // Route::get('fetch_all_user', [CivilCaseController::class, 'fetchAllUser'])->name('fetchAllUser');
+    // Route::get('add_user', [CivilCaseController::class, 'addUser'])->name('addUser');
+    // Route::post('save_user', [CivilCaseController::class, 'saveUser'])->name('saveUser');
+    // Route::get('edit_user', [CivilCaseController::class, 'editUser'])->name('editUser');
+    // Route::post('update_user', [CivilCaseController::class, 'updateUser'])->name('updateUser');
+    // Route::delete('delete_user', [CivilCaseController::class, 'deleteUser'])->name('deleteUser');
 });

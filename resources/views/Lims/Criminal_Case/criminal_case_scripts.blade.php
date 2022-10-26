@@ -16,15 +16,15 @@
 
     <script>
         $(document).ready(function() {
-            fetchAllUsers();
+            fetchAllCriminalCase();
 
-            // Fetch all user ajax request
-            function fetchAllUsers() {
+            // Fetch all Criminal Cases ajax request
+            function fetchAllCriminalCase() {
                 $.ajax({
-                    url: '{{ route('fetchAllUser') }}',
+                    url: '{{ route('fetchAllCriminalCase') }}',
                     method: 'get',
                     success: function(response) {
-                        $("#show_all_users").html(response);
+                        $("#show_all_criminal_cases").html(response);
                         var table = $('#datatable-buttons').DataTable({
                             // lengthChange: false,
                             lengthMenu: [

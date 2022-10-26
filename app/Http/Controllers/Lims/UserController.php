@@ -14,11 +14,13 @@ use Validator;
 
 class UserController extends Controller
 {
+    // User data table page view
     public function showUser()
     {
         return view('Lims/user/show_user');
     }
 
+    // Fetch all users ajax request
     public function fetchAllUser()
     {
         $show_user_data = User::all();
@@ -40,9 +42,9 @@ class UserController extends Controller
             <tbody>';
             foreach ($show_user_data as $key => $data) {
                 if ($data->status == 1) {
-                    $status_var = "Active";
+                    $data->status = "Active";
                 } else {
-                    $status_var = "Inactive";
+                    $data->status = "Inactive";
                 }
                 $output .= '<tr>
                 <th scope="row">' . $data->id . ' </th>
@@ -54,7 +56,7 @@ class UserController extends Controller
                 <td>' . $data->name . ' </td>
                 <td>' . $data->email . '</td>
                 <td>' . $data->dob . '</td>
-                <td>' . $status_var . '</td>
+                <td>' . $data->status . '</td>
                 <td>
                 <a href="#" id="' . $data->id . '" class="btn btn-warning waves-effect btn-label waves-light edit_user" data-bs-toggle="modal" data-bs-target="#editUserModal"><i class="bx bx-pencil label-icon"></i> Edit</a>
                 <a href="#" id="' . $data->id . '" class="btn btn-danger waves-effect btn-label waves-light delete_user"><i class="bx bx-trash label-icon"></i> Delete</a>
@@ -68,11 +70,7 @@ class UserController extends Controller
         }
     }
 
-    public function addUser()
-    {
-        return view('Lims/user/add_user');
-    }
-
+    // Save user ajax request
     public function saveUser(Request $request)
     {
         $validator = Validator::make($request->all(), [

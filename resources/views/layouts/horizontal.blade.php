@@ -875,6 +875,21 @@
                     </li>
 
                     <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle arrow-none" href="#" id="topnav-cases"
+                            role="button">
+                            <i class="bx bx-briefcase me-2"></i><span key="t-layouts">Cases</span>
+                            <div class="arrow-down"></div>
+                        </a>
+
+                        <div class="dropdown-menu" aria-labelledby="topnav-cases">
+                            {{-- <a href="{{ route('posts.edit', ['id' => $post->id]) }}">Link</a> --}}
+                            <a class="dropdown-item"
+                                href="{{ route('showCriminalCase') }}">{{ __('Criminal Case') }}</a>
+                            <a class="dropdown-item" href="{{ route('showCivilCase') }}">{{ __('Civil Case') }}</a>
+                        </div>
+                    </li>
+
+                    <li class="nav-item dropdown">
                         <a class="nav-link dropdown-toggle arrow-none" href="#" id="topnav-admin"
                             role="button">
                             <i class="bx bx-layout me-2"></i><span key="t-layouts">Admin Modules</span>
