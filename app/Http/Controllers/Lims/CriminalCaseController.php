@@ -78,8 +78,8 @@ class CriminalCaseController extends Controller
                 <td>' . $data->document_status . '</td>
                 <td>' . $data->status . '</td>
                 <td>
-                <a href="#" id="' . $data->id . '" class="btn btn-warning waves-effect btn-label waves-light edit_user" data-bs-toggle="modal" data-bs-target="#editUserModal"><i class="bx bx-pencil label-icon"></i> Edit</a>
-                <a href="#" id="' . $data->id . '" class="btn btn-danger waves-effect btn-label waves-light delete_user"><i class="bx bx-trash label-icon"></i> Delete</a>
+                <a href="#" id="' . $data->id . '" class="btn btn-warning waves-effect btn-label waves-light edit_criminal_case" data-bs-toggle="modal" data-bs-target="#editCriminalCaseModal"><i class="bx bx-pencil label-icon"></i> Edit</a>
+                <a href="#" id="' . $data->id . '" class="btn btn-danger waves-effect btn-label waves-light delete_criminal_case"><i class="bx bx-trash label-icon"></i> Delete</a>
                 </td>
                 </tr>';
             }
@@ -91,7 +91,7 @@ class CriminalCaseController extends Controller
     }
 
     // Save Criminal Case ajax request
-    public function saveUser(Request $request)
+    public function saveCriminalCase(Request $request)
     {
         $validator = Validator::make($request->all(), [
             'filed_case_name' => ['required', 'string', 'max:255'],
@@ -113,25 +113,42 @@ class CriminalCaseController extends Controller
         if ($validator->passes()) {
             $criminal_case = new CriminalCase();
 
-            $user->name = $request->name;
-            $user->email = $request->email;
-            $user->password = Hash::make($request->user_password);
-            $user->dob = date('Y-m-d', strtotime($request->dob));
-            $user->avatar = "/images/" . $avatarName;
-
+            $criminal_case->filed_case_name = $request->filed_case_name;
+            $criminal_case->case_category = $request->case_category;
+            $criminal_case->court_name = $request->court_name;
+            $criminal_case->division = $request->division;
+            $criminal_case->district = $request->district;
+            $criminal_case->region = $request->region;
+            $criminal_case->defendant_name = $request->defendant_name;
+            $criminal_case->plaintiff_name = $request->plaintiff_name;
+            $criminal_case->case_filling_date = date('Y-m-d', strtotime($request->case_filling_date));
+            $criminal_case->assigned_lawyer_name = $request->assigned_lawyer_name;
+            $criminal_case->case_created_by = $request->case_created_by;
+            if ($request->admin_approval == "on") {
+                $request->admin_approval = "1";
+            } else {
+                $request->admin_approval = "0";
+            }
+            $criminal_case->admin_approval = $request->admin_approval;
+            if ($request->document_status == "on") {
+                $request->document_status = "1";
+            } else {
+                $request->document_status = "0";
+            }
+            $criminal_case->document_status = $request->document_status;
             if ($request->status == "on") {
                 $request->status = "1";
             } else {
                 $request->status = "0";
             }
-            $user->status = $request->status;
+            $criminal_case->status = $request->status;
 
-            $query = $user->save();
+            $query = $criminal_case->save();
 
             if ($query) {
                 return response()->json([
                     'isSuccess' => true,
-                    'Message' => "User Details Saved successfully!",
+                    'Message' => "Criminal Case Details Saved successfully!",
                     'code' => 1
                 ], 200); // Status code here
             } else {
@@ -147,6 +164,118 @@ class CriminalCaseController extends Controller
                 'Message' => "Please check the inputs!",
                 'code' => 0,
                 'error' => $validator->errors()->toArray()
+            ], 200); // Status code here
+        }
+    }
+
+    // handle edit an Criminal Case ajax request
+    public function editCriminalCase(Request $request)
+    {
+        $id = $request->id;
+        $edit_criminal_case_data = CriminalCase::find($id);
+
+        return response()->json($edit_criminal_case_data);
+    }
+
+    // update Criminal Case ajax request
+    public function updateCriminalCase(Request $request)
+    {
+        $validator = Validator::make($request->all(), [
+            'e_filed_case_name' => ['required', 'string', 'max:255'],
+            'e_case_category' => ['required', 'string', 'max:255'],
+            'e_court_name' => ['required', 'string', 'max:255'],
+            'e_division' => ['required', 'string', 'max:255'],
+            'e_district' => ['required', 'string', 'max:255'],
+            'e_region' => ['required', 'string', 'max:255'],
+            'e_defendant_name' => ['required', 'string', 'max:255'],
+            'e_plaintiff_name' => ['required', 'string', 'max:255'],
+            'e_case_filling_date' => ['required', 'date', 'before:today'],
+            'e_assigned_lawyer_name' => ['required', 'string', 'max:255'],
+            'e_case_created_by' => ['required', 'string', 'max:255'],
+            'e_admin_approval' => ['string', 'max:255'],
+            'e_document_status' => ['string', 'max:255'],
+            'e_status' => ['string', 'max:255'],
+        ]);
+
+        if ($validator->passes()) {
+
+            $id = $request->e_criminal_case_id;
+            $criminal_case_old_data = CriminalCase::find($id);
+
+            $criminal_case_old_data->name = $request->e_name;
+
+
+            $criminal_case_old_data->filed_case_name = $request->e_filed_case_name;
+            $criminal_case_old_data->case_category = $request->e_case_category;
+            $criminal_case_old_data->court_name = $request->e_court_name;
+            $criminal_case_old_data->division = $request->e_division;
+            $criminal_case_old_data->district = $request->e_district;
+            $criminal_case_old_data->region = $request->e_region;
+            $criminal_case_old_data->defendant_name = $request->e_defendant_name;
+            $criminal_case_old_data->plaintiff_name = $request->e_plaintiff_name;
+            $criminal_case_old_data->case_filling_date = date('Y-m-d', strtotime($request->e_case_filling_date));
+            $criminal_case_old_data->assigned_lawyer_name = $request->e_assigned_lawyer_name;
+            $criminal_case_old_data->case_created_by = $request->e_case_created_by;
+            if ($request->e_admin_approval == "on") {
+                $request->e_admin_approval = "1";
+            } else {
+                $request->e_admin_approval = "0";
+            }
+            $criminal_case_old_data->admin_approval = $request->e_admin_approval;
+            if ($request->e_document_status == "on") {
+                $request->e_document_status = "1";
+            } else {
+                $request->e_document_status = "0";
+            }
+            $criminal_case_old_data->document_status = $request->e_document_status;
+            if ($request->e_status == "on") {
+                $request->e_status = "1";
+            } else {
+                $request->e_status = "0";
+            }
+            $criminal_case_old_data->status = $request->e_status;
+
+            $query = $criminal_case_old_data->save();
+
+            if ($query) {
+                return response()->json([
+                    'isSuccess' => true,
+                    'Message' => "Criminal Case Details Updated successfully!",
+                    'code' => 1
+                ], 200); // Status code here
+            } else {
+                return response()->json([
+                    'isSuccess' => false,
+                    'Message' => "Something went wrong!",
+                    'code' => 0
+                ], 200); // Status code here
+            }
+        } else {
+            return response()->json([
+                'isSuccess' => false,
+                'Message' => "Please check the inputs!",
+                'code' => 0,
+                'error' => $validator->errors()->toArray()
+            ], 200); // Status code here
+        }
+    }
+
+    // Delete Criminal Case ajax request
+    public function deleteCriminalCase(Request $request)
+    {
+        $id = $request->id;
+
+        if (CriminalCase::destroy($id)) {
+            return response()->json([
+                'isSuccess' => true,
+                'Message' => 'Criminal Case deleted successfully!',
+                'code' => 1
+            ], 200); // Status code here
+        } else {
+            return response()->json([
+                'isSuccess' => false,
+                'Message' => 'Something went wrong!',
+                'code' => 0
             ], 200); // Status code here
         }
     }

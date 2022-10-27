@@ -51,11 +51,11 @@
                 }
             })
 
-            // Create user ajax request
-            $("#create_user_form").on("submit", function(e) {
+            // Create Criminal Case ajax request
+            $("#create_criminal_case_form").on("submit", function(e) {
                 e.preventDefault();
                 var form = this;
-                $("#add_user_btn").text('Updating...');
+                $("#add_criminal_case_btn").text('Updating...');
                 $.ajax({
                     url: $(form).attr('action'),
                     method: $(form).attr('method'),
@@ -75,42 +75,55 @@
                             toastr.error(data.Message);
                         } else if (data.code == 1) {
                             $(form)[0].reset();
-                            $("#addUserModal").modal("hide");
+                            $("#addCriminalCaseModal").modal("hide");
                             Swal.fire(
                                 'Added!',
-                                'User Added Successfully!',
+                                'Criminal Case Added Successfully!',
                                 'success'
                             )
-                            fetchAllUsers();
+                            fetchAllCriminalCase();
                             toastr.success(data.Message);
                         }
-                        $("#add_user_btn").text('Create User');
+                        $("#add_criminal_case_btn").text('Create Criminal Case');
 
                     },
                 });
             });
 
-            // Edit user ajax request
-            $(document).on('click', '.edit_user', function(e) {
+            // Edit Criminal Case ajax request
+            $(document).on('click', '.edit_criminal_case', function(e) {
                 e.preventDefault();
                 let id = $(this).attr('id');
                 $.ajax({
-                    url: '{{ route('editUser') }}',
+                    url: '{{ route('editCriminalCase') }}',
                     method: 'get',
                     data: {
                         id: id,
                         _token: '{{ csrf_token() }}'
                     },
                     success: function(response) {
-                        // console.log(response)
-                        $("#e_user_id").val(id);
-                        $("#e_name").val(response.name);
-                        $("#e_email").val(response.email);
-                        $("#e_user_password").val("");
-                        $("#e_dob").val(response.dob);
-                        $("#avatar_show").html('<img src="' + response.avatar +
-                            '" width="100" class="img-fluid img-thumbnail">'
-                        );
+                        $("#e_criminal_case_id").val(id);
+                        $("#e_filed_case_name").val(response.filed_case_name);
+                        $("#e_case_category").val(response.case_category);
+                        $("#e_court_name").val(response.court_name);
+                        $("#e_division").val(response.division);
+                        $("#e_district").val(response.district);
+                        $("#e_region").val(response.region);
+                        $("#e_defendant_name").val(response.defendant_name);
+                        $("#e_plaintiff_name").val(response.plaintiff_name);
+                        $("#e_case_filling_date").val(response.case_filling_date);
+                        $("#e_assigned_lawyer_name").val(response.assigned_lawyer_name);
+                        $("#e_case_created_by").val(response.case_created_by);
+                        if (response.admin_approval == 1) {
+                            $("#e_admin_approval").attr("checked", true);
+                        } else if (response.admin_approval == 0) {
+                            $("#e_admin_approval").removeAttr("checked");
+                        }
+                        if (response.document_status == 1) {
+                            $("#e_document_status").attr("checked", true);
+                        } else if (response.document_status == 0) {
+                            $("#e_document_status").removeAttr("checked");
+                        }
                         if (response.status == 1) {
                             $("#e_status").attr("checked", true);
                         } else if (response.status == 0) {
@@ -120,11 +133,11 @@
                 });
             });
 
-            // Update user ajax request
-            $(document).on('submit', '#edit_user_form', function(e) {
+            // Update Criminal Case ajax request
+            $(document).on('submit', '#edit_criminal_case_form', function(e) {
                 e.preventDefault();
                 var form = this;
-                $("#edit_user_btn").text('Updating...');
+                $("#edit_criminal_case_btn").text('Updating...');
                 $.ajax({
                     url: $(form).attr('action'),
                     method: $(form).attr('method'),
@@ -145,22 +158,22 @@
                         } else if (data.code == 1) {
                             // console.log(data.Message)
                             $(form)[0].reset();
-                            $("#editUserModal").modal("hide");
+                            $("#editCriminalCaseModal").modal("hide");
                             Swal.fire(
                                 'Added!',
-                                'User Edited Successfully!',
+                                'Criminal Case Edited Successfully!',
                                 'success'
                             )
-                            fetchAllUsers();
+                            fetchAllcriminal_case();
                             toastr.success(data.Message);
                         }
-                        $("#edit_user_btn").text('Update User');
+                        $("#edit_criminal_case_btn").text('Update Criminal Case');
                     },
                 });
             });
 
-            // Delete user ajax request
-            $(document).on('click', '.delete_user', function(e) {
+            // Delete Criminal Case ajax request
+            $(document).on('click', '.delete_criminal_case', function(e) {
                 e.preventDefault();
                 let id = $(this).attr('id');
                 let csrf = '{{ csrf_token() }}';
@@ -175,7 +188,7 @@
                 }).then((result) => {
                     if (result.isConfirmed) {
                         $.ajax({
-                            url: '{{ url('delete_user') }}',
+                            url: '{{ url('delete_criminal_case') }}',
                             method: 'delete',
                             data: {
                                 id: id,
@@ -189,16 +202,16 @@
                                         'Something went wrong!',
                                         'error'
                                     )
-                                    fetchAllUsers();
+                                    fetchAllCriminalCase();
                                     toastr.error(response.Message);
                                 } else if (response.code == 1) {
                                     console.log(response);
                                     Swal.fire(
                                         'Deleted!',
-                                        'Your file has been deleted.',
+                                        'Criminal Case has been deleted.',
                                         'success'
                                     )
-                                    fetchAllUsers();
+                                    fetchAllCriminalCase();
                                     toastr.success(response.Message);
                                 }
                             }

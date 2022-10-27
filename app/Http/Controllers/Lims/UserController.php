@@ -79,7 +79,7 @@ class UserController extends Controller
             'user_password' => ['required', 'string', 'min:6'],
             'dob' => ['required', 'date', 'before:today'],
             'avatar' => ['required', 'image', 'mimes:jpg,jpeg,png', 'max:1024'],
-            // 'status' => ['required', 'string'],
+            'status' => ['required', 'string'],
         ]);
 
         if ($validator->passes()) {
@@ -133,8 +133,7 @@ class UserController extends Controller
     {
         $id = $request->id;
         $edit_user_data = User::find($id);
-        // $edit_user_data_pass = $edit_user_data->password;
-        // $edit_user_data->test = $edit_user_data_pass;
+
         return response()->json($edit_user_data);
     }
 
@@ -147,7 +146,7 @@ class UserController extends Controller
             'e_user_password' => ['nullable', 'string', 'min:6'],
             'e_dob' => ['required', 'date', 'before:today'],
             'e_avatar' => ['nullable', 'image', 'mimes:jpg,jpeg,png', 'max:1024'],
-            // 'status' => ['required', 'string'],
+            'e_status' => ['string', 'max:255'],
         ]);
 
         if ($validator->passes()) {
@@ -207,6 +206,7 @@ class UserController extends Controller
         }
     }
 
+    // Delete user ajax request
     public function deleteUser(Request $request)
     {
         $id = $request->id;
