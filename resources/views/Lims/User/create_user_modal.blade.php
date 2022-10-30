@@ -54,7 +54,7 @@
                         <button type="button" class="btn btn-danger waves-effect btn-label waves-light"
                             data-bs-dismiss="modal"><i class="bx bx-block label-icon "></i> Close</button>
                         <button type="submit" class="btn btn-success waves-effect btn-label waves-light"
-                            id="add_user_btn"><i class="bx bx-check-double label-icon"></i> Create User</button>
+                            id="add_user_btn"><i class="bx bx-check-double label-icon"></i><span id="add_user_btn_span"> Create User</span></button>
                     </div>
                 </form>
             </div>

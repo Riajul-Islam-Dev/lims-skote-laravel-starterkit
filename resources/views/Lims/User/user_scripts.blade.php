@@ -55,7 +55,7 @@
             $("#create_user_form").on("submit", function(e) {
                 e.preventDefault();
                 var form = this;
-                $("#add_user_btn").text('Updating...');
+                $("#add_user_btn_span").text('Saving...');
                 $.ajax({
                     url: $(form).attr('action'),
                     method: $(form).attr('method'),
@@ -84,7 +84,7 @@
                             fetchAllUsers();
                             toastr.success(data.Message);
                         }
-                        $("#add_user_btn").text('Create User');
+                        $("#add_user_btn_span").text('Create User');
 
                     },
                 });
@@ -124,7 +124,7 @@
             $(document).on('submit', '#edit_user_form', function(e) {
                 e.preventDefault();
                 var form = this;
-                $("#edit_user_btn").text('Updating...');
+                $("#edit_user_btn_span").text('Updating...');
                 $.ajax({
                     url: $(form).attr('action'),
                     method: $(form).attr('method'),
@@ -154,7 +154,7 @@
                             fetchAllUsers();
                             toastr.success(data.Message);
                         }
-                        $("#edit_user_btn").text('Update User');
+                        $("#edit_user_btn_span").text('Update User');
                     },
                 });
             });

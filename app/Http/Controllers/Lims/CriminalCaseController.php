@@ -105,9 +105,9 @@ class CriminalCaseController extends Controller
             'case_filling_date' => ['required', 'date', 'before:today'],
             'assigned_lawyer_name' => ['required', 'string', 'max:255'],
             'case_created_by' => ['required', 'string', 'max:255'],
-            'admin_approval' => ['required', 'string', 'max:255'],
-            'document_status' => ['required', 'string', 'max:255'],
-            'status' => ['required', 'string', 'max:255'],
+            // 'admin_approval' => ['required', 'string', 'max:255'],
+            // 'document_status' => ['required', 'string', 'max:255'],
+            // 'status' => ['required', 'string', 'max:255'],
         ]);
 
         if ($validator->passes()) {
@@ -192,18 +192,15 @@ class CriminalCaseController extends Controller
             'e_case_filling_date' => ['required', 'date', 'before:today'],
             'e_assigned_lawyer_name' => ['required', 'string', 'max:255'],
             'e_case_created_by' => ['required', 'string', 'max:255'],
-            'e_admin_approval' => ['string', 'max:255'],
-            'e_document_status' => ['string', 'max:255'],
-            'e_status' => ['string', 'max:255'],
+            // 'e_admin_approval' => ['string', 'max:255'],
+            // 'e_document_status' => ['string', 'max:255'],
+            // 'e_status' => ['string', 'max:255'],
         ]);
 
         if ($validator->passes()) {
 
             $id = $request->e_criminal_case_id;
             $criminal_case_old_data = CriminalCase::find($id);
-
-            $criminal_case_old_data->name = $request->e_name;
-
 
             $criminal_case_old_data->filed_case_name = $request->e_filed_case_name;
             $criminal_case_old_data->case_category = $request->e_case_category;

@@ -14,6 +14,7 @@
                     enctype="multipart/form-data">
                     @csrf
                     <div class="modal-body">
+                        <input type="hidden" id="e_criminal_case_id" name="e_criminal_case_id">
                         <div class="row my-2">
                             <div class="col-6">
                                 <x-lims.forms.input.label for="e_filed_case_name" label="Filed Case Name"
@@ -116,8 +117,9 @@
                         <button type="button" class="btn btn-danger waves-effect btn-label waves-light"
                             data-bs-dismiss="modal"><i class="bx bx-block label-icon"></i> Close</button>
                         <button type="submit" class="btn btn-success waves-effect btn-label waves-light"
-                            id="edit_criminal_case_btn"><i class="bx bx-check-double label-icon"></i> Update Criminal
-                            Case</button>
+                            id="edit_criminal_case_btn"><i class="bx bx-check-double label-icon"></i> <span
+                                id="edit_criminal_case_btn_span">Update Criminal
+                                Case</span></button>
                     </div>
                 </form>
             </div>

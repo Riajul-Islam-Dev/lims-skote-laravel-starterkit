@@ -55,7 +55,7 @@
             $("#create_criminal_case_form").on("submit", function(e) {
                 e.preventDefault();
                 var form = this;
-                $("#add_criminal_case_btn").text('Updating...');
+                $("#add_criminal_case_btn_span").text('Saving...');
                 $.ajax({
                     url: $(form).attr('action'),
                     method: $(form).attr('method'),
@@ -84,7 +84,7 @@
                             fetchAllCriminalCase();
                             toastr.success(data.Message);
                         }
-                        $("#add_criminal_case_btn").text('Create Criminal Case');
+                        $("#add_criminal_case_btn_span").text('Create Criminal Case');
 
                     },
                 });
@@ -137,7 +137,7 @@
             $(document).on('submit', '#edit_criminal_case_form', function(e) {
                 e.preventDefault();
                 var form = this;
-                $("#edit_criminal_case_btn").text('Updating...');
+                $("#edit_criminal_case_btn_span").text('Updating...');
                 $.ajax({
                     url: $(form).attr('action'),
                     method: $(form).attr('method'),
@@ -164,10 +164,10 @@
                                 'Criminal Case Edited Successfully!',
                                 'success'
                             )
-                            fetchAllcriminal_case();
+                            fetchAllCriminalCase();
                             toastr.success(data.Message);
                         }
-                        $("#edit_criminal_case_btn").text('Update Criminal Case');
+                        $("#edit_criminal_case_btn_span").text('Update Criminal Case');
                     },
                 });
             });

@@ -113,8 +113,8 @@
                         <button type="button" class="btn btn-danger waves-effect btn-label waves-light"
                             data-bs-dismiss="modal"><i class="bx bx-block label-icon "></i> Close</button>
                         <button type="submit" class="btn btn-success waves-effect btn-label waves-light"
-                            id="add_criminal_case_btn"><i class="bx bx-check-double label-icon"></i> Create Criminal
-                            Case</button>
+                            id="add_criminal_case_btn"><i class="bx bx-check-double label-icon"></i> <span
+                                id="add_criminal_case_btn_span">Create Criminal Case</span></button>
                     </div>
                 </form>
             </div>
