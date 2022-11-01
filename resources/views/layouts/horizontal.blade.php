@@ -484,8 +484,9 @@
                             <a class="dropdown-item"
                                 href="{{ route('showRoleSection') }}">{{ __('Role Sections') }}</a>
                             <a class="dropdown-item" href="{{ route('showRight') }}">{{ __('Rights') }}</a>
-                            <a class="dropdown-item" href="{{ route('showMenu') }}">{{ __('Menu') }}</a>
-                            <a class="dropdown-item" href="{{ route('showDepartment') }}">{{ __('Department') }}</a>
+                            <a class="dropdown-item" href="{{ route('showMenu') }}">{{ __('Menus') }}</a>
+                            <a class="dropdown-item"
+                                href="{{ route('showDepartment') }}">{{ __('Departments') }}</a>
                         </div>
                     </li>
 
@@ -512,7 +513,11 @@
                             <div class="arrow-down"></div>
                         </a>
                         <div class="dropdown-menu" aria-labelledby="topnav-admin">
-                            <a class="dropdown-item" href="{{ route('showModule') }}">{{ __('Modules') }}</a>
+                            <a class="dropdown-item" href="{{ route('showCourt') }}">{{ __('Courts') }}</a>
+                            <a class="dropdown-item" href="{{ route('showDivision') }}">{{ __('Divisions') }}</a>
+                            <a class="dropdown-item" href="{{ route('showDistrict') }}">{{ __('Districts') }}</a>
+                            <a class="dropdown-item"
+                                href="{{ route('showPanelLawyer') }}">{{ __('Panel Lawyers') }}</a>
                         </div>
                     </li>
                 </ul>

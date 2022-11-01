@@ -11,6 +11,10 @@ use App\Http\Controllers\Lims\MenuController;
 use App\Http\Controllers\Lims\DepartmentController;
 use App\Http\Controllers\Lims\CriminalCaseController;
 use App\Http\Controllers\Lims\CivilCaseController;
+use App\Http\Controllers\Lims\CourtController;
+use App\Http\Controllers\Lims\DivisionController;
+use App\Http\Controllers\Lims\DistrictController;
+use App\Http\Controllers\Lims\PanelLawyerController;
 
 // LIMS Routes
 
@@ -132,4 +136,14 @@ Route::group(['prefix' => '', 'middleware' => ['auth']], function () {
     Route::get('edit_district', [DistrictController::class, 'editDistrict'])->name('editDistrict');
     Route::post('update_district', [DistrictController::class, 'updateDistrict'])->name('updateDistrict');
     Route::delete('delete_district', [DistrictController::class, 'deleteDistrict'])->name('deleteDistrict');
+});
+
+// Panel Lawyer
+Route::group(['prefix' => '', 'middleware' => ['auth']], function () {
+    Route::get('show_panel_lawyer', [PanelLawyerController::class, 'showPanelLawyer'])->name('showPanelLawyer');
+    Route::get('fetch_all_panel_lawyer', [PanelLawyerController::class, 'fetchAllPanelLawyer'])->name('fetchAllPanelLawyer');
+    Route::post('save_panel_lawyer', [PanelLawyerController::class, 'savePanelLawyer'])->name('savePanelLawyer');
+    Route::get('edit_panel_lawyer', [PanelLawyerController::class, 'editPanelLawyer'])->name('editPanelLawyer');
+    Route::post('update_panel_lawyer', [PanelLawyerController::class, 'updatePanelLawyer'])->name('updatePanelLawyer');
+    Route::delete('delete_panel_lawyer', [PanelLawyerController::class, 'deletePanelLawyer'])->name('deletePanelLawyer');
 });
