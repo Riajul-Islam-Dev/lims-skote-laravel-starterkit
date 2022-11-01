@@ -33,8 +33,8 @@ class CriminalCaseController extends Controller
                     <th>Division</th>
                     <th>District</th>
                     <th>Region</th>
-                    <th>Defendant Name</th>
-                    <th>Plaintiff Name</th>
+                    <th>Complainant Name</th>
+                    <th>Accused Name</th>
                     <th>Case Filling Date</th>
                     <th>Assigned Lawyer Name</th>
                     <th>Case Created By</th>
@@ -69,8 +69,8 @@ class CriminalCaseController extends Controller
                 <td>' . $data->division . '</td>
                 <td>' . $data->district . '</td>
                 <td>' . $data->region . '</td>
-                <td>' . $data->defendant_name . '</td>
-                <td>' . $data->plaintiff_name . '</td>
+                <td>' . $data->complainant_name . '</td>
+                <td>' . $data->accused_name . '</td>
                 <td>' . $data->case_filling_date . '</td>
                 <td>' . $data->assigned_lawyer_name . '</td>
                 <td>' . $data->case_created_by . '</td>
@@ -100,8 +100,8 @@ class CriminalCaseController extends Controller
             'division' => ['required', 'string', 'max:255'],
             'district' => ['required', 'string', 'max:255'],
             'region' => ['required', 'string', 'max:255'],
-            'defendant_name' => ['required', 'string', 'max:255'],
-            'plaintiff_name' => ['required', 'string', 'max:255'],
+            'complainant_name' => ['required', 'string', 'max:255'],
+            'accused_name' => ['required', 'string', 'max:255'],
             'case_filling_date' => ['required', 'date', 'before:today'],
             'assigned_lawyer_name' => ['required', 'string', 'max:255'],
             'case_created_by' => ['required', 'string', 'max:255'],
@@ -119,8 +119,8 @@ class CriminalCaseController extends Controller
             $criminal_case->division = $request->division;
             $criminal_case->district = $request->district;
             $criminal_case->region = $request->region;
-            $criminal_case->defendant_name = $request->defendant_name;
-            $criminal_case->plaintiff_name = $request->plaintiff_name;
+            $criminal_case->complainant_name = $request->complainant_name;
+            $criminal_case->accused_name = $request->accused_name;
             $criminal_case->case_filling_date = date('Y-m-d', strtotime($request->case_filling_date));
             $criminal_case->assigned_lawyer_name = $request->assigned_lawyer_name;
             $criminal_case->case_created_by = $request->case_created_by;
@@ -187,8 +187,8 @@ class CriminalCaseController extends Controller
             'e_division' => ['required', 'string', 'max:255'],
             'e_district' => ['required', 'string', 'max:255'],
             'e_region' => ['required', 'string', 'max:255'],
-            'e_defendant_name' => ['required', 'string', 'max:255'],
-            'e_plaintiff_name' => ['required', 'string', 'max:255'],
+            'e_complainant_name' => ['required', 'string', 'max:255'],
+            'e_accused_name' => ['required', 'string', 'max:255'],
             'e_case_filling_date' => ['required', 'date', 'before:today'],
             'e_assigned_lawyer_name' => ['required', 'string', 'max:255'],
             'e_case_created_by' => ['required', 'string', 'max:255'],
@@ -208,8 +208,8 @@ class CriminalCaseController extends Controller
             $criminal_case_old_data->division = $request->e_division;
             $criminal_case_old_data->district = $request->e_district;
             $criminal_case_old_data->region = $request->e_region;
-            $criminal_case_old_data->defendant_name = $request->e_defendant_name;
-            $criminal_case_old_data->plaintiff_name = $request->e_plaintiff_name;
+            $criminal_case_old_data->complainant_name = $request->e_complainant_name;
+            $criminal_case_old_data->accused_name = $request->e_accused_name;
             $criminal_case_old_data->case_filling_date = date('Y-m-d', strtotime($request->e_case_filling_date));
             $criminal_case_old_data->assigned_lawyer_name = $request->e_assigned_lawyer_name;
             $criminal_case_old_data->case_created_by = $request->e_case_created_by;

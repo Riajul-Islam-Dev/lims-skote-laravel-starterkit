@@ -55,16 +55,17 @@
                         </div>
                         <div class="row my-2">
                             <div class="col-6">
-                                <x-lims.forms.input.label for="defendant_name" label="Defendant Name" star="*" />
-                                <x-lims.forms.input.text name="defendant_name" id="defendant_name"
-                                    placeholder="Defendant Name" />
-                                <span class="text-danger error-text defendant_name_error"></span>
+                                <x-lims.forms.input.label for="complainant_name" label="Complainant Name"
+                                    star="*" />
+                                <x-lims.forms.input.text name="complainant_name" id="complainant_name"
+                                    placeholder="Complainant Name" />
+                                <span class="text-danger error-text complainant_name_error"></span>
                             </div>
                             <div class="col-6">
-                                <x-lims.forms.input.label for="plaintiff_name" label="Plaintiff Name" star="*" />
-                                <x-lims.forms.input.text name="plaintiff_name" id="plaintiff_name"
-                                    placeholder="Plaintiff Name" />
-                                <span class="text-danger error-text plaintiff_name_error"></span>
+                                <x-lims.forms.input.label for="accused_name" label="Accused Name" star="*" />
+                                <x-lims.forms.input.text name="accused_name" id="accused_name"
+                                    placeholder="Accused Name" />
+                                <span class="text-danger error-text accused_name_error"></span>
                             </div>
                         </div>
                         <div class="row my-2">

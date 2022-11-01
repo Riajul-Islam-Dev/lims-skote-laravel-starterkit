@@ -97,10 +97,9 @@ Route::group(['prefix' => '', 'middleware' => ['auth']], function () {
 // Civil Case
 Route::group(['prefix' => '', 'middleware' => ['auth']], function () {
     Route::get('show_civil_case', [CivilCaseController::class, 'showCivilCase'])->name('showCivilCase');
-    // Route::get('fetch_all_user', [CivilCaseController::class, 'fetchAllUser'])->name('fetchAllUser');
-    // Route::get('add_user', [CivilCaseController::class, 'addUser'])->name('addUser');
-    // Route::post('save_user', [CivilCaseController::class, 'saveUser'])->name('saveUser');
-    // Route::get('edit_user', [CivilCaseController::class, 'editUser'])->name('editUser');
-    // Route::post('update_user', [CivilCaseController::class, 'updateUser'])->name('updateUser');
-    // Route::delete('delete_user', [CivilCaseController::class, 'deleteUser'])->name('deleteUser');
+    Route::get('fetch_all_civil_case', [CivilCaseController::class, 'fetchAllCivilCase'])->name('fetchAllCivilCase');
+    Route::post('save_civil_case', [CivilCaseController::class, 'saveCivilCase'])->name('saveCivilCase');
+    Route::get('edit_civil_case', [CivilCaseController::class, 'editCivilCase'])->name('editCivilCase');
+    Route::post('update_civil_case', [CivilCaseController::class, 'updateCivilCase'])->name('updateCivilCase');
+    Route::delete('delete_civil_case', [CivilCaseController::class, 'deleteCivilCase'])->name('deleteCivilCase');
 });

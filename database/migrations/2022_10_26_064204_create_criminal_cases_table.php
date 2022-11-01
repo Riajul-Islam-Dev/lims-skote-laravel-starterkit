@@ -21,8 +21,8 @@ class CreateCriminalCasesTable extends Migration
             $table->string('division');
             $table->string('district');
             $table->string('region');
-            $table->string('defendant_name');
-            $table->string('plaintiff_name');
+            $table->string('complainant_name');
+            $table->string('accused_name');
             $table->string('case_filling_date');
             $table->string('assigned_lawyer_name');
             $table->string('case_created_by');

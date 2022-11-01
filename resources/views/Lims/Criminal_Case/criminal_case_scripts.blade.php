@@ -109,8 +109,8 @@
                         $("#e_division").val(response.division);
                         $("#e_district").val(response.district);
                         $("#e_region").val(response.region);
-                        $("#e_defendant_name").val(response.defendant_name);
-                        $("#e_plaintiff_name").val(response.plaintiff_name);
+                        $("#e_complainant_name").val(response.complainant_name);
+                        $("#e_accused_name").val(response.accused_name);
                         $("#e_case_filling_date").val(response.case_filling_date);
                         $("#e_assigned_lawyer_name").val(response.assigned_lawyer_name);
                         $("#e_case_created_by").val(response.case_created_by);
