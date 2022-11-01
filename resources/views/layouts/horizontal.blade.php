@@ -464,10 +464,9 @@
                         </a>
 
                         <div class="dropdown-menu" aria-labelledby="topnav-cases">
-                            {{-- <a href="{{ route('posts.edit', ['id' => $post->id]) }}">Link</a> --}}
+                            <a class="dropdown-item" href="{{ route('showCivilCase') }}">{{ __('Civil Case') }}</a>
                             <a class="dropdown-item"
                                 href="{{ route('showCriminalCase') }}">{{ __('Criminal Case') }}</a>
-                            <a class="dropdown-item" href="{{ route('showCivilCase') }}">{{ __('Civil Case') }}</a>
                         </div>
                     </li>
 
