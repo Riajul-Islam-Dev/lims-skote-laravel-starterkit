@@ -12,7 +12,7 @@
 @section('content')
     @component('components.breadcrumb')
         @slot('li_1')
-            LIMS
+            <a href="/">LIMS</a>
         @endslot
         @slot('title')
             Show Department
@@ -51,7 +51,8 @@
                                         <a href="{{ url('/edit_department/' . $data->id) }}" class="btn btn-warning"><i
                                                 class="fa-solid fa-pen-to-square"></i> Edit</a>
                                         <a href="{{ url('/delete_department/' . $data->id) }}" class="btn btn-danger"
-                                            onclick="return confirm('Delete Department?')"><i class="fa-solid fa-trash-can"></i>
+                                            onclick="return confirm('Delete Department?')"><i
+                                                class="fa-solid fa-trash-can"></i>
                                             Delete</a>
                                     </td>
                                 </tr>

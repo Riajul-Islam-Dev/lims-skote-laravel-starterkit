@@ -12,7 +12,7 @@
 @section('content')
     @component('components.breadcrumb')
         @slot('li_1')
-            LIMS
+            <a href="/">LIMS</a>
         @endslot
         @slot('title')
             Show Module
@@ -29,7 +29,8 @@
                     </p>
 
                     <table id="datatable-buttons" class="table table-bordered dt-responsive nowrap w-100">
-                        <a href="{{ url('/add_module') }}" class="btn btn-success my-3"><i class="fa-solid fa-circle-plus"></i> Add new Module</a>
+                        <a href="{{ url('/add_module') }}" class="btn btn-success my-3"><i
+                                class="fa-solid fa-circle-plus"></i> Add new Module</a>
                         <thead>
                             <tr>
                                 <th>ID</th>

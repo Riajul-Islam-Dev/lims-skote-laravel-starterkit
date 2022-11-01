@@ -3,7 +3,7 @@
         <div class="d-flex">
             <!-- LOGO -->
             <div class="navbar-brand-box">
-                <a href="index" class="logo logo-light">
+                <a href="/" class="logo logo-light">
                     <span class="logo-sm">
                         <img src="{{ URL::asset('/assets/images/leotech-logo.png') }}" alt="" height="43">
                     </span>

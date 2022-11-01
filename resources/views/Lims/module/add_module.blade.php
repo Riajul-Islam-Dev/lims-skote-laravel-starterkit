@@ -7,7 +7,7 @@
 @section('content')
     @component('components.breadcrumb')
         @slot('li_1')
-            LIMS
+            <a href="/">LIMS</a>
         @endslot
         @slot('title')
             Add Module
@@ -27,7 +27,8 @@
                         <div class="row">
                             <div class="col-md-6">
                                 <div class="mb-3 position-relative">
-                                    <label for="name" class="form-label">Module Name <span style="color: red">*</span></label>
+                                    <label for="name" class="form-label">Module Name <span
+                                            style="color: red">*</span></label>
                                     <input type="text" class="form-control" id="name" name="name"
                                         placeholder="Name" required>
                                     <div class="valid-tooltip">

@@ -12,7 +12,7 @@
 @section('content')
     @component('components.breadcrumb')
         @slot('li_1')
-            LIMS
+            <a href="/">LIMS</a>
         @endslot
         @slot('title')
             Show Right

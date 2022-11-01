@@ -103,3 +103,33 @@ Route::group(['prefix' => '', 'middleware' => ['auth']], function () {
     Route::post('update_civil_case', [CivilCaseController::class, 'updateCivilCase'])->name('updateCivilCase');
     Route::delete('delete_civil_case', [CivilCaseController::class, 'deleteCivilCase'])->name('deleteCivilCase');
 });
+
+// Court
+Route::group(['prefix' => '', 'middleware' => ['auth']], function () {
+    Route::get('show_court', [CourtController::class, 'showCourt'])->name('showCourt');
+    Route::get('fetch_all_court', [CourtController::class, 'fetchAllCourt'])->name('fetchAllCourt');
+    Route::post('save_court', [CourtController::class, 'saveCourt'])->name('saveCourt');
+    Route::get('edit_court', [CourtController::class, 'editCourt'])->name('editCourt');
+    Route::post('update_court', [CourtController::class, 'updateCourt'])->name('updateCourt');
+    Route::delete('delete_court', [CourtController::class, 'deleteCourt'])->name('deleteCourt');
+});
+
+// Division
+Route::group(['prefix' => '', 'middleware' => ['auth']], function () {
+    Route::get('show_division', [DivisionController::class, 'showDivision'])->name('showDivision');
+    Route::get('fetch_all_division', [DivisionController::class, 'fetchAllDivision'])->name('fetchAllDivision');
+    Route::post('save_division', [DivisionController::class, 'saveDivision'])->name('saveDivision');
+    Route::get('edit_division', [DivisionController::class, 'editDivision'])->name('editDivision');
+    Route::post('update_division', [DivisionController::class, 'updateDivision'])->name('updateDivision');
+    Route::delete('delete_division', [DivisionController::class, 'deleteDivision'])->name('deleteDivision');
+});
+
+// District
+Route::group(['prefix' => '', 'middleware' => ['auth']], function () {
+    Route::get('show_district', [DistrictController::class, 'showDistrict'])->name('showDistrict');
+    Route::get('fetch_all_district', [DistrictController::class, 'fetchAllDistrict'])->name('fetchAllDistrict');
+    Route::post('save_district', [DistrictController::class, 'saveDistrict'])->name('saveDistrict');
+    Route::get('edit_district', [DistrictController::class, 'editDistrict'])->name('editDistrict');
+    Route::post('update_district', [DistrictController::class, 'updateDistrict'])->name('updateDistrict');
+    Route::delete('delete_district', [DistrictController::class, 'deleteDistrict'])->name('deleteDistrict');
+});

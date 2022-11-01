@@ -12,7 +12,7 @@
 @section('content')
     @component('components.breadcrumb')
         @slot('li_1')
-            LIMS
+            <a href="/">LIMS</a>
         @endslot
         @slot('title')
             Show Role Section
@@ -47,7 +47,7 @@
                                 <tr>
                                     <th scope="row">{{ $loop->iteration }}</th>
                                     <td>{{ $data->role_section_name }}</td>
-                                    
+
                                     @foreach ($department_data as $department_individual_data)
                                         @if ($data->department_name == $department_individual_data->id)
                                             <td>{{ $department_individual_data->department_name }}</td>

@@ -11,7 +11,7 @@
 @section('content')
     @component('components.breadcrumb')
         @slot('li_1')
-            LIMS
+            <a href="/">LIMS</a>
         @endslot
         @slot('title')
             Edit Department
@@ -34,9 +34,9 @@
                                 <div class="mb-3 position-relative">
                                     <label for="department_name" class="form-label">Department Name <span
                                             style="color: red">*</span></label>
-                                    <input type="text" class="form-control" id="department_name"
-                                        name="department_name" value="{{ $edit_department_data->department_name }}"
-                                        placeholder="Department Name" required>
+                                    <input type="text" class="form-control" id="department_name" name="department_name"
+                                        value="{{ $edit_department_data->department_name }}" placeholder="Department Name"
+                                        required>
                                     <div class="valid-tooltip">
                                         Looks good!
                                     </div>
