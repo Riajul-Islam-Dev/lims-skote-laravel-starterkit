@@ -16,15 +16,15 @@
 
     <script>
         $(document).ready(function() {
-            fetchAllCivilCase();
+            fetchAllCourt();
 
-            // Fetch all Civil Cases ajax request
-            function fetchAllCivilCase() {
+            // Fetch all Courts ajax request
+            function fetchAllCourt() {
                 $.ajax({
-                    url: '{{ route('fetchAllCivilCase') }}',
+                    url: '{{ route('fetchAllCourt') }}',
                     method: 'get',
                     success: function(response) {
-                        $("#show_all_civil_cases").html(response);
+                        $("#show_all_courts").html(response);
                         var table = $('#datatable-buttons').DataTable({
                             // lengthChange: false,
                             lengthMenu: [
@@ -51,11 +51,11 @@
                 }
             })
 
-            // Create Civil Case ajax request
-            $("#create_civil_case_form").on("submit", function(e) {
+            // Create Court ajax request
+            $("#create_court_form").on("submit", function(e) {
                 e.preventDefault();
                 var form = this;
-                $("#add_civil_case_btn_span").text('Saving...');
+                $("#add_court_btn_span").text('Saving...');
                 $.ajax({
                     url: $(form).attr('action'),
                     method: $(form).attr('method'),
@@ -75,34 +75,34 @@
                             toastr.error(data.Message);
                         } else if (data.code == 1) {
                             $(form)[0].reset();
-                            $("#addCivilCaseModal").modal("hide");
+                            $("#addCourtModal").modal("hide");
                             Swal.fire(
                                 'Added!',
-                                'Civil Case Added Successfully!',
+                                'Court Added Successfully!',
                                 'success'
                             )
-                            fetchAllCivilCase();
+                            fetchAllCourt();
                             toastr.success(data.Message);
                         }
-                        $("#add_civil_case_btn_span").text('Create Civil Case');
+                        $("#add_court_btn_span").text('Create Court');
 
                     },
                 });
             });
 
-            // Edit Civil Case ajax request
-            $(document).on('click', '.edit_civil_case', function(e) {
+            // Edit Court ajax request
+            $(document).on('click', '.edit_court', function(e) {
                 e.preventDefault();
                 let id = $(this).attr('id');
                 $.ajax({
-                    url: '{{ route('editCivilCase') }}',
+                    url: '{{ route('editCourt') }}',
                     method: 'get',
                     data: {
                         id: id,
                         _token: '{{ csrf_token() }}'
                     },
                     success: function(response) {
-                        $("#e_civil_case_id").val(id);
+                        $("#e_court_id").val(id);
                         $("#e_filed_case_name").val(response.filed_case_name);
                         $("#e_case_category").val(response.case_category);
                         $("#e_court_name").val(response.court_name);
@@ -133,11 +133,11 @@
                 });
             });
 
-            // Update Civil Case ajax request
-            $(document).on('submit', '#edit_civil_case_form', function(e) {
+            // Update Court ajax request
+            $(document).on('submit', '#edit_court_form', function(e) {
                 e.preventDefault();
                 var form = this;
-                $("#edit_civil_case_btn_span").text('Updating...');
+                $("#edit_court_btn_span").text('Updating...');
                 $.ajax({
                     url: $(form).attr('action'),
                     method: $(form).attr('method'),
@@ -158,22 +158,22 @@
                         } else if (data.code == 1) {
                             // console.log(data.Message)
                             $(form)[0].reset();
-                            $("#editCivilCaseModal").modal("hide");
+                            $("#editCourtModal").modal("hide");
                             Swal.fire(
                                 'Added!',
-                                'Civil Case Edited Successfully!',
+                                'Court Edited Successfully!',
                                 'success'
                             )
-                            fetchAllCivilCase();
+                            fetchAllCourt();
                             toastr.success(data.Message);
                         }
-                        $("#edit_civil_case_btn_span").text('Update Civil Case');
+                        $("#edit_court_btn_span").text('Update Court');
                     },
                 });
             });
 
-            // Delete Civil Case ajax request
-            $(document).on('click', '.delete_civil_case', function(e) {
+            // Delete Court ajax request
+            $(document).on('click', '.delete_court', function(e) {
                 e.preventDefault();
                 let id = $(this).attr('id');
                 let csrf = '{{ csrf_token() }}';
@@ -188,7 +188,7 @@
                 }).then((result) => {
                     if (result.isConfirmed) {
                         $.ajax({
-                            url: '{{ url('delete_civil_case') }}',
+                            url: '{{ url('delete_court') }}',
                             method: 'delete',
                             data: {
                                 id: id,
@@ -202,16 +202,16 @@
                                         'Something went wrong!',
                                         'error'
                                     )
-                                    fetchAllCivilCase();
+                                    fetchAllCourt();
                                     toastr.error(response.Message);
                                 } else if (response.code == 1) {
                                     console.log(response);
                                     Swal.fire(
                                         'Deleted!',
-                                        'Civil Case has been deleted.',
+                                        'Court has been deleted.',
                                         'success'
                                     )
-                                    fetchAllCivilCase();
+                                    fetchAllCourt();
                                     toastr.success(response.Message);
                                 }
                             }
