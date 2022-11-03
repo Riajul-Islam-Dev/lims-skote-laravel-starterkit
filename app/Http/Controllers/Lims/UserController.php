@@ -43,8 +43,10 @@ class UserController extends Controller
             foreach ($show_user_data as $key => $data) {
                 if ($data->status == 1) {
                     $data->status = "Active";
+                    $status_badge_class = 'badge bg-info';
                 } else {
                     $data->status = "Inactive";
+                    $status_badge_class = 'badge bg-danger';
                 }
                 $output .= '<tr>
                 <th scope="row">' . $data->id . ' </th>
@@ -56,7 +58,7 @@ class UserController extends Controller
                 <td>' . $data->name . ' </td>
                 <td>' . $data->email . '</td>
                 <td>' . $data->dob . '</td>
-                <td>' . $data->status . '</td>
+                <td><div class="' . $status_badge_class . '">' . $data->status . '</div></td>
                 <td>
                 <a href="#" id="' . $data->id . '" class="btn btn-warning waves-effect btn-label waves-light edit_user" data-bs-toggle="modal" data-bs-target="#editUserModal"><i class="bx bx-pencil label-icon"></i> Edit</a>
                 <a href="#" id="' . $data->id . '" class="btn btn-danger waves-effect btn-label waves-light delete_user"><i class="bx bx-trash label-icon"></i> Delete</a>

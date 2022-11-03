@@ -48,18 +48,24 @@ class CriminalCaseController extends Controller
             foreach ($show_criminal_case_data as $key => $data) {
                 if ($data->admin_approval == 1) {
                     $data->admin_approval = "Approved";
+                    $admin_approval_badge_class = 'badge bg-info';
                 } else {
                     $data->admin_approval = "Not Approved";
+                    $admin_approval_badge_class = 'badge bg-danger';
                 }
                 if ($data->document_status == 1) {
                     $data->document_status = "Uploaded";
+                    $document_status_badge_class = 'badge bg-info';
                 } else {
                     $data->document_status = "Not Uploaded";
+                    $document_status_badge_class = 'badge bg-danger';
                 }
                 if ($data->status == 1) {
                     $data->status = "Active";
+                    $status_badge_class = 'badge bg-info';
                 } else {
                     $data->status = "Inactive";
+                    $status_badge_class = 'badge bg-danger';
                 }
                 $output .= '<tr>
                 <th scope="row">' . $data->id . ' </th>
@@ -74,9 +80,9 @@ class CriminalCaseController extends Controller
                 <td>' . $data->case_filling_date . '</td>
                 <td>' . $data->assigned_lawyer_name . '</td>
                 <td>' . $data->case_created_by . '</td>
-                <td>' . $data->admin_approval . '</td>
-                <td>' . $data->document_status . '</td>
-                <td>' . $data->status . '</td>
+                <td><div class="' . $admin_approval_badge_class . '">' . $data->admin_approval . '</div></td>
+                <td><div class="' . $document_status_badge_class . '">' . $data->document_status . '</div></td>
+                <td><div class="' . $status_badge_class . '">' . $data->status . '</div></td>
                 <td>
                 <a href="#" id="' . $data->id . '" class="btn btn-warning waves-effect btn-label waves-light edit_criminal_case" data-bs-toggle="modal" data-bs-target="#editCriminalCaseModal"><i class="bx bx-pencil label-icon"></i> Edit</a>
                 <a href="#" id="' . $data->id . '" class="btn btn-danger waves-effect btn-label waves-light delete_criminal_case"><i class="bx bx-trash label-icon"></i> Delete</a>
