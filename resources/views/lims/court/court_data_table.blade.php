@@ -1,5 +1,5 @@
-<div class="row" id="Court_data_table">
-    <div class="col-12" id="Court_data_table_col">
+<div class="row" id="court_data_table">
+    <div class="col-12" id="court_data_table_col">
         <div class="card">
             <div class="card-body">
                 <h4 class="card-title">Court List:</h4>

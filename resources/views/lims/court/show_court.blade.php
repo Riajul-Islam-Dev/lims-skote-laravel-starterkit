@@ -28,17 +28,17 @@
 
     <!-- Court Data Table -->
     <div>
-        @include('Lims/Court/court_data_table')
+        @include('Lims/court/court_data_table')
     </div>
 
     <!-- Add Court Modal -->
-    @include('Lims/Court/create_court_modal')
+    @include('Lims/court/create_court_modal')
 
     <!-- Edit Court Modal -->
-    @include('Lims/Court/edit_court_modal')
+    @include('Lims/court/edit_court_modal')
 @endsection
 
 @push('custom-scripts')
     <!-- Developer's JS file -->
-    @include('Lims.Court.court_scripts')
+    @include('Lims.court.court_scripts')
 @endpush

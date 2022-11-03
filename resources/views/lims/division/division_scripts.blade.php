@@ -16,15 +16,15 @@
 
     <script>
         $(document).ready(function() {
-            fetchAllCivilCase();
+            fetchAllDivision();
 
-            // Fetch all Civil Cases ajax request
-            function fetchAllCivilCase() {
+            // Fetch all Divisions ajax request
+            function fetchAllDivision() {
                 $.ajax({
-                    url: '{{ route('fetchAllCivilCase') }}',
+                    url: '{{ route('fetchAllDivision') }}',
                     method: 'get',
                     success: function(response) {
-                        $("#show_all_civil_cases").html(response);
+                        $("#show_all_divisions").html(response);
                         var table = $('#datatable-buttons').DataTable({
                             // lengthChange: false,
                             lengthMenu: [
@@ -51,11 +51,11 @@
                 }
             })
 
-            // Create Civil Case ajax request
-            $("#create_civil_case_form").on("submit", function(e) {
+            // Create Division ajax request
+            $("#create_division_form").on("submit", function(e) {
                 e.preventDefault();
                 var form = this;
-                $("#add_civil_case_btn_span").text('Saving...');
+                $("#add_division_btn_span").text('Saving...');
                 $.ajax({
                     url: $(form).attr('action'),
                     method: $(form).attr('method'),
@@ -75,55 +75,36 @@
                             toastr.error(data.Message);
                         } else if (data.code == 1) {
                             $(form)[0].reset();
-                            $("#addCivilCaseModal").modal("hide");
+                            $("#addDivisionModal").modal("hide");
                             Swal.fire(
                                 'Added!',
-                                'Civil Case Added Successfully!',
+                                'Division Added Successfully!',
                                 'success'
                             )
-                            fetchAllCivilCase();
+                            fetchAllDivision();
                             toastr.success(data.Message);
                         }
-                        $("#add_civil_case_btn_span").text('Create Civil Case');
+                        $("#add_division_btn_span").text('Create Division');
 
                     },
                 });
             });
 
-            // Edit Civil Case ajax request
-            $(document).on('click', '.edit_civil_case', function(e) {
+            // Edit Division ajax request
+            $(document).on('click', '.edit_division', function(e) {
                 e.preventDefault();
                 let id = $(this).attr('id');
                 $.ajax({
-                    url: '{{ route('editCivilCase') }}',
+                    url: '{{ route('editDivision') }}',
                     method: 'get',
                     data: {
                         id: id,
                         _token: '{{ csrf_token() }}'
                     },
                     success: function(response) {
-                        $("#e_civil_case_id").val(id);
-                        $("#e_filed_case_name").val(response.filed_case_name);
-                        $("#e_case_category").val(response.case_category);
-                        $("#e_court_name").val(response.court_name);
-                        $("#e_division").val(response.division);
-                        $("#e_district").val(response.district);
-                        $("#e_region").val(response.region);
-                        $("#e_plaintiff_name").val(response.plaintiff_name);
-                        $("#e_defendant_name").val(response.defendant_name);
-                        $("#e_case_filling_date").val(response.case_filling_date);
-                        $("#e_assigned_lawyer_name").val(response.assigned_lawyer_name);
-                        $("#e_case_created_by").val(response.case_created_by);
-                        if (response.admin_approval == 1) {
-                            $("#e_admin_approval").attr("checked", true);
-                        } else if (response.admin_approval == 0) {
-                            $("#e_admin_approval").removeAttr("checked");
-                        }
-                        if (response.document_status == 1) {
-                            $("#e_document_status").attr("checked", true);
-                        } else if (response.document_status == 0) {
-                            $("#e_document_status").removeAttr("checked");
-                        }
+                        $("#e_division_id").val(id);
+                        $("#e_division_name").val(response.division_name);
+                        $("#e_division_code").val(response.division_code);
                         if (response.status == 1) {
                             $("#e_status").attr("checked", true);
                         } else if (response.status == 0) {
@@ -133,11 +114,11 @@
                 });
             });
 
-            // Update Civil Case ajax request
-            $(document).on('submit', '#edit_civil_case_form', function(e) {
+            // Update Division ajax request
+            $(document).on('submit', '#edit_division_form', function(e) {
                 e.preventDefault();
                 var form = this;
-                $("#edit_civil_case_btn_span").text('Updating...');
+                $("#edit_division_btn_span").text('Updating...');
                 $.ajax({
                     url: $(form).attr('action'),
                     method: $(form).attr('method'),
@@ -158,22 +139,22 @@
                         } else if (data.code == 1) {
                             // console.log(data.Message)
                             $(form)[0].reset();
-                            $("#editCivilCaseModal").modal("hide");
+                            $("#editDivisionModal").modal("hide");
                             Swal.fire(
                                 'Added!',
-                                'Civil Case Edited Successfully!',
+                                'Division Edited Successfully!',
                                 'success'
                             )
-                            fetchAllCivilCase();
+                            fetchAllDivision();
                             toastr.success(data.Message);
                         }
-                        $("#edit_civil_case_btn_span").text('Update Civil Case');
+                        $("#edit_division_btn_span").text('Update Division');
                     },
                 });
             });
 
-            // Delete Civil Case ajax request
-            $(document).on('click', '.delete_civil_case', function(e) {
+            // Delete Division ajax request
+            $(document).on('click', '.delete_division', function(e) {
                 e.preventDefault();
                 let id = $(this).attr('id');
                 let csrf = '{{ csrf_token() }}';
@@ -188,7 +169,7 @@
                 }).then((result) => {
                     if (result.isConfirmed) {
                         $.ajax({
-                            url: '{{ url('delete_civil_case') }}',
+                            url: '{{ url('delete_division') }}',
                             method: 'delete',
                             data: {
                                 id: id,
@@ -202,16 +183,16 @@
                                         'Something went wrong!',
                                         'error'
                                     )
-                                    fetchAllCivilCase();
+                                    fetchAllDivision();
                                     toastr.error(response.Message);
                                 } else if (response.code == 1) {
                                     console.log(response);
                                     Swal.fire(
                                         'Deleted!',
-                                        'Civil Case has been deleted.',
+                                        'Division has been deleted.',
                                         'success'
                                     )
-                                    fetchAllCivilCase();
+                                    fetchAllDivision();
                                     toastr.success(response.Message);
                                 }
                             }
