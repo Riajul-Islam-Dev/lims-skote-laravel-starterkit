@@ -16,15 +16,15 @@
 
     <script>
         $(document).ready(function() {
-            fetchAllCivilCase();
+            fetchAllDistrict();
 
-            // Fetch all Civil Cases ajax request
-            function fetchAllCivilCase() {
+            // Fetch all Districts ajax request
+            function fetchAllDistrict() {
                 $.ajax({
-                    url: '{{ route('fetchAllCivilCase') }}',
+                    url: '{{ route('fetchAllDistrict') }}',
                     method: 'get',
                     success: function(response) {
-                        $("#show_all_civil_cases").html(response);
+                        $("#show_all_districts").html(response);
                         var table = $('#datatable-buttons').DataTable({
                             // lengthChange: false,
                             lengthMenu: [
@@ -51,11 +51,11 @@
                 }
             })
 
-            // Create Civil Case ajax request
-            $("#create_civil_case_form").on("submit", function(e) {
+            // Create District ajax request
+            $("#create_district_form").on("submit", function(e) {
                 e.preventDefault();
                 var form = this;
-                $("#add_civil_case_btn_span").text('Saving...');
+                $("#add_district_btn_span").text('Saving...');
                 $.ajax({
                     url: $(form).attr('action'),
                     method: $(form).attr('method'),
@@ -75,55 +75,37 @@
                             toastr.error(data.Message);
                         } else if (data.code == 1) {
                             $(form)[0].reset();
-                            $("#addCivilCaseModal").modal("hide");
+                            $("#addDistrictModal").modal("hide");
                             Swal.fire(
                                 'Added!',
-                                'Civil Case Added Successfully!',
+                                'District Added Successfully!',
                                 'success'
                             )
-                            fetchAllCivilCase();
+                            fetchAllDistrict();
                             toastr.success(data.Message);
                         }
-                        $("#add_civil_case_btn_span").text('Create Civil Case');
+                        $("#add_district_btn_span").text('Create District');
 
                     },
                 });
             });
 
-            // Edit Civil Case ajax request
-            $(document).on('click', '.edit_civil_case', function(e) {
+            // Edit District ajax request
+            $(document).on('click', '.edit_district', function(e) {
                 e.preventDefault();
                 let id = $(this).attr('id');
                 $.ajax({
-                    url: '{{ route('editCivilCase') }}',
+                    url: '{{ route('editDistrict') }}',
                     method: 'get',
                     data: {
                         id: id,
                         _token: '{{ csrf_token() }}'
                     },
                     success: function(response) {
-                        $("#e_civil_case_id").val(id);
-                        $("#e_filed_case_name").val(response.filed_case_name);
-                        $("#e_case_category").val(response.case_category);
-                        $("#e_court_name").val(response.court_name);
-                        $("#e_division").val(response.division);
-                        $("#e_district").val(response.district);
-                        $("#e_region").val(response.region);
-                        $("#e_plaintiff_name").val(response.plaintiff_name);
-                        $("#e_defendant_name").val(response.defendant_name);
-                        $("#e_case_filling_date").val(response.case_filling_date);
-                        $("#e_assigned_lawyer_name").val(response.assigned_lawyer_name);
-                        $("#e_case_created_by").val(response.case_created_by);
-                        if (response.admin_approval == 1) {
-                            $("#e_admin_approval").attr("checked", true);
-                        } else if (response.admin_approval == 0) {
-                            $("#e_admin_approval").removeAttr("checked");
-                        }
-                        if (response.document_status == 1) {
-                            $("#e_document_status").attr("checked", true);
-                        } else if (response.document_status == 0) {
-                            $("#e_document_status").removeAttr("checked");
-                        }
+                        $("#e_district_id").val(id);
+                        $("#e_district_name").val(response.district_name);
+                        $("#e_district_code").val(response.district_code);
+                        $("#e_division_name").val(response.division_name);
                         if (response.status == 1) {
                             $("#e_status").attr("checked", true);
                         } else if (response.status == 0) {
@@ -133,11 +115,11 @@
                 });
             });
 
-            // Update Civil Case ajax request
-            $(document).on('submit', '#edit_civil_case_form', function(e) {
+            // Update District ajax request
+            $(document).on('submit', '#edit_district_form', function(e) {
                 e.preventDefault();
                 var form = this;
-                $("#edit_civil_case_btn_span").text('Updating...');
+                $("#edit_district_btn_span").text('Updating...');
                 $.ajax({
                     url: $(form).attr('action'),
                     method: $(form).attr('method'),
@@ -158,22 +140,22 @@
                         } else if (data.code == 1) {
                             // console.log(data.Message)
                             $(form)[0].reset();
-                            $("#editCivilCaseModal").modal("hide");
+                            $("#editDistrictModal").modal("hide");
                             Swal.fire(
                                 'Added!',
-                                'Civil Case Edited Successfully!',
+                                'District Edited Successfully!',
                                 'success'
                             )
-                            fetchAllCivilCase();
+                            fetchAllDistrict();
                             toastr.success(data.Message);
                         }
-                        $("#edit_civil_case_btn_span").text('Update Civil Case');
+                        $("#edit_district_btn_span").text('Update District');
                     },
                 });
             });
 
-            // Delete Civil Case ajax request
-            $(document).on('click', '.delete_civil_case', function(e) {
+            // Delete District ajax request
+            $(document).on('click', '.delete_district', function(e) {
                 e.preventDefault();
                 let id = $(this).attr('id');
                 let csrf = '{{ csrf_token() }}';
@@ -188,7 +170,7 @@
                 }).then((result) => {
                     if (result.isConfirmed) {
                         $.ajax({
-                            url: '{{ url('delete_civil_case') }}',
+                            url: '{{ url('delete_district') }}',
                             method: 'delete',
                             data: {
                                 id: id,
@@ -202,16 +184,16 @@
                                         'Something went wrong!',
                                         'error'
                                     )
-                                    fetchAllCivilCase();
+                                    fetchAllDistrict();
                                     toastr.error(response.Message);
                                 } else if (response.code == 1) {
                                     console.log(response);
                                     Swal.fire(
                                         'Deleted!',
-                                        'Civil Case has been deleted.',
+                                        'District has been deleted.',
                                         'success'
                                     )
-                                    fetchAllCivilCase();
+                                    fetchAllDistrict();
                                     toastr.success(response.Message);
                                 }
                             }

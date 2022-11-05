@@ -1,7 +1,7 @@
 @extends('layouts.master')
 
 @section('title')
-    Show Civil Case
+    Show Division
 @endsection
 
 @push('custom-css')
@@ -22,23 +22,23 @@
             <a href="/">LIMS</a>
         @endslot
         @slot('title')
-            Civil Case
+            District
         @endslot
     @endcomponent
 
-    <!-- User Data Table -->
+    <!-- District Data Table -->
     <div>
-        @include('Lims/Civil_Case/civil_case_data_table')
+        @include('Lims/district/district_data_table')
     </div>
 
-    <!-- Add User Modal -->
-    @include('Lims/Civil_Case/create_civil_case_modal')
+    <!-- Add District Modal -->
+    @include('Lims/district/create_district_modal')
 
-    <!-- Edit User Modal -->
-    @include('Lims/Civil_Case/edit_civil_case_modal')
+    <!-- Edit District Modal -->
+    @include('Lims/district/edit_district_modal')
 @endsection
 
 @push('custom-scripts')
     <!-- Developer's JS file -->
-    @include('Lims.Civil_Case.civil_case_scripts')
+    @include('Lims.district.district_scripts')
 @endpush
