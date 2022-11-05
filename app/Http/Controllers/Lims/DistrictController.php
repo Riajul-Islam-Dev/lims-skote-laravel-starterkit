@@ -5,6 +5,7 @@ namespace App\Http\Controllers\lims;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Models\Lims\District;
+use App\Models\Lims\Division;
 use Validator;
 
 class DistrictController extends Controller
@@ -12,7 +13,8 @@ class DistrictController extends Controller
     // District data table page view
     public function showDistrict()
     {
-        return view('Lims/district/show_district');
+        $show_division_data = Division::all();
+        return view('Lims/district/show_district', compact("show_division_data"));
     }
 
     // Fetch all Districts ajax request
