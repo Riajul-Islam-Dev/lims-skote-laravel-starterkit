@@ -45,6 +45,19 @@
                                 <span class="text-danger error-text avatar_error"></span>
                             </div>
                             <div class="col-6">
+                                <x-lims.forms.input.label for="role_id" label="Select Role" star="*" />
+                                <x-lims.forms.input.select name="role_id" id="role_id">
+                                    <option value="option_select" disabled selected>Select Role</option>
+                                    @foreach ($show_role_data as $show_role_data_individual)
+                                        <option value="{{ $show_role_data_individual->id }}">
+                                            {{ $show_role_data_individual->role_name }}</option>
+                                    @endforeach
+                                </x-lims.forms.input.select>
+                                <span class="text-danger error-text role_id_error"></span>
+                            </div>
+                        </div>
+                        <div class="row my-2">
+                            <div class="col-6">
                                 <x-lims.forms.input.label for="status" label="Status" star="*" />
                                 <x-lims.forms.input.toggle name="status" id="status" />
                             </div>
@@ -54,7 +67,8 @@
                         <button type="button" class="btn btn-danger waves-effect btn-label waves-light"
                             data-bs-dismiss="modal"><i class="bx bx-block label-icon "></i> Close</button>
                         <button type="submit" class="btn btn-success waves-effect btn-label waves-light"
-                            id="add_user_btn"><i class="bx bx-check-double label-icon"></i><span id="add_user_btn_span"> Create User</span></button>
+                            id="add_user_btn"><i class="bx bx-check-double label-icon"></i><span id="add_user_btn_span">
+                                Create User</span></button>
                     </div>
                 </form>
             </div>

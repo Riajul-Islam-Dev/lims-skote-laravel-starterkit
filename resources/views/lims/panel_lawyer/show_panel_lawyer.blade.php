@@ -1,7 +1,7 @@
 @extends('layouts.master')
 
 @section('title')
-    Show Civil Case
+    Show Panel Lawyer
 @endsection
 
 @push('custom-css')
@@ -22,23 +22,23 @@
             <a href="/">LIMS</a>
         @endslot
         @slot('title')
-            Civil Case
+            Show Panel Lawyer
         @endslot
     @endcomponent
 
-    <!-- User Data Table -->
+    <!-- Panel Lawyer Data Table -->
     <div>
-        @include('Lims/Civil_Case/civil_case_data_table')
+        @include('Lims/panel_lawyer/panel_lawyer_data_table')
     </div>
 
-    <!-- Add User Modal -->
-    @include('Lims/Civil_Case/create_civil_case_modal')
+    <!-- Add Panel Lawyer Modal -->
+    @include('Lims/panel_lawyer/create_panel_lawyer_modal')
 
-    <!-- Edit User Modal -->
-    @include('Lims/Civil_Case/edit_civil_case_modal')
+    <!-- Edit Panel Lawyer Modal -->
+    @include('Lims/panel_lawyer/edit_panel_lawyer_modal')
 @endsection
 
 @push('custom-scripts')
     <!-- Developer's JS file -->
-    @include('Lims.Civil_Case.civil_case_scripts')
+    @include('Lims.panel_lawyer.panel_lawyer_scripts')
 @endpush

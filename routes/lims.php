@@ -146,4 +146,5 @@ Route::group(['prefix' => '', 'middleware' => ['auth']], function () {
     Route::get('edit_panel_lawyer', [PanelLawyerController::class, 'editPanelLawyer'])->name('editPanelLawyer');
     Route::post('update_panel_lawyer', [PanelLawyerController::class, 'updatePanelLawyer'])->name('updatePanelLawyer');
     Route::delete('delete_panel_lawyer', [PanelLawyerController::class, 'deletePanelLawyer'])->name('deletePanelLawyer');
+    Route::get('get_user_avatar', [PanelLawyerController::class, 'getUserAvatar'])->name('getUserAvatar');
 });

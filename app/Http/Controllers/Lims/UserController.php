@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Lims;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Models\Lims\User;
+use App\Models\Lims\Role;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Session;
 use Illuminate\Support\Facades\File;
@@ -17,13 +18,15 @@ class UserController extends Controller
     // User data table page view
     public function showUser()
     {
-        return view('Lims/user/show_user');
+        $show_role_data = Role::all();
+        return view('Lims/user/show_user', compact("show_role_data"));
     }
 
     // Fetch all users ajax request
     public function fetchAllUser()
     {
         $show_user_data = User::all();
+        $show_role_data = Role::all();
 
         $output = '';
         if ($show_user_data->count() > 0) {
@@ -35,6 +38,7 @@ class UserController extends Controller
                     <th>User Name</th>
                     <th>User Email</th>
                     <th>Date of Birth</th>
+                    <th>Role Name</th>
                     <th>Status</th>
                     <th>Action</th>
                 </tr>
@@ -43,11 +47,20 @@ class UserController extends Controller
             foreach ($show_user_data as $key => $data) {
                 if ($data->status == 1) {
                     $data->status = "Active";
-                    $status_badge_class = 'badge bg-info';
+                    $status_badge_class = 'badge bg-success';
                 } else {
                     $data->status = "Inactive";
                     $status_badge_class = 'badge bg-danger';
                 }
+
+                $role_name = '';
+                foreach ($show_role_data as $role_data) {
+                    if ($role_data->id == $data->role_id) {
+                        $role_name = $role_data->role_name;
+                        $role_name_badge_class = 'badge bg-info';
+                    }
+                }
+
                 $output .= '<tr>
                 <th scope="row">' . $data->id . ' </th>
                 <td>
@@ -58,6 +71,7 @@ class UserController extends Controller
                 <td>' . $data->name . ' </td>
                 <td>' . $data->email . '</td>
                 <td>' . $data->dob . '</td>
+                <td><div class="' . $role_name_badge_class . '">' . $role_name . '</div></td>
                 <td><div class="' . $status_badge_class . '">' . $data->status . '</div></td>
                 <td>
                 <a href="#" id="' . $data->id . '" class="btn btn-warning waves-effect btn-label waves-light edit_user" data-bs-toggle="modal" data-bs-target="#editUserModal"><i class="bx bx-pencil label-icon"></i> Edit</a>
@@ -81,6 +95,7 @@ class UserController extends Controller
             'user_password' => ['required', 'string', 'min:6'],
             'dob' => ['required', 'date', 'before:today'],
             'avatar' => ['required', 'image', 'mimes:jpg,jpeg,png', 'max:1024'],
+            'role_id' => ['required', 'string', 'max:255'],
             // 'status' => ['required', 'string'],
         ]);
 
@@ -97,6 +112,7 @@ class UserController extends Controller
             $user->password = Hash::make($request->user_password);
             $user->dob = date('Y-m-d', strtotime($request->dob));
             $user->avatar = "/images/" . $avatarName;
+            $user->role_id = $request->role_id;
 
             if ($request->status == "on") {
                 $request->status = "1";
@@ -148,6 +164,7 @@ class UserController extends Controller
             'e_user_password' => ['nullable', 'string', 'min:6'],
             'e_dob' => ['required', 'date', 'before:today'],
             'e_avatar' => ['nullable', 'image', 'mimes:jpg,jpeg,png', 'max:1024'],
+            'e_role_id' => ['required', 'string', 'max:255'],
             // 'e_status' => ['string', 'max:255'],
         ]);
 
@@ -175,6 +192,7 @@ class UserController extends Controller
             $user_old_data->name = $request->e_name;
             $user_old_data->email = $request->e_email;
             $user_old_data->dob = date('Y-m-d', strtotime($request->e_dob));
+            $user_old_data->role_id = $request->e_role_id;
 
             if ($request->e_status == "on") {
                 $request->e_status = "1";

@@ -47,15 +47,17 @@
                                 <div class="py-3 text-center bg-light" id="avatar_show"></div>
                             </div>
                             <div class="col-6">
-                                <x-lims.forms.input.label for="e_role_id" label="Select Role" star="*" />
-                                <x-lims.forms.input.select name="e_role_id" id="e_role_id">
+                                <select class="js-states browser-default select2" name="e_role_id" required
+                                    id="e_role_id">
                                     <option value="option_select" disabled selected>Select Role</option>
-                                    @foreach ($show_role_data as $show_role_data_individual)
+                                    {{-- @foreach ($show_role_data as $show_role_data_individual)
                                         <option value="{{ $show_role_data_individual->id }}">
                                             {{ $show_role_data_individual->role_name }}</option>
-                                    @endforeach
-                                </x-lims.forms.input.select>
-                                <span class="text-danger error-text e_role_id_error"></span>
+                                    @endforeach --}}
+                                </select>
+                                {{-- <x-lims.forms.input.label for="role_id" label="Role ID" star="*" />
+                                <x-lims.forms.input.text name="role_id" id="role_id" placeholder="Role ID" /> --}}
+                                <span class="text-danger error-text role_id_error"></span>
                             </div>
                         </div>
                         <div class="row my-2">

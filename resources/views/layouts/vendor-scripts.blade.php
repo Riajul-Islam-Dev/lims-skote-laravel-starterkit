@@ -4,7 +4,10 @@
     <script src="{{ URL::asset('assets/libs/metismenu/metismenu.min.js') }}"></script>
     <script src="{{ URL::asset('assets/libs/simplebar/simplebar.min.js') }}"></script>
     <script src="{{ URL::asset('assets/libs/node-waves/node-waves.min.js') }}"></script>
-    @stack('custom-scripts')
+    <!-- Select2 -->
+    <script src="{{ URL::asset('/assets/libs/select2/select2.min.js') }}"></script>
+    <!-- form advanced init -->
+    <script src="{{ URL::asset('assets/js/pages/form-advanced.init.js') }}"></script>
 
     <script>
         $('#change-password').on('submit', function(event) {
@@ -46,11 +49,11 @@
             });
         });
     </script>
+    @stack('custom-scripts')
 
     <!-- owl.carousel js -->
     <script src="{{ URL::asset('assets/libs/owl.carousel/owl.carousel.min.js') }}"></script>
     <!-- auth-2-carousel init -->
     <script src="{{ URL::asset('assets/js/pages/auth-2-carousel.init.js') }}"></script>
-
     <!-- App js -->
     <script src="{{ URL::asset('assets/js/app.min.js') }}"></script>

@@ -15,15 +15,36 @@
 
 <script>
     $(document).ready(function() {
-        fetchAllDistrict();
+        $('select').on('change', function(e) {
+            e.preventDefault();
+            var optionSelected = $("option:selected", this);
+            var valueSelected = this.value;
 
-        // Fetch all Districts ajax request
-        function fetchAllDistrict() {
             $.ajax({
-                url: '{{ route('fetchAllDistrict') }}',
+                url: '{{ route('getUserAvatar') }}',
+                method: 'get',
+                data: {
+                    id: valueSelected,
+                    _token: '{{ csrf_token() }}'
+                },
+                success: function(response) {
+
+                    $("#user_avatar_show").html('<img src="' + response.avatar +
+                        '" width="100" class="img-fluid img-thumbnail">'
+                    );
+                }
+            });
+        });
+
+        fetchAllPanelLawyers();
+
+        // Fetch all Panel Lawyer ajax request
+        function fetchAllPanelLawyers() {
+            $.ajax({
+                url: '{{ route('fetchAllPanelLawyer') }}',
                 method: 'get',
                 success: function(response) {
-                    $("#show_all_districts").html(response);
+                    $("#show_all_panel_lawyers").html(response);
                     var table = $('#datatable-buttons').DataTable({
                         // lengthChange: false,
                         lengthMenu: [
@@ -50,11 +71,11 @@
             }
         })
 
-        // Create District ajax request
-        $("#create_district_form").on("submit", function(e) {
+        // Create Panel Lawyer  ajax request
+        $("#create_panel_lawyer_form").on("submit", function(e) {
             e.preventDefault();
             var form = this;
-            $("#add_district_btn_span").text('Saving...');
+            $("#add_panel_lawyer_btn_span").text('Saving...');
             $.ajax({
                 url: $(form).attr('action'),
                 method: $(form).attr('method'),
@@ -74,37 +95,43 @@
                         toastr.error(data.Message);
                     } else if (data.code == 1) {
                         $(form)[0].reset();
-                        $("#addDistrictModal").modal("hide");
+                        $("#addPanelLawyerModal").modal("hide");
                         Swal.fire(
                             'Added!',
-                            'District Added Successfully!',
+                            'Panel Lawyer Added Successfully!',
                             'success'
                         )
-                        fetchAllDistrict();
+                        fetchAllPanelLawyers();
                         toastr.success(data.Message);
                     }
-                    $("#add_district_btn_span").text('Create District');
+                    $("#add_panel_lawyer_btn_span").text('Create Panel Lawyer');
 
                 },
             });
         });
 
-        // Edit District ajax request
-        $(document).on('click', '.edit_district', function(e) {
+        // Edit Panel Lawyer ajax request
+        $(document).on('click', '.edit_panel_lawyer', function(e) {
             e.preventDefault();
             let id = $(this).attr('id');
             $.ajax({
-                url: '{{ route('editDistrict') }}',
+                url: '{{ route('editPanelLawyer') }}',
                 method: 'get',
                 data: {
                     id: id,
                     _token: '{{ csrf_token() }}'
                 },
                 success: function(response) {
-                    $("#e_district_id").val(id);
-                    $("#e_district_name").val(response.district_name);
-                    $("#e_district_code").val(response.district_code);
-                    $("#e_division_name").val(response.division_name);
+                    // console.log(response)
+                    $("#e_user_id").val(id);
+                    $("#e_name").val(response.name);
+                    $("#e_email").val(response.email);
+                    $("#e_user_password").val("");
+                    $("#e_dob").val(response.dob);
+                    $("#avatar_show").html('<img src="' + response.avatar +
+                        '" width="100" class="img-fluid img-thumbnail">'
+                    );
+                    $("#e_role_id").val(response.role_id);
                     if (response.status == 1) {
                         $("#e_status").attr("checked", true);
                     } else if (response.status == 0) {
@@ -114,11 +141,11 @@
             });
         });
 
-        // Update District ajax request
-        $(document).on('submit', '#edit_district_form', function(e) {
+        // Update user ajax request
+        $(document).on('submit', '#edit_user_form', function(e) {
             e.preventDefault();
             var form = this;
-            $("#edit_district_btn_span").text('Updating...');
+            $("#edit_user_btn_span").text('Updating...');
             $.ajax({
                 url: $(form).attr('action'),
                 method: $(form).attr('method'),
@@ -139,22 +166,22 @@
                     } else if (data.code == 1) {
                         // console.log(data.Message)
                         $(form)[0].reset();
-                        $("#editDistrictModal").modal("hide");
+                        $("#editUserModal").modal("hide");
                         Swal.fire(
                             'Added!',
-                            'District Edited Successfully!',
+                            'User Edited Successfully!',
                             'success'
                         )
-                        fetchAllDistrict();
+                        fetchAllUsers();
                         toastr.success(data.Message);
                     }
-                    $("#edit_district_btn_span").text('Update District');
+                    $("#edit_user_btn_span").text('Update User');
                 },
             });
         });
 
-        // Delete District ajax request
-        $(document).on('click', '.delete_district', function(e) {
+        // Delete Panel Lawyer ajax request
+        $(document).on('click', '.delete_panel_lawyer', function(e) {
             e.preventDefault();
             let id = $(this).attr('id');
             let csrf = '{{ csrf_token() }}';
@@ -169,7 +196,7 @@
             }).then((result) => {
                 if (result.isConfirmed) {
                     $.ajax({
-                        url: '{{ url('delete_district') }}',
+                        url: '{{ url('delete_panel_lawyer') }}',
                         method: 'delete',
                         data: {
                             id: id,
@@ -183,16 +210,16 @@
                                     'Something went wrong!',
                                     'error'
                                 )
-                                fetchAllDistrict();
+                                fetchAllPanelLawyers();
                                 toastr.error(response.Message);
                             } else if (response.code == 1) {
                                 console.log(response);
                                 Swal.fire(
                                     'Deleted!',
-                                    'District has been deleted.',
+                                    'Panel Lawyer has been deleted.',
                                     'success'
                                 )
-                                fetchAllDistrict();
+                                fetchAllPanelLawyers();
                                 toastr.success(response.Message);
                             }
                         }
