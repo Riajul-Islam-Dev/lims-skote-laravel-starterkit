@@ -195,7 +195,7 @@
             }).then((result) => {
                 if (result.isConfirmed) {
                     $.ajax({
-                        url: '{{ url('delete_panel_lawyer') }}',
+                        url: '{{ route('deletePanelLawyer') }}',
                         method: 'delete',
                         data: {
                             id: id,

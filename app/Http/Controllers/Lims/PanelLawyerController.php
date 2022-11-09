@@ -241,32 +241,19 @@ class PanelLawyerController extends Controller
         }
     }
 
-    // Delete user ajax request
-    public function deleteUser(Request $request)
+    // Delete Panel Lawyer ajax request
+    public function deletePanelLawyer(Request $request)
     {
-        $id = $request->id;
-        $delete_user_data = User::find($id);
-
-        $image_path = public_path() . $delete_user_data->avatar;  // Value is not URL but directory file path
-        if (File::exists($image_path)) {
-            if (File::delete($image_path)) {
-                User::destroy($id);
-                return response()->json([
-                    'isSuccess' => true,
-                    'Message' => 'User deleted successfully!',
-                    'code' => 1
-                ], 200); // Status code here
-            } else {
-                return response()->json([
-                    'isSuccess' => false,
-                    'Message' => 'Something went wrong!',
-                    'code' => 0
-                ], 200); // Status code here
-            }
+        if (PanelLawyer::destroy($request->id)) {
+            return response()->json([
+                'isSuccess' => true,
+                'Message' => 'Panel Lawyer deleted successfully!',
+                'code' => 1
+            ], 200); // Status code here
         } else {
             return response()->json([
                 'isSuccess' => false,
-                'Message' => 'No Avatar found!',
+                'Message' => 'Something went wrong!',
                 'code' => 0
             ], 200); // Status code here
         }
