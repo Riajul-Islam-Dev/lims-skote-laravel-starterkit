@@ -30,12 +30,13 @@ Route::group(['prefix' => '', 'middleware' => ['auth']], function () {
 
 // User
 Route::group(['prefix' => '', 'middleware' => ['auth']], function () {
-    Route::get('show_user', [UserController::class, 'showUser'])->name('showUser');
+    Route::get('index_user', [UserController::class, 'indexUser'])->name('indexUser');
     Route::get('fetch_all_user', [UserController::class, 'fetchAllUser'])->name('fetchAllUser');
     Route::post('save_user', [UserController::class, 'saveUser'])->name('saveUser');
     Route::get('edit_user', [UserController::class, 'editUser'])->name('editUser');
     Route::post('update_user', [UserController::class, 'updateUser'])->name('updateUser');
     Route::delete('delete_user', [UserController::class, 'deleteUser'])->name('deleteUser');
+    Route::get('show_user', [UserController::class, 'showUser'])->name('showUser');
 });
 
 // Role

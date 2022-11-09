@@ -206,5 +206,33 @@
                 }
             })
         });
+
+        // Show User ajax request
+        $(document).on('click', '.show_user', function(e) {
+            e.preventDefault();
+            let id = $(this).attr('id');
+            $.ajax({
+                url: '{{ route('showUser') }}',
+                method: 'get',
+                data: {
+                    id: id,
+                    _token: '{{ csrf_token() }}'
+                },
+                success: function(response) {
+                    // console.log(response)
+                    $(".user_avatar").attr('src', response.avatar);
+                    $(".user_role_name").text(response.role_name);
+                    $(".user_id").text(response.id);
+                    $(".user_name").text(response.name);
+                    $(".user_email").text(response.email);
+                    $(".user_dob").text(response.dob);
+                    if (response.status == 1) {
+                        $(".user_status").text("Active");
+                    } else {
+                        $(".user_status").text("Inactive");
+                    }
+                }
+            });
+        });
     });
 </script>

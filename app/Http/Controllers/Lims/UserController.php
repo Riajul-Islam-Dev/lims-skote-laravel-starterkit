@@ -16,7 +16,7 @@ use Validator;
 class UserController extends Controller
 {
     // User data table page view
-    public function showUser()
+    public function indexUser()
     {
         $show_role_data = Role::all();
         return view('Lims/user/show_user', compact("show_role_data"));
@@ -74,6 +74,7 @@ class UserController extends Controller
                 <td><div class="' . $role_name_badge_class . '">' . $role_name . '</div></td>
                 <td><div class="' . $status_badge_class . '">' . $data->status . '</div></td>
                 <td>
+                <a href="#" id="' . $data->id . '" class="btn btn-info waves-effect btn-label waves-light show_user" data-bs-toggle="modal" data-bs-target="#showUserModal"><i class="bx bx-user-circle label-icon"></i> View</a>
                 <a href="#" id="' . $data->id . '" class="btn btn-warning waves-effect btn-label waves-light edit_user" data-bs-toggle="modal" data-bs-target="#editUserModal"><i class="bx bx-pencil label-icon"></i> Edit</a>
                 <a href="#" id="' . $data->id . '" class="btn btn-danger waves-effect btn-label waves-light delete_user"><i class="bx bx-trash label-icon"></i> Delete</a>
                 </td>
@@ -255,5 +256,18 @@ class UserController extends Controller
                 'code' => 0
             ], 200); // Status code here
         }
+    }
+
+    // Show User ajax request
+    public function showUser(Request $request)
+    {
+        $id = $request->id;
+        $show_user_data = User::find($id);
+
+        $role_data = Role::find($show_user_data->role_id);
+
+        $show_user_data->role_name = $role_data->role_name;
+
+        return response()->json($show_user_data);
     }
 }

@@ -36,6 +36,9 @@
 
     <!-- Edit User Modal -->
     @include('Lims/user/edit_user_modal')
+
+    <!-- Show User Modal -->
+    @include('Lims/user/show_user_modal')
 @endsection
 
 @push('custom-scripts')

@@ -479,7 +479,7 @@
                         <div class="dropdown-menu" aria-labelledby="topnav-admin">
                             {{-- <a href="{{ route('posts.edit', ['id' => $post->id]) }}">Link</a> --}}
                             <a class="dropdown-item" href="{{ route('showModule') }}">{{ __('Modules') }}</a>
-                            <a class="dropdown-item" href="{{ route('showUser') }}">{{ __('Users') }}</a>
+                            <a class="dropdown-item" href="{{ route('indexUser') }}">{{ __('Users') }}</a>
                             <a class="dropdown-item" href="{{ route('showRole') }}">{{ __('Roles') }}</a>
                             <a class="dropdown-item"
                                 href="{{ route('showRoleSection') }}">{{ __('Role Sections') }}</a>
@@ -487,6 +487,21 @@
                             <a class="dropdown-item" href="{{ route('showMenu') }}">{{ __('Menus') }}</a>
                             <a class="dropdown-item"
                                 href="{{ route('showDepartment') }}">{{ __('Departments') }}</a>
+                            <a class="dropdown-item" href="{{ route('showCourt') }}">{{ __('Courts') }}</a>
+                            <a class="dropdown-item" href="{{ route('showDivision') }}">{{ __('Divisions') }}</a>
+                            <a class="dropdown-item" href="{{ route('showDistrict') }}">{{ __('Districts') }}</a>
+                        </div>
+                    </li>
+
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle arrow-none" href="#" id="topnav-panel-lawyer"
+                            role="button">
+                            <i class="bx bx-cog me-2"></i><span key="t-layouts">Panel Lawyers</span>
+                            <div class="arrow-down"></div>
+                        </a>
+                        <div class="dropdown-menu" aria-labelledby="topnav-panel-lawyer">
+                            <a class="dropdown-item"
+                                href="{{ route('indexPanelLawyer') }}">{{ __('Panel Lawyers') }}</a>
                         </div>
                     </li>
 
@@ -513,11 +528,9 @@
                             <div class="arrow-down"></div>
                         </a>
                         <div class="dropdown-menu" aria-labelledby="topnav-admin">
-                            <a class="dropdown-item" href="{{ route('showCourt') }}">{{ __('Courts') }}</a>
+                            {{-- <a class="dropdown-item" href="{{ route('showCourt') }}">{{ __('Courts') }}</a>
                             <a class="dropdown-item" href="{{ route('showDivision') }}">{{ __('Divisions') }}</a>
-                            <a class="dropdown-item" href="{{ route('showDistrict') }}">{{ __('Districts') }}</a>
-                            <a class="dropdown-item"
-                                href="{{ route('indexPanelLawyer') }}">{{ __('Panel Lawyers') }}</a>
+                            <a class="dropdown-item" href="{{ route('showDistrict') }}">{{ __('Districts') }}</a> --}}
                         </div>
                     </li>
                 </ul>
