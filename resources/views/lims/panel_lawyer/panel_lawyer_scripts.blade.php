@@ -121,16 +121,29 @@
                     _token: '{{ csrf_token() }}'
                 },
                 success: function(response) {
-                    // console.log(response)
-                    $("#e_user_id").val(id);
-                    $("#e_name").val(response.name);
-                    $("#e_email").val(response.email);
-                    $("#e_user_password").val("");
-                    $("#e_dob").val(response.dob);
-                    $("#avatar_show").html('<img src="' + response.avatar +
+                    console.log(response)
+                    $("#e_panel_lawyer_id").val(id);
+                    $("#e_panel_lawyer_name").val(response.user_name);
+                    $("#panel_lawyer_avatar").html('<img src="' + response.avatar +
                         '" width="100" class="img-fluid img-thumbnail">'
                     );
-                    $("#e_role_id").val(response.role_id);
+                    $("#e_father_name").val(response.father_name);
+                    $("#e_mother_name").val(response.mother_name);
+                    $("#e_contact_number").val(response.contact_number);
+                    $("#e_nationality").val(response.nationality);
+                    $("#e_religion").val(response.religion);
+                    $("#e_district_name").val(response.district_name);
+                    $("#e_date_of_enrollment").val(response.date_of_enrollment);
+                    $("#e_name_of_the_bar").val(response.name_of_the_bar);
+                    $("#e_membership_number").val(response.membership_number);
+                    $("#e_address_of_chamber").val(response.address_of_chamber);
+                    $("#e_address_of_residence").val(response.address_of_residence);
+                    $("#e_specialized_practicing_area").val(response
+                        .specialized_practicing_area);
+                    $("#e_professional_experience").val(response.professional_experience);
+                    $("#e_case_conducted").val(response.case_conducted);
+                    $("#e_references").val(response.references);
+                    $("#e_remarks").val(response.remarks);
                     if (response.status == 1) {
                         $("#e_status").attr("checked", true);
                     } else if (response.status == 0) {
@@ -140,11 +153,11 @@
             });
         });
 
-        // Update user ajax request
-        $(document).on('submit', '#edit_user_form', function(e) {
+        // Update Panel Lawyer ajax request
+        $(document).on('submit', '#edit_panel_lawyer_form', function(e) {
             e.preventDefault();
             var form = this;
-            $("#edit_user_btn_span").text('Updating...');
+            $("#edit_panel_lawyer_btn_span").text('Updating...');
             $.ajax({
                 url: $(form).attr('action'),
                 method: $(form).attr('method'),
@@ -165,16 +178,16 @@
                     } else if (data.code == 1) {
                         // console.log(data.Message)
                         $(form)[0].reset();
-                        $("#editUserModal").modal("hide");
+                        $("#editPanelLawyerModal").modal("hide");
                         Swal.fire(
                             'Added!',
-                            'User Edited Successfully!',
+                            'Panel Lawyer Edited Successfully!',
                             'success'
                         )
-                        fetchAllUsers();
+                        fetchAllPanelLawyers();
                         toastr.success(data.Message);
                     }
-                    $("#edit_user_btn_span").text('Update User');
+                    $("#edit_panel_lawyer_btn_span").text('Update Panel Lawyer');
                 },
             });
         });

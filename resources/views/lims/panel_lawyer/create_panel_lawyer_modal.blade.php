@@ -33,13 +33,13 @@
                         </div>
                         <div class="row my-2">
                             <div class="col-6">
-                                <x-lims.forms.input.label for="father_name" label="Father Name" star="*" />
+                                <x-lims.forms.input.label for="father_name" label="Father's Name" star="*" />
                                 <x-lims.forms.input.text name="father_name" id="father_name"
                                     placeholder="Father Name" />
                                 <span class="text-danger error-text father_name_error"></span>
                             </div>
                             <div class="col-6">
-                                <x-lims.forms.input.label for="mother_name" label="Mother Name" star="*" />
+                                <x-lims.forms.input.label for="mother_name" label="Mother's Name" star="*" />
                                 <x-lims.forms.input.text name="mother_name" id="mother_name"
                                     placeholder="Mother Name" />
                                 <span class="text-danger error-text mother_name_error"></span>

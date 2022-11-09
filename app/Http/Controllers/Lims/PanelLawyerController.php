@@ -161,67 +161,77 @@ class PanelLawyerController extends Controller
         }
     }
 
-    // handle edit an user ajax request
-    public function editUser(Request $request)
+    // handle Panel Lawyer edit ajax request
+    public function editPanelLawyer(Request $request)
     {
         $id = $request->id;
-        $edit_user_data = User::find($id);
+        $edit_panel_lawyer_data = PanelLawyer::find($id);
+        $user_data = User::find($edit_panel_lawyer_data->user_id);
+        $edit_panel_lawyer_data->user_name = $user_data->name;
+        $edit_panel_lawyer_data->avatar = $user_data->avatar;
 
-        return response()->json($edit_user_data);
+        return response()->json($edit_panel_lawyer_data);
     }
 
-    // update user ajax request
-    public function updateUser(Request $request)
+    // update Panel Lawyer ajax request
+    public function updatePanelLawyer(Request $request)
     {
         $validator = Validator::make($request->all(), [
-            'e_name' => ['required', 'string', 'max:255'],
-            'e_email' => ['required', 'string', 'email', 'max:255'],
-            'e_user_password' => ['nullable', 'string', 'min:6'],
-            'e_dob' => ['required', 'date', 'before:today'],
-            'e_avatar' => ['nullable', 'image', 'mimes:jpg,jpeg,png', 'max:1024'],
-            'e_role_id' => ['required', 'string', 'max:255'],
-            // 'e_status' => ['string', 'max:255'],
+            'e_panel_lawyer_id' => ['required', 'string', 'max:255'],
+            'e_father_name' => ['required', 'string', 'max:255'],
+            'e_mother_name' => ['required', 'string', 'max:255'],
+            'e_contact_number' => ['required', 'string', 'max:255'],
+            'e_nationality' => ['required', 'string', 'max:255'],
+            'e_religion' => ['required', 'string', 'max:255'],
+            'e_district_name' => ['required', 'string', 'max:255'],
+            'e_date_of_enrollment' => ['required', 'date', 'before:today'],
+            'e_name_of_the_bar' => ['required', 'string', 'max:255'],
+            'e_membership_number' => ['required', 'string', 'max:255'],
+            'e_address_of_chamber' => ['required', 'string', 'max:255'],
+            'e_address_of_residence' => ['required', 'string', 'max:255'],
+            'e_specialized_practicing_area' => ['required', 'string', 'max:255'],
+            'e_professional_experience' => ['required', 'string', 'max:255'],
+            'e_case_conducted' => ['required', 'string', 'max:255'],
+            'e_references' => ['required', 'string', 'max:255'],
+            'e_remarks' => ['required', 'string', 'max:255'],
+            // 'e_status' => ['required', 'string'],
         ]);
 
         if ($validator->passes()) {
 
-            $id = $request->e_user_id;
-            $user_old_data = User::find($id);
+            $id = $request->e_panel_lawyer_id;
+            $panel_lawyer_old_data = PanelLawyer::find($id);
 
-            if (!empty($request->e_avatar)) {
-                $image_path = public_path() . $user_old_data->avatar;  // Value is not URL but directory file path
-                if (File::exists($image_path)) {
-                    File::delete($image_path);
-                }
-                $avatar = $request->e_avatar;
-                $avatarName = time() . '.' . $avatar->getClientOriginalExtension();
-                $avatarPath = public_path('/images/');
-                $avatar->move($avatarPath, $avatarName);
-                $user_old_data->avatar = "/images/" . $avatarName;
-            }
-
-            if (!empty($request->e_user_password)) {
-                $user_old_data->password = Hash::make($request->e_user_password);
-            }
-
-            $user_old_data->name = $request->e_name;
-            $user_old_data->email = $request->e_email;
-            $user_old_data->dob = date('Y-m-d', strtotime($request->e_dob));
-            $user_old_data->role_id = $request->e_role_id;
+            $panel_lawyer_old_data->father_name = $request->e_father_name;
+            $panel_lawyer_old_data->mother_name = $request->e_mother_name;
+            $panel_lawyer_old_data->contact_number = $request->e_contact_number;
+            $panel_lawyer_old_data->nationality = $request->e_nationality;
+            $panel_lawyer_old_data->religion = $request->e_religion;
+            $panel_lawyer_old_data->district_name = $request->e_district_name;
+            $panel_lawyer_old_data->date_of_enrollment = date('Y-m-d', strtotime($request->e_date_of_enrollment));
+            $panel_lawyer_old_data->name_of_the_bar = $request->e_name_of_the_bar;
+            $panel_lawyer_old_data->membership_number = $request->e_membership_number;
+            $panel_lawyer_old_data->address_of_chamber = $request->e_address_of_chamber;
+            $panel_lawyer_old_data->address_of_residence = $request->e_address_of_residence;
+            $panel_lawyer_old_data->specialized_practicing_area = $request->e_specialized_practicing_area;
+            $panel_lawyer_old_data->professional_experience = $request->e_professional_experience;
+            $panel_lawyer_old_data->case_conducted = $request->e_case_conducted;
+            $panel_lawyer_old_data->references = $request->e_references;
+            $panel_lawyer_old_data->remarks = $request->e_remarks;
 
             if ($request->e_status == "on") {
                 $request->e_status = "1";
             } else {
                 $request->e_status = "0";
             }
-            $user_old_data->status = $request->e_status;
+            $panel_lawyer_old_data->status = $request->e_status;
 
-            $query = $user_old_data->save();
+            $query = $panel_lawyer_old_data->save();
 
             if ($query) {
                 return response()->json([
                     'isSuccess' => true,
-                    'Message' => "User Details Updated successfully!",
+                    'Message' => "Panel Lawyer Details Updated successfully!",
                     'code' => 1
                 ], 200); // Status code here
             } else {
