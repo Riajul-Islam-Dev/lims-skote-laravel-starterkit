@@ -105,7 +105,6 @@
                         toastr.success(data.Message);
                     }
                     $("#add_panel_lawyer_btn_span").text('Create Panel Lawyer');
-
                 },
             });
         });
@@ -226,6 +225,48 @@
                     });
                 }
             })
+        });
+
+        // Show Panel Lawyer ajax request
+        $(document).on('click', '.show_panel_lawyer', function(e) {
+            e.preventDefault();
+            let id = $(this).attr('id');
+            $.ajax({
+                url: '{{ route('showPanelLawyer') }}',
+                method: 'get',
+                data: {
+                    id: id,
+                    _token: '{{ csrf_token() }}'
+                },
+                success: function(response) {
+                    console.log(response)
+                    $(".pl_avatar").attr('src', response.avatar);
+                    $(".pl_name").text(response.name);
+                    $(".pl_email").text(response.email);
+                    $(".pl_contact_number").text(response.contact_number);
+                    $(".pl_dob").text(response.dob);
+                    if (response.status == 1) {
+                        $(".pl_status").text("Active");
+                    } else {
+                        $(".pl_status").text("Inactive");
+                    }
+                    $(".pl_address_of_residence").text(response.address_of_residence);
+                    $(".pl_father_name").text(response.father_name);
+                    $(".pl_mother_name").text(response.mother_name);
+                    $(".pl_nationality").text(response.nationality);
+                    $(".pl_religion").text(response.religion);
+                    $(".pl_date_of_enrollment").text(response.date_of_enrollment);
+                    $(".pl_name_of_the_bar").text(response.name_of_the_bar);
+                    $(".pl_membership_number").text(response.membership_number);
+                    $(".pl_address_of_chamber").text(response.address_of_chamber);
+                    $(".pl_specialized_practicing_area").text(response
+                        .specialized_practicing_area);
+                    $(".pl_professional_experience").text(response.professional_experience);
+                    $(".pl_case_conducted").text(response.case_conducted);
+                    $(".pl_references").text(response.references);
+                    $(".pl_remarks").text(response.remarks);
+                }
+            });
         });
     });
 </script>

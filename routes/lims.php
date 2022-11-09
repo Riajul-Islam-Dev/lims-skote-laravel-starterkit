@@ -140,11 +140,12 @@ Route::group(['prefix' => '', 'middleware' => ['auth']], function () {
 
 // Panel Lawyer
 Route::group(['prefix' => '', 'middleware' => ['auth']], function () {
-    Route::get('show_panel_lawyer', [PanelLawyerController::class, 'showPanelLawyer'])->name('showPanelLawyer');
+    Route::get('index_panel_lawyer', [PanelLawyerController::class, 'indexPanelLawyer'])->name('indexPanelLawyer');
     Route::get('fetch_all_panel_lawyer', [PanelLawyerController::class, 'fetchAllPanelLawyer'])->name('fetchAllPanelLawyer');
     Route::post('save_panel_lawyer', [PanelLawyerController::class, 'savePanelLawyer'])->name('savePanelLawyer');
     Route::get('edit_panel_lawyer', [PanelLawyerController::class, 'editPanelLawyer'])->name('editPanelLawyer');
     Route::post('update_panel_lawyer', [PanelLawyerController::class, 'updatePanelLawyer'])->name('updatePanelLawyer');
     Route::delete('delete_panel_lawyer', [PanelLawyerController::class, 'deletePanelLawyer'])->name('deletePanelLawyer');
     Route::get('get_user_avatar', [PanelLawyerController::class, 'getUserAvatar'])->name('getUserAvatar');
+    Route::get('show_panel_lawyer', [PanelLawyerController::class, 'showPanelLawyer'])->name('showPanelLawyer');
 });

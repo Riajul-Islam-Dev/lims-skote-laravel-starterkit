@@ -36,6 +36,9 @@
 
     <!-- Edit Panel Lawyer Modal -->
     @include('Lims/panel_lawyer/edit_panel_lawyer_modal')
+
+    <!-- Show Panel Lawyer Modal -->
+    @include('Lims/panel_lawyer/show_panel_lawyer_modal')
 @endsection
 
 @push('custom-scripts')

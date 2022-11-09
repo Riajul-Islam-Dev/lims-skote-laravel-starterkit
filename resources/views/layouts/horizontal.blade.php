@@ -517,7 +517,7 @@
                             <a class="dropdown-item" href="{{ route('showDivision') }}">{{ __('Divisions') }}</a>
                             <a class="dropdown-item" href="{{ route('showDistrict') }}">{{ __('Districts') }}</a>
                             <a class="dropdown-item"
-                                href="{{ route('showPanelLawyer') }}">{{ __('Panel Lawyers') }}</a>
+                                href="{{ route('indexPanelLawyer') }}">{{ __('Panel Lawyers') }}</a>
                         </div>
                     </li>
                 </ul>

@@ -13,7 +13,7 @@ use Validator;
 class PanelLawyerController extends Controller
 {
     // Panel Lawyer data table page view
-    public function showPanelLawyer()
+    public function indexPanelLawyer()
     {
         $condition = ['role_id' => 3];
         $show_user_data = User::where($condition)->get();
@@ -34,24 +34,9 @@ class PanelLawyerController extends Controller
                     <th>ID</th>
                     <th>Avatar</th>
                     <th>User Name</th>
-                    <th>User Email</th>
-                    <th>Date of Birth</th>
-                    <th>Father Name</th>
-                    <th>Mother Name</th>
-                    <th>Contact Number</th>
-                    <th>Nationality</th>
-                    <th>Religion</th>
                     <th>District Name</th>
-                    <th>Date of Enrollment</th>
                     <th>Name of the Bar</th>
                     <th>Membership Number</th>
-                    <th>Address of Chamber</th>
-                    <th>Address of Residence</th>
-                    <th>Specialized Practicing Area</th>
-                    <th>Professional Experience</th>
-                    <th>Cae Conducted</th>
-                    <th>References</th>
-                    <th>Remarks</th>
                     <th>Status</th>
                     <th>Action</th>
                 </tr>
@@ -81,26 +66,12 @@ class PanelLawyerController extends Controller
                     </div>
                 </td>
                 <td>' . $user_details->name . ' </td>
-                <td>' . $user_details->email . '</td>
-                <td>' . $user_details->dob . '</td>
-                <td>' . $data->father_name . '</td>
-                <td>' . $data->mother_name . '</td>
-                <td>' . $data->contact_number . '</td>
-                <td>' . $data->nationality . '</td>
-                <td>' . $data->religion . '</td>
                 <td>' . $data->district_name . '</td>
-                <td>' . $data->date_of_enrollment . '</td>
                 <td>' . $data->name_of_the_bar . '</td>
                 <td>' . $data->membership_number . '</td>
-                <td>' . $data->address_of_chamber . '</td>
-                <td>' . $data->address_of_residence . '</td>
-                <td>' . $data->specialized_practicing_area . '</td>
-                <td>' . $data->professional_experience . '</td>
-                <td>' . $data->case_conducted . '</td>
-                <td>' . $data->references . '</td>
-                <td>' . $data->remarks . '</td>
                 <td><div class="' . $status_badge_class . '">' . $data->status . '</div></td>
                 <td>
+                <a href="#" id="' . $data->id . '" class="btn btn-info waves-effect btn-label waves-light show_panel_lawyer" data-bs-toggle="modal" data-bs-target="#showPanelLawyerModal"><i class="bx bx-user-circle label-icon"></i> View</a>
                 <a href="#" id="' . $data->id . '" class="btn btn-warning waves-effect btn-label waves-light edit_panel_lawyer" data-bs-toggle="modal" data-bs-target="#editPanelLawyerModal"><i class="bx bx-pencil label-icon"></i> Edit</a>
                 <a href="#" id="' . $data->id . '" class="btn btn-danger waves-effect btn-label waves-light delete_panel_lawyer"><i class="bx bx-trash label-icon"></i> Delete</a>
                 </td>
@@ -308,5 +279,20 @@ class PanelLawyerController extends Controller
         $user_data = User::find($id);
 
         return response()->json($user_data);
+    }
+
+    // show Panel Lawyer ajax request
+    public function showPanelLawyer(Request $request)
+    {
+        $id = $request->id;
+        $panel_lawyer_data = PanelLawyer::find($id);
+        $user_data = User::find($panel_lawyer_data->user_id);
+
+        $panel_lawyer_data->name = $user_data->name;
+        $panel_lawyer_data->email = $user_data->email;
+        $panel_lawyer_data->dob = $user_data->dob;
+        $panel_lawyer_data->avatar = $user_data->avatar;
+
+        return response()->json($panel_lawyer_data);
     }
 }
