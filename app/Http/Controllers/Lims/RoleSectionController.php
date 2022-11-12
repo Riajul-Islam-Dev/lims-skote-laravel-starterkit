@@ -14,16 +14,14 @@ class RoleSectionController extends Controller
     {
         $show_role_section_data = RoleSection::all();
         $department_data = Department::all();
-        // $show_role_section_data = RoleSection::paginate(3);
-        // $show_role_section_data = RoleSection::simplePaginate(3);
+
         return view('Lims/role_section/show_role_section', compact('show_role_section_data', 'department_data'));
     }
 
     public function addRoleSection()
     {
         $department_data = Department::all();
-        // $department_data = Department::pluck('department_name')->toArray();
-        // dd($department_data);
+
         return view('Lims/role_section/add_role_section', compact('department_data'));
     }
 

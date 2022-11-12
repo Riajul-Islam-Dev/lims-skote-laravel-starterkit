@@ -1,8 +1,7 @@
 <div>
-    <div class="input-group" id="datepicker">
-        <input type="text" {{ $attributes->merge(['class' => 'form-control placeholder="dd-mm-yyyy"']) }}
-            data-date-format="dd-mm-yyyy" data-date-container='#datepicker' data-date-end-date="0d"
-            data-provide="datepicker">
+    <div class="input-group" id="{{ $attributes['id'] }}">
+        <input type="text" {{ $attributes->merge(['class' => 'form-control']) }} data-date-format="dd"
+            data-date-container='#{{ $attributes['id'] }}' data-provide="datepicker" data-date-autoclose="true">
         <span class="input-group-text"><i class="mdi mdi-calendar"></i></span>
     </div>
 </div>

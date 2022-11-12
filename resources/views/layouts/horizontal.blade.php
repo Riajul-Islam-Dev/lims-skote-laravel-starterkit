@@ -528,9 +528,8 @@
                             <div class="arrow-down"></div>
                         </a>
                         <div class="dropdown-menu" aria-labelledby="topnav-admin">
-                            {{-- <a class="dropdown-item" href="{{ route('showCourt') }}">{{ __('Courts') }}</a>
-                            <a class="dropdown-item" href="{{ route('showDivision') }}">{{ __('Divisions') }}</a>
-                            <a class="dropdown-item" href="{{ route('showDistrict') }}">{{ __('Districts') }}</a> --}}
+                            <a class="dropdown-item" href="{{ route('indexMeeting') }}">{{ __('Meetings') }}</a>
+                            <a class="dropdown-item" href="{{ route('indexBilling') }}">{{ __('Billings') }}</a>
                         </div>
                     </li>
                 </ul>

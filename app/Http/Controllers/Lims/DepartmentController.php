@@ -12,8 +12,7 @@ class DepartmentController extends Controller
     public function showDepartment()
     {
         $show_department_data = Department::all();
-        // $show_department_data = Department::paginate(3);
-        // $show_department_data = Department::simplePaginate(3);
+
         return view('Lims/department/show_department', compact('show_department_data'));
     }
 

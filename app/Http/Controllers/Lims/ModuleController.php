@@ -12,11 +12,9 @@ class ModuleController extends Controller
     public function showModule()
     {
         $show_module_data = Module::all();
-        // $show_module_data = Module::paginate(3);
 
-        // $show_module_data = Module::simplePaginate(3);
         return view('Lims/module/show_module', compact('show_module_data'));
-        // return view('Lims/module/show_module');
+
     }
 
     public function addModule()

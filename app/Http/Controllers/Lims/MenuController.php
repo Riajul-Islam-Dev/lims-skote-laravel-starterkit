@@ -13,17 +13,14 @@ class MenuController extends Controller
     public function showMenu()
     {
         $show_menu_data = Menu::all();
-        // $show_menu_data = Menu::paginate(3);
 
-        // $show_menu_data = Menu::simplePaginate(3);
         return view('Lims/menu/show_menu', compact('show_menu_data'));
-        // return view('Lims/menu/show_menu');
     }
 
     public function addMenu()
     {
         $module_data = Module::pluck('name')->toArray();
-        // dd($module_data);
+
         return view('Lims/menu/add_menu', compact('module_data'));
     }
 

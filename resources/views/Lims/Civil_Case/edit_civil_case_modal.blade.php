@@ -75,7 +75,7 @@
                             <div class="col-6">
                                 <x-lims.forms.input.label for="e_case_filling_date" label="Case Filling Date"
                                     star="*" />
-                                <x-lims.forms.input.date name="e_case_filling_date" id="e_case_filling_date"
+                                <x-lims.forms.input.datepicker name="e_case_filling_date" id="e_case_filling_date"
                                     placeholder="Case Filling Date" />
                                 <span class="text-danger error-text e_case_filling_date_error"></span>
                             </div>

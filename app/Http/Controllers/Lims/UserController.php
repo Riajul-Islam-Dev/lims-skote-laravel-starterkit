@@ -53,7 +53,7 @@ class UserController extends Controller
                     $status_badge_class = 'badge bg-danger';
                 }
 
-                $role_name = '';
+                $role_name = 'Data not found';
                 foreach ($show_role_data as $role_data) {
                     if ($role_data->id == $data->role_id) {
                         $role_name = $role_data->role_name;

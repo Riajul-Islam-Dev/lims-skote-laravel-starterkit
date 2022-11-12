@@ -12,8 +12,7 @@ class RightController extends Controller
     public function showRight()
     {
         $show_right_data = Right::all();
-        // $show_right_data = Right::paginate(3);
-        // $show_right_data = Right::simplePaginate(3);
+
         return view('Lims/right/show_right', compact('show_right_data'));
     }
 

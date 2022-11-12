@@ -34,7 +34,8 @@
                             </div>
                             <div class="col-6">
                                 <x-lims.forms.input.label for="dob" label="Date of Birth" star="*" />
-                                <x-lims.forms.input.date name="dob" id="dob" placeholder="Date of Birth" />
+                                <x-lims.forms.input.datepicker name="dob" id="dob"
+                                    placeholder="Date of Birth" />
                                 <span class="text-danger error-text dob_error"></span>
                             </div>
                         </div>

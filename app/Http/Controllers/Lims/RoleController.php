@@ -15,8 +15,7 @@ class RoleController extends Controller
     {
         $show_role_data = Role::all();
         $role_section_data = RoleSection::all();
-        // $show_role_data = Role::paginate(3);
-        // $show_role_data = Role::simplePaginate(3);
+
         return view('Lims/role/show_role', compact('show_role_data', 'role_section_data'));
     }
 
@@ -24,7 +23,7 @@ class RoleController extends Controller
     {
         $role_section_data = RoleSection::all();
         $department_data = Department::all();
-        // dd($role_section_data);
+
         return view('Lims/role/add_role', compact('role_section_data', 'department_data'));
     }
 

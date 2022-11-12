@@ -76,7 +76,7 @@
                             <div class="col-6">
                                 <x-lims.forms.input.label for="date_of_enrollment" label="Date of Enrollment"
                                     star="*" />
-                                <x-lims.forms.input.date name="date_of_enrollment" id="date_of_enrollment"
+                                <x-lims.forms.input.datepicker name="date_of_enrollment" id="date_of_enrollment"
                                     placeholder="Date of Enrollment" />
                                 <span class="text-danger error-text date_of_enrollment_error"></span>
                             </div>

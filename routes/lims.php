@@ -15,6 +15,8 @@ use App\Http\Controllers\Lims\CourtController;
 use App\Http\Controllers\Lims\DivisionController;
 use App\Http\Controllers\Lims\DistrictController;
 use App\Http\Controllers\Lims\PanelLawyerController;
+use App\Http\Controllers\Lims\MeetingController;
+use App\Http\Controllers\Lims\BillingController;
 
 // LIMS Routes
 
@@ -149,4 +151,26 @@ Route::group(['prefix' => '', 'middleware' => ['auth']], function () {
     Route::delete('delete_panel_lawyer', [PanelLawyerController::class, 'deletePanelLawyer'])->name('deletePanelLawyer');
     Route::get('get_user_avatar', [PanelLawyerController::class, 'getUserAvatar'])->name('getUserAvatar');
     Route::get('show_panel_lawyer', [PanelLawyerController::class, 'showPanelLawyer'])->name('showPanelLawyer');
+});
+
+// Meeting
+Route::group(['prefix' => '', 'middleware' => ['auth']], function () {
+    Route::get('index_meeting', [MeetingController::class, 'indexMeeting'])->name('indexMeeting');
+    Route::get('fetch_all_meeting', [MeetingController::class, 'fetchAllMeeting'])->name('fetchAllMeeting');
+    Route::post('save_meeting', [MeetingController::class, 'saveMeeting'])->name('saveMeeting');
+    Route::get('edit_meeting', [MeetingController::class, 'editMeeting'])->name('editMeeting');
+    Route::post('update_meeting', [MeetingController::class, 'updateMeeting'])->name('updateMeeting');
+    Route::delete('delete_meeting', [MeetingController::class, 'deleteMeeting'])->name('deleteMeeting');
+    Route::get('show_meeting', [MeetingController::class, 'showMeeting'])->name('showMeeting');
+});
+
+// Billing
+Route::group(['prefix' => '', 'middleware' => ['auth']], function () {
+    Route::get('index_billing', [BillingController::class, 'indexBilling'])->name('indexBilling');
+    Route::get('fetch_all_billing', [BillingController::class, 'fetchAllBilling'])->name('fetchAllBilling');
+    Route::post('save_billing', [BillingController::class, 'saveBilling'])->name('saveBilling');
+    Route::get('edit_billing', [BillingController::class, 'editBilling'])->name('editBilling');
+    Route::post('update_billing', [BillingController::class, 'updateBilling'])->name('updateBilling');
+    Route::delete('delete_billing', [BillingController::class, 'deleteBilling'])->name('deleteBilling');
+    Route::get('show_billing', [BillingController::class, 'showBilling'])->name('showBilling');
 });

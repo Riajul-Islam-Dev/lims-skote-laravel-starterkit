@@ -51,7 +51,7 @@ class PanelLawyerController extends Controller
                     $status_badge_class = 'badge bg-danger';
                 }
 
-                $user_details = '';
+                $user_details = 'Data not found';
                 foreach ($show_user_data as $user_data) {
                     if ($user_data->id == $data->user_id && $user_data->role_id == 3) {
                         $user_details = $user_data;

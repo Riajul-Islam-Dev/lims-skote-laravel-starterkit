@@ -4,10 +4,11 @@
     <script src="{{ URL::asset('assets/libs/metismenu/metismenu.min.js') }}"></script>
     <script src="{{ URL::asset('assets/libs/simplebar/simplebar.min.js') }}"></script>
     <script src="{{ URL::asset('assets/libs/node-waves/node-waves.min.js') }}"></script>
-    <!-- Select2 -->
-    <script src="{{ URL::asset('/assets/libs/select2/select2.min.js') }}"></script>
+
     <!-- form advanced init -->
     <script src="{{ URL::asset('assets/js/pages/form-advanced.init.js') }}"></script>
+    <!-- Select2 -->
+    <script src="{{ URL::asset('/assets/libs/select2/select2.min.js') }}"></script>
 
     <script>
         $('#change-password').on('submit', function(event) {

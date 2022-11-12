@@ -1,7 +1,7 @@
 @extends('layouts.master')
 
 @section('title')
-    Show District
+    Show Meeting
 @endsection
 
 @push('custom-css')
@@ -22,23 +22,26 @@
             <a href="/">LIMS</a>
         @endslot
         @slot('title')
-            District
+            Show Meeting
         @endslot
     @endcomponent
 
-    <!-- District Data Table -->
+    <!-- Meeting Data Table -->
     <div>
-        @include('Lims/district/district_data_table')
+        @include('Lims/meeting/meeting_data_table')
     </div>
 
-    <!-- Add District Modal -->
-    @include('Lims/district/create_district_modal')
+    <!-- Add Meeting Modal -->
+    @include('Lims/meeting/create_meeting_modal')
 
-    <!-- Edit District Modal -->
-    @include('Lims/district/edit_district_modal')
+    {{-- <!-- Edit Meeting Modal -->
+    @include('Lims/meeting/edit_meeting_modal') --}}
+
+    <!-- Show Meeting Modal -->
+    @include('Lims/meeting/show_meeting_modal')
 @endsection
 
 @push('custom-scripts')
     <!-- Developer's JS file -->
-    @include('Lims.district.district_scripts')
+    @include('Lims.meeting.meeting_scripts')
 @endpush
