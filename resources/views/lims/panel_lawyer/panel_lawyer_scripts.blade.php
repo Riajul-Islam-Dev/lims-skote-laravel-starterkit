@@ -36,15 +36,15 @@
             });
         });
 
-        fetchAllMeetings();
+        fetchAllPanelLawyers();
 
-        // Fetch all Meeting ajax request
-        function fetchAllMeetings() {
+        // Fetch all Panel Lawyer ajax request
+        function fetchAllPanelLawyers() {
             $.ajax({
-                url: '{{ route('fetchAllMeeting') }}',
+                url: '{{ route('fetchAllPanelLawyer') }}',
                 method: 'get',
                 success: function(response) {
-                    $("#show_all_meetings").html(response);
+                    $("#show_all_panel_lawyers").html(response);
                     var table = $('#datatable-buttons').DataTable({
                         // lengthChange: false,
                         lengthMenu: [
