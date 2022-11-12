@@ -13,43 +13,90 @@
                                             <hr class="mt-0 mb-4">
                                             <div class="row pt-1">
                                                 <div class="col-6 mb-3">
-                                                    <h6>ID</h6>
-                                                    <p class="text-muted meeting_id"></p>
+                                                    <div class="row">
+                                                        <div class="col-6">
+                                                            <h6>ID</h6>
+                                                        </div>
+                                                        <div class="col-6">
+                                                            <p class="text-muted meeting_id"></p>
+                                                        </div>
+                                                    </div>
                                                 </div>
                                                 <div class="col-6 mb-3">
-                                                    <h6>Division</h6>
-                                                    <p class="text-muted meeting_Division"></p>
-                                                </div>
-                                            </div>
-                                            <div class="row pt-1">
-                                                <div class="col-6 mb-3">
-                                                    <h6>District</h6>
-                                                    <p class="text-muted meeting_District"></p>
-                                                </div>
-                                                <div class="col-6 mb-3">
-                                                    <h6>Start Date</h6>
-                                                    <p class="text-muted meeting_start_date"></p>
-                                                </div>
-                                            </div>
-                                            <div class="row pt-1">
-                                                <div class="col-6 mb-3">
-                                                    <h6>End Date</h6>
-                                                    <p class="text-muted meeting_end_date"></p>
-                                                </div>
-                                                <div class="col-6 mb-3">
-                                                    <h6>Month</h6>
-                                                    <p class="text-muted meeting_month"></p>
+                                                    <div class="row">
+                                                        <div class="col-6">
+                                                            <h6>Division</h6>
+                                                        </div>
+                                                        <div class="col-6">
+                                                            <p class="text-muted meeting_Division"></p>
+                                                        </div>
+                                                    </div>
                                                 </div>
                                             </div>
                                             <div class="row pt-1">
                                                 <div class="col-6 mb-3">
-                                                    <h6>Year</h6>
-                                                    <p class="text-muted meeting_year"></p>
+                                                    <div class="row">
+                                                        <div class="col-6">
+                                                            <h6>District</h6>
+                                                        </div>
+                                                        <div class="col-6">
+                                                            <p class="text-muted meeting_District"></p>
+                                                        </div>
+                                                    </div>
                                                 </div>
                                                 <div class="col-6 mb-3">
-                                                    <h6>Meeting Held Status</h6>
-                                                    <p class="text-muted meeting_status"></p>
-                                                    <p class="meeting_status"></p>
+                                                    <div class="row">
+                                                        <div class="col-6">
+                                                            <h6>Start Date</h6>
+                                                        </div>
+                                                        <div class="col-6">
+                                                            <p class="text-muted meeting_start_date"></p>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="row pt-1">
+                                                <div class="col-6 mb-3">
+                                                    <div class="row">
+                                                        <div class="col-6">
+                                                            <h6>End Date</h6>
+                                                        </div>
+                                                        <div class="col-6">
+                                                            <p class="text-muted meeting_end_date"></p>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="col-6 mb-3">
+                                                    <div class="row">
+                                                        <div class="col-6">
+                                                            <h6>Month</h6>
+                                                        </div>
+                                                        <div class="col-6">
+                                                            <p class="text-muted meeting_month"></p>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="row pt-1">
+                                                <div class="col-6 mb-3">
+                                                    <div class="row">
+                                                        <div class="col-6">
+                                                            <h6>Year</h6>
+                                                        </div>
+                                                        <div class="col-6">
+                                                            <p class="text-muted meeting_year"></p>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="col-6 mb-3">
+                                                    <div class="row">
+                                                        <div class="col-6">
+                                                            <h6>Meeting Held Status</h6>
+                                                        </div>
+                                                        <div class="col-6">
+                                                            <p class="text-muted meeting_status"></p>
+                                                        </div>
+                                                    </div>
                                                 </div>
                                             </div>
                                             <button type="button"

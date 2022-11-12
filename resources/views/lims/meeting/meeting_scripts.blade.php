@@ -207,12 +207,12 @@
             })
         });
 
-        // Show User ajax request
-        $(document).on('click', '.show_user', function(e) {
+        // Show Meeting ajax request
+        $(document).on('click', '.show_meeting', function(e) {
             e.preventDefault();
             let id = $(this).attr('id');
             $.ajax({
-                url: '{{ route('showUser') }}',
+                url: '{{ route('showMeeting') }}',
                 method: 'get',
                 data: {
                     id: id,
@@ -220,17 +220,14 @@
                 },
                 success: function(response) {
                     // console.log(response)
-                    $(".user_avatar").attr('src', response.avatar);
-                    $(".user_role_name").text(response.role_name);
-                    $(".user_id").text(response.id);
-                    $(".user_name").text(response.name);
-                    $(".user_email").text(response.email);
-                    $(".user_dob").text(response.dob);
-                    if (response.status == 1) {
-                        $(".user_status").text("Active");
-                    } else {
-                        $(".user_status").text("Inactive");
-                    }
+                    $(".meeting_id").text(response.id);
+                    $(".meeting_Division").text(response.division);
+                    $(".meeting_District").text(response.district);
+                    $(".meeting_start_date").text(response.start_date);
+                    $(".meeting_end_date").text(response.end_date);
+                    $(".meeting_month").text(response.month);
+                    $(".meeting_year").text(response.year);
+                    $(".meeting_status").text(response.status);
                 }
             });
         });

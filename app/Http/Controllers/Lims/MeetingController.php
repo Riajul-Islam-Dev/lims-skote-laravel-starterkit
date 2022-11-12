@@ -275,10 +275,33 @@ class MeetingController extends Controller
     {
         $id = $request->id;
         $show_meeting_data = Meeting::find($id);
+        $division_data = Division::all();
+        $district_data = District::all();
+        $month_data = Month::all();
 
-        // $role_data = Role::find($show_meeting_data->role_id);
+        if ($show_meeting_data->status == 1) {
+            $show_meeting_data->status = "Active";
+        } else {
+            $show_meeting_data->status = "Inactive";
+        }
 
-        // $show_meeting_data->role_name = $role_data->role_name;
+        foreach ($division_data as $division_data_individual) {
+            if ($show_meeting_data->division == $division_data_individual->division_code) {
+                $show_meeting_data->division = $division_data_individual->division_name;
+            }
+        }
+
+        foreach ($district_data as $district_data_individual) {
+            if ($show_meeting_data->district == $district_data_individual->district_code) {
+                $show_meeting_data->district = $district_data_individual->district_name;
+            }
+        }
+
+        foreach ($month_data as $month_data_individual) {
+            if ($show_meeting_data->month == $month_data_individual->month_code) {
+                $show_meeting_data->month = $month_data_individual->month_name;
+            }
+        }
 
         return response()->json($show_meeting_data);
     }
