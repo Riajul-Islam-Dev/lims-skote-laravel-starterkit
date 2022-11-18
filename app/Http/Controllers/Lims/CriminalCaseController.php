@@ -4,9 +4,10 @@ namespace App\Http\Controllers\lims;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
+use App\Models\Lims\CriminalCaseLog;
 use App\Models\Lims\CriminalCase;
 use Validator;
-
+use Illuminate\Support\Facades\Auth;
 
 class CriminalCaseController extends Controller
 {
@@ -38,6 +39,7 @@ class CriminalCaseController extends Controller
                     <th>Case Filling Date</th>
                     <th>Assigned Lawyer Name</th>
                     <th>Case Created By</th>
+                    <th>Case Updated By</th>
                     <th>Admin Approval</th>
                     <th>Document Status</th>
                     <th>Status</th>
@@ -46,6 +48,14 @@ class CriminalCaseController extends Controller
             </thead>
             <tbody>';
             foreach ($show_criminal_case_data as $key => $data) {
+                if (CriminalCaseLog::where('case_id', $data->id)->exists()) {
+                    $data_log = CriminalCaseLog::where('case_id', '=', $data->id)->orderBy('updated_at', 'desc')->first();
+
+                    $data = $data_log;
+                    $data->id = $data->case_id;
+                } else {
+                    $data->case_updated_by = "N/A";
+                }
                 if ($data->admin_approval == 1) {
                     $data->admin_approval = "Approved";
                     $admin_approval_badge_class = 'badge bg-info';
@@ -80,6 +90,7 @@ class CriminalCaseController extends Controller
                 <td>' . $data->case_filling_date . '</td>
                 <td>' . $data->assigned_lawyer_name . '</td>
                 <td>' . $data->case_created_by . '</td>
+                <td>' . $data->case_updated_by . '</td>
                 <td><div class="' . $admin_approval_badge_class . '">' . $data->admin_approval . '</div></td>
                 <td><div class="' . $document_status_badge_class . '">' . $data->document_status . '</div></td>
                 <td><div class="' . $status_badge_class . '">' . $data->status . '</div></td>
@@ -110,7 +121,6 @@ class CriminalCaseController extends Controller
             'accused_name' => ['required', 'string', 'max:255'],
             'case_filling_date' => ['required', 'date', 'before:today'],
             'assigned_lawyer_name' => ['required', 'string', 'max:255'],
-            'case_created_by' => ['required', 'string', 'max:255'],
             // 'admin_approval' => ['required', 'string', 'max:255'],
             // 'document_status' => ['required', 'string', 'max:255'],
             // 'status' => ['required', 'string', 'max:255'],
@@ -129,7 +139,7 @@ class CriminalCaseController extends Controller
             $criminal_case->accused_name = $request->accused_name;
             $criminal_case->case_filling_date = date('Y-m-d', strtotime($request->case_filling_date));
             $criminal_case->assigned_lawyer_name = $request->assigned_lawyer_name;
-            $criminal_case->case_created_by = $request->case_created_by;
+            $criminal_case->case_created_by = Auth::user()->id;
             if ($request->admin_approval == "on") {
                 $request->admin_approval = "1";
             } else {
@@ -152,6 +162,28 @@ class CriminalCaseController extends Controller
             $query = $criminal_case->save();
 
             if ($query) {
+                $criminal_case_log = new CriminalCaseLog();
+                $criminal_case_log->case_id = $criminal_case->id;
+                $criminal_case_log->id = null;
+
+                $criminal_case_log->filed_case_name = $criminal_case->filed_case_name;
+                $criminal_case_log->case_category = $criminal_case->case_category;
+                $criminal_case_log->court_name = $criminal_case->court_name;
+                $criminal_case_log->division = $criminal_case->division;
+                $criminal_case_log->district = $criminal_case->district;
+                $criminal_case_log->region = $criminal_case->region;
+                $criminal_case_log->plaintiff_name = $criminal_case->plaintiff_name;
+                $criminal_case_log->defendant_name = $criminal_case->defendant_name;
+                $criminal_case_log->case_filling_date = $criminal_case->case_filling_date;
+                $criminal_case_log->assigned_lawyer_name = $criminal_case->assigned_lawyer_name;
+                $criminal_case_log->case_created_by = $criminal_case->case_created_by;
+                $criminal_case_log->case_updated_by = "N/A";
+                $criminal_case_log->admin_approval = $criminal_case->admin_approval;
+                $criminal_case_log->document_status = $criminal_case->document_status;
+                $criminal_case_log->status = $criminal_case->status;
+
+                $criminal_case_log->save();
+
                 return response()->json([
                     'isSuccess' => true,
                     'Message' => "Criminal Case Details Saved successfully!",
@@ -178,7 +210,13 @@ class CriminalCaseController extends Controller
     public function editCriminalCase(Request $request)
     {
         $id = $request->id;
-        $edit_criminal_case_data = CriminalCase::find($id);
+
+        if (CriminalCaseLog::where('case_id', $id)->exists()) {
+            $edit_criminal_case_data = CriminalCaseLog::where('case_id', '=', $id)->orderBy('updated_at', 'desc')->first();
+        } else {
+            $edit_criminal_case_data = CriminalCase::find($id);
+            $edit_criminal_case_data->case_updated_by = "N/A";
+        }
 
         return response()->json($edit_criminal_case_data);
     }
@@ -197,7 +235,6 @@ class CriminalCaseController extends Controller
             'e_accused_name' => ['required', 'string', 'max:255'],
             'e_case_filling_date' => ['required', 'date', 'before:today'],
             'e_assigned_lawyer_name' => ['required', 'string', 'max:255'],
-            'e_case_created_by' => ['required', 'string', 'max:255'],
             // 'e_admin_approval' => ['string', 'max:255'],
             // 'e_document_status' => ['string', 'max:255'],
             // 'e_status' => ['string', 'max:255'],
@@ -205,9 +242,9 @@ class CriminalCaseController extends Controller
 
         if ($validator->passes()) {
 
-            $id = $request->e_criminal_case_id;
-            $criminal_case_old_data = CriminalCase::find($id);
+            $criminal_case_old_data = new CriminalCaseLog();
 
+            $criminal_case_old_data->case_id = $request->e_criminal_case_id;
             $criminal_case_old_data->filed_case_name = $request->e_filed_case_name;
             $criminal_case_old_data->case_category = $request->e_case_category;
             $criminal_case_old_data->court_name = $request->e_court_name;
@@ -219,6 +256,7 @@ class CriminalCaseController extends Controller
             $criminal_case_old_data->case_filling_date = date('Y-m-d', strtotime($request->e_case_filling_date));
             $criminal_case_old_data->assigned_lawyer_name = $request->e_assigned_lawyer_name;
             $criminal_case_old_data->case_created_by = $request->e_case_created_by;
+            $criminal_case_old_data->case_updated_by = Auth::user()->id;
             if ($request->e_admin_approval == "on") {
                 $request->e_admin_approval = "1";
             } else {
@@ -269,6 +307,32 @@ class CriminalCaseController extends Controller
         $id = $request->id;
 
         if (CriminalCase::destroy($id)) {
+            if (CriminalCaseLog::where('case_id', $id)->exists()) {
+                $criminal_case_log_data = CriminalCaseLog::where('case_id', $id)->orderBy('updated_at', 'desc')->first();
+
+                $criminal_case_log = new CriminalCaseLog();
+                $criminal_case_log->id = null;
+
+                $criminal_case_log->case_id = $criminal_case_log_data->case_id;
+                $criminal_case_log->filed_case_name = $criminal_case_log_data->filed_case_name;
+                $criminal_case_log->case_category = $criminal_case_log_data->case_category;
+                $criminal_case_log->court_name = $criminal_case_log_data->court_name;
+                $criminal_case_log->division = $criminal_case_log_data->division;
+                $criminal_case_log->district = $criminal_case_log_data->district;
+                $criminal_case_log->region = $criminal_case_log_data->region;
+                $criminal_case_log->plaintiff_name = $criminal_case_log_data->plaintiff_name;
+                $criminal_case_log->defendant_name = $criminal_case_log_data->defendant_name;
+                $criminal_case_log->case_filling_date = $criminal_case_log_data->case_filling_date;
+                $criminal_case_log->assigned_lawyer_name = $criminal_case_log_data->assigned_lawyer_name;
+                $criminal_case_log->case_created_by = $criminal_case_log_data->case_created_by;
+                $criminal_case_log->case_updated_by = Auth::user()->id;
+                $criminal_case_log->admin_approval = $criminal_case_log_data->admin_approval;
+                $criminal_case_log->document_status = $criminal_case_log_data->document_status;
+                $criminal_case_log->status = -1;
+
+                $criminal_case_log->save();
+            }
+
             return response()->json([
                 'isSuccess' => true,
                 'Message' => 'Criminal Case deleted successfully!',

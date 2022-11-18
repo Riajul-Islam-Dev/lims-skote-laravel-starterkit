@@ -73,7 +73,7 @@
                                 <x-lims.forms.input.label for="case_filling_date" label="Case Filling Date"
                                     star="*" />
                                 <x-lims.forms.input.datepicker name="case_filling_date" id="case_filling_date"
-                                    placeholder="Case Filling Date" />
+                                    placeholder="Case Filling Date" datepicker_id="case_filling_date_datepicker" />
                                 <span class="text-danger error-text case_filling_date_error"></span>
                             </div>
                             <div class="col-6">
@@ -86,24 +86,17 @@
                         </div>
                         <div class="row my-2">
                             <div class="col-6">
-                                <x-lims.forms.input.label for="case_created_by" label="Case Created By"
-                                    star="*" />
-                                <x-lims.forms.input.text name="case_created_by" id="case_created_by"
-                                    placeholder="Case Created By" />
-                                <span class="text-danger error-text case_created_by_error"></span>
-                            </div>
-                            <div class="col-6">
                                 <x-lims.forms.input.label for="admin_approval" label="Admin Approval"
                                     star="*" />
                                 <x-lims.forms.input.toggle name="admin_approval" id="admin_approval" />
                             </div>
-                        </div>
-                        <div class="row my-2">
                             <div class="col-6">
                                 <x-lims.forms.input.label for="document_status" label="Document Status"
                                     star="*" />
                                 <x-lims.forms.input.toggle name="document_status" id="document_status" />
                             </div>
+                        </div>
+                        <div class="row my-2">
                             <div class="col-6">
                                 <x-lims.forms.input.label for="status" label="Status" star="*" />
                                 <x-lims.forms.input.toggle name="status" id="status" />

@@ -34,8 +34,8 @@
     <!-- Add Meeting Modal -->
     @include('Lims/meeting/create_meeting_modal')
 
-    {{-- <!-- Edit Meeting Modal -->
-    @include('Lims/meeting/edit_meeting_modal') --}}
+    <!-- Edit Meeting Modal -->
+    @include('Lims/meeting/edit_meeting_modal')
 
     <!-- Show Meeting Modal -->
     @include('Lims/meeting/show_meeting_modal')

@@ -89,28 +89,28 @@
             });
         });
 
-        // Edit user ajax request
-        $(document).on('click', '.edit_user', function(e) {
+        // Edit Meeting ajax request
+        $(document).on('click', '.edit_meeting', function(e) {
             e.preventDefault();
             let id = $(this).attr('id');
             $.ajax({
-                url: '{{ route('editUser') }}',
+                url: '{{ route('editMeeting') }}',
                 method: 'get',
                 data: {
                     id: id,
                     _token: '{{ csrf_token() }}'
                 },
                 success: function(response) {
-                    // console.log(response)
-                    $("#e_user_id").val(id);
-                    $("#e_name").val(response.name);
-                    $("#e_email").val(response.email);
-                    $("#e_user_password").val("");
-                    $("#e_dob").val(response.dob);
-                    $("#avatar_show").html('<img src="' + response.avatar +
-                        '" width="100" class="img-fluid img-thumbnail">'
-                    );
-                    $("#e_role_id").val(response.role_id);
+                    console.log(response)
+                    $("#e_meeting_id").val(id);
+                    $("#e_division").val($("#e_division option").eq(response.division)
+                        .val());
+                    $("#e_district").val($("#e_district option").eq(response.district)
+                        .val());
+                    $("#e_start_date").val(response.start_date);
+                    $("#e_end_date").val(response.end_date);
+                    $("#e_month").val(response.month);
+                    $("#e_year").val(response.year);
                     if (response.status == 1) {
                         $("#e_status").attr("checked", true);
                     } else if (response.status == 0) {
@@ -120,11 +120,11 @@
             });
         });
 
-        // Update user ajax request
-        $(document).on('submit', '#edit_user_form', function(e) {
+        // Update Meeting ajax request
+        $(document).on('submit', '#edit_meeting_form', function(e) {
             e.preventDefault();
             var form = this;
-            $("#edit_user_btn_span").text('Updating...');
+            $("#edit_meeting_btn_span").text('Updating...');
             $.ajax({
                 url: $(form).attr('action'),
                 method: $(form).attr('method'),
@@ -145,16 +145,16 @@
                     } else if (data.code == 1) {
                         // console.log(data.Message)
                         $(form)[0].reset();
-                        $("#editUserModal").modal("hide");
+                        $("#editMeetingModal").modal("hide");
                         Swal.fire(
                             'Added!',
-                            'User Edited Successfully!',
+                            'Meeting Edited Successfully!',
                             'success'
                         )
-                        fetchAllUsers();
+                        fetchAllMeetings();
                         toastr.success(data.Message);
                     }
-                    $("#edit_user_btn_span").text('Update User');
+                    $("#edit_meeting_btn_span").text('Update Meeting');
                 },
             });
         });

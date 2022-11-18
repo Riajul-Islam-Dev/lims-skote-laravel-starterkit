@@ -102,6 +102,7 @@
                         _token: '{{ csrf_token() }}'
                     },
                     success: function(response) {
+                        console.log(response);
                         $("#e_criminal_case_id").val(id);
                         $("#e_filed_case_name").val(response.filed_case_name);
                         $("#e_case_category").val(response.case_category);

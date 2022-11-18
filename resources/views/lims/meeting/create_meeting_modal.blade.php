@@ -19,7 +19,7 @@
                                 <x-lims.forms.input.select name="division" id="division">
                                     <option value="option_select" disabled selected>Division</option>
                                     @foreach ($division_data as $division_data_individual)
-                                        <option value="{{ $division_data_individual->id }}">
+                                        <option value="{{ $division_data_individual->division_code }}">
                                             {{ $division_data_individual->division_name }}</option>
                                     @endforeach
                                 </x-lims.forms.input.select>
@@ -30,7 +30,7 @@
                                 <x-lims.forms.input.select name="district" id="district">
                                     <option value="option_select" disabled selected>District</option>
                                     @foreach ($district_data as $district_data_individual)
-                                        <option value="{{ $district_data_individual->id }}">
+                                        <option value="{{ $district_data_individual->district_code }}">
                                             {{ $district_data_individual->district_name }}</option>
                                     @endforeach
                                 </x-lims.forms.input.select>

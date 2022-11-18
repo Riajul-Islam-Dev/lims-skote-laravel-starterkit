@@ -17,6 +17,7 @@ use Illuminate\Support\Facades\Route;
 Auth::routes();
 
 Route::get('/index', [App\Http\Controllers\HomeController::class, 'root'])->name('root');
+Route::get('/', [App\Http\Controllers\HomeController::class, 'root'])->name('rootIndex');
 // Route::get('/index', [App\Http\Controllers\HomeController::class, 'root'])->name('root');
 
 //Update User Details

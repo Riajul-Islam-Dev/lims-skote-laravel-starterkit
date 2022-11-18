@@ -183,54 +183,40 @@ class MeetingController extends Controller
     public function updateMeeting(Request $request)
     {
         $validator = Validator::make($request->all(), [
-            'e_name' => ['required', 'string', 'max:255'],
-            'e_email' => ['required', 'string', 'email', 'max:255'],
-            'e_user_password' => ['nullable', 'string', 'min:6'],
-            'e_dob' => ['required', 'date', 'before:today'],
-            'e_avatar' => ['nullable', 'image', 'mimes:jpg,jpeg,png', 'max:1024'],
-            'e_role_id' => ['required', 'string', 'max:255'],
+            'e_division' => ['required', 'string', 'max:255'],
+            'e_district' => ['required', 'string', 'max:255'],
+            'e_start_date' => ['required', 'string', 'max:255', 'regex:/^[-0-9\+]+$/'],
+            'e_end_date' => ['required', 'string', 'max:255', 'regex:/^[-0-9\+]+$/'],
+            'e_month' => ['required', 'string', 'max:255'],
+            'e_year' => ['required', 'string', 'max:255', 'regex:/^[-0-9\+]+$/'],
             // 'e_status' => ['string', 'max:255'],
         ]);
 
         if ($validator->passes()) {
 
-            $id = $request->e_user_id;
-            $user_old_data = User::find($id);
+            $id = $request->e_meeting_id;
+            $meeting_old_data = Meeting::find($id);
 
-            if (!empty($request->e_avatar)) {
-                $image_path = public_path() . $user_old_data->avatar;  // Value is not URL but directory file path
-                if (File::exists($image_path)) {
-                    File::delete($image_path);
-                }
-                $avatar = $request->e_avatar;
-                $avatarName = time() . '.' . $avatar->getClientOriginalExtension();
-                $avatarPath = public_path('/images/');
-                $avatar->move($avatarPath, $avatarName);
-                $user_old_data->avatar = "/images/" . $avatarName;
-            }
-
-            if (!empty($request->e_user_password)) {
-                $user_old_data->password = Hash::make($request->e_user_password);
-            }
-
-            $user_old_data->name = $request->e_name;
-            $user_old_data->email = $request->e_email;
-            $user_old_data->dob = date('Y-m-d', strtotime($request->e_dob));
-            $user_old_data->role_id = $request->e_role_id;
+            $meeting_old_data->division = $request->e_division;
+            $meeting_old_data->district = $request->e_district;
+            $meeting_old_data->start_date = $request->e_start_date;
+            $meeting_old_data->end_date = $request->e_end_date;
+            $meeting_old_data->month = $request->e_month;
+            $meeting_old_data->year = $request->e_year;
 
             if ($request->e_status == "on") {
                 $request->e_status = "1";
             } else {
                 $request->e_status = "0";
             }
-            $user_old_data->status = $request->e_status;
+            $meeting_old_data->status = $request->e_status;
 
-            $query = $user_old_data->save();
+            $query = $meeting_old_data->save();
 
             if ($query) {
                 return response()->json([
                     'isSuccess' => true,
-                    'Message' => "User Details Updated successfully!",
+                    'Message' => "Meeting Details Updated successfully!",
                     'code' => 1
                 ], 200); // Status code here
             } else {

@@ -4,8 +4,10 @@ namespace App\Http\Controllers\lims;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
+use App\Models\Lims\CivilCaseLog;
 use App\Models\Lims\CivilCase;
 use Validator;
+use Illuminate\Support\Facades\Auth;
 
 class CivilCaseController extends Controller
 {
@@ -37,6 +39,7 @@ class CivilCaseController extends Controller
                     <th>Case Filling Date</th>
                     <th>Assigned Lawyer Name</th>
                     <th>Case Created By</th>
+                    <th>Case Updated By</th>
                     <th>Admin Approval</th>
                     <th>Document Status</th>
                     <th>Status</th>
@@ -45,6 +48,14 @@ class CivilCaseController extends Controller
             </thead>
             <tbody>';
             foreach ($show_civil_case_data as $key => $data) {
+                if (CivilCaseLog::where('case_id', $data->id)->exists()) {
+                    $data_log = CivilCaseLog::where('case_id', '=', $data->id)->orderBy('updated_at', 'desc')->first();
+
+                    $data = $data_log;
+                    $data->id = $data->case_id;
+                } else {
+                    $data->case_updated_by = "N/A";
+                }
                 if ($data->admin_approval == 1) {
                     $data->admin_approval = "Approved";
                     $admin_approval_badge_class = 'badge bg-info';
@@ -79,6 +90,7 @@ class CivilCaseController extends Controller
                 <td>' . $data->case_filling_date . '</td>
                 <td>' . $data->assigned_lawyer_name . '</td>
                 <td>' . $data->case_created_by . '</td>
+                <td>' . $data->case_updated_by . '</td>
                 <td><div class="' . $admin_approval_badge_class . '">' . $data->admin_approval . '</div></td>
                 <td><div class="' . $document_status_badge_class . '">' . $data->document_status . '</div></td>
                 <td><div class="' . $status_badge_class . '">' . $data->status . '</div></td>
@@ -109,7 +121,6 @@ class CivilCaseController extends Controller
             'defendant_name' => ['required', 'string', 'max:255'],
             'case_filling_date' => ['required', 'date', 'before:today'],
             'assigned_lawyer_name' => ['required', 'string', 'max:255'],
-            'case_created_by' => ['required', 'string', 'max:255'],
             // 'admin_approval' => ['required', 'string', 'max:255'],
             // 'document_status' => ['required', 'string', 'max:255'],
             // 'status' => ['required', 'string', 'max:255'],
@@ -128,7 +139,7 @@ class CivilCaseController extends Controller
             $civil_case->defendant_name = $request->defendant_name;
             $civil_case->case_filling_date = date('Y-m-d', strtotime($request->case_filling_date));
             $civil_case->assigned_lawyer_name = $request->assigned_lawyer_name;
-            $civil_case->case_created_by = $request->case_created_by;
+            $civil_case->case_created_by = Auth::user()->id;
             if ($request->admin_approval == "on") {
                 $request->admin_approval = "1";
             } else {
@@ -151,6 +162,28 @@ class CivilCaseController extends Controller
             $query = $civil_case->save();
 
             if ($query) {
+                $civil_case_log = new CivilCaseLog();
+                $civil_case_log->case_id = $civil_case->id;
+                $civil_case_log->id = null;
+
+                $civil_case_log->filed_case_name = $civil_case->filed_case_name;
+                $civil_case_log->case_category = $civil_case->case_category;
+                $civil_case_log->court_name = $civil_case->court_name;
+                $civil_case_log->division = $civil_case->division;
+                $civil_case_log->district = $civil_case->district;
+                $civil_case_log->region = $civil_case->region;
+                $civil_case_log->plaintiff_name = $civil_case->plaintiff_name;
+                $civil_case_log->defendant_name = $civil_case->defendant_name;
+                $civil_case_log->case_filling_date = $civil_case->case_filling_date;
+                $civil_case_log->assigned_lawyer_name = $civil_case->assigned_lawyer_name;
+                $civil_case_log->case_created_by = $civil_case->case_created_by;
+                $civil_case_log->case_updated_by = "N/A";
+                $civil_case_log->admin_approval = $civil_case->admin_approval;
+                $civil_case_log->document_status = $civil_case->document_status;
+                $civil_case_log->status = $civil_case->status;
+
+                $civil_case_log->save();
+
                 return response()->json([
                     'isSuccess' => true,
                     'Message' => "Civil Case Details Saved successfully!",
@@ -177,7 +210,13 @@ class CivilCaseController extends Controller
     public function editCivilCase(Request $request)
     {
         $id = $request->id;
-        $edit_civil_case_data = CivilCase::find($id);
+
+        if (CivilCaseLog::where('case_id', $id)->exists()) {
+            $edit_civil_case_data = CivilCaseLog::where('case_id', '=', $id)->orderBy('updated_at', 'desc')->first();
+        } else {
+            $edit_civil_case_data = CivilCase::find($id);
+            $edit_civil_case_data->case_updated_by = "N/A";
+        }
 
         return response()->json($edit_civil_case_data);
     }
@@ -196,7 +235,6 @@ class CivilCaseController extends Controller
             'e_defendant_name' => ['required', 'string', 'max:255'],
             'e_case_filling_date' => ['required', 'date', 'before:today'],
             'e_assigned_lawyer_name' => ['required', 'string', 'max:255'],
-            'e_case_created_by' => ['required', 'string', 'max:255'],
             // 'e_admin_approval' => ['string', 'max:255'],
             // 'e_document_status' => ['string', 'max:255'],
             // 'e_status' => ['string', 'max:255'],
@@ -204,9 +242,9 @@ class CivilCaseController extends Controller
 
         if ($validator->passes()) {
 
-            $id = $request->e_civil_case_id;
-            $civil_case_old_data = CivilCase::find($id);
+            $civil_case_old_data = new CivilCaseLog();
 
+            $civil_case_old_data->case_id = $request->e_civil_case_id;
             $civil_case_old_data->filed_case_name = $request->e_filed_case_name;
             $civil_case_old_data->case_category = $request->e_case_category;
             $civil_case_old_data->court_name = $request->e_court_name;
@@ -218,6 +256,7 @@ class CivilCaseController extends Controller
             $civil_case_old_data->case_filling_date = date('Y-m-d', strtotime($request->e_case_filling_date));
             $civil_case_old_data->assigned_lawyer_name = $request->e_assigned_lawyer_name;
             $civil_case_old_data->case_created_by = $request->e_case_created_by;
+            $civil_case_old_data->case_updated_by = Auth::user()->id;
             if ($request->e_admin_approval == "on") {
                 $request->e_admin_approval = "1";
             } else {
@@ -268,6 +307,32 @@ class CivilCaseController extends Controller
         $id = $request->id;
 
         if (CivilCase::destroy($id)) {
+            if (CivilCaseLog::where('case_id', $id)->exists()) {
+                $civil_case_log_data = CivilCaseLog::where('case_id', $id)->orderBy('updated_at', 'desc')->first();
+
+                $civil_case_log = new CivilCaseLog();
+                $civil_case_log->id = null;
+
+                $civil_case_log->case_id = $civil_case_log_data->case_id;
+                $civil_case_log->filed_case_name = $civil_case_log_data->filed_case_name;
+                $civil_case_log->case_category = $civil_case_log_data->case_category;
+                $civil_case_log->court_name = $civil_case_log_data->court_name;
+                $civil_case_log->division = $civil_case_log_data->division;
+                $civil_case_log->district = $civil_case_log_data->district;
+                $civil_case_log->region = $civil_case_log_data->region;
+                $civil_case_log->plaintiff_name = $civil_case_log_data->plaintiff_name;
+                $civil_case_log->defendant_name = $civil_case_log_data->defendant_name;
+                $civil_case_log->case_filling_date = $civil_case_log_data->case_filling_date;
+                $civil_case_log->assigned_lawyer_name = $civil_case_log_data->assigned_lawyer_name;
+                $civil_case_log->case_created_by = $civil_case_log_data->case_created_by;
+                $civil_case_log->case_updated_by = Auth::user()->id;
+                $civil_case_log->admin_approval = $civil_case_log_data->admin_approval;
+                $civil_case_log->document_status = $civil_case_log_data->document_status;
+                $civil_case_log->status = -1;
+
+                $civil_case_log->save();
+            }
+
             return response()->json([
                 'isSuccess' => true,
                 'Message' => 'Civil Case deleted successfully!',

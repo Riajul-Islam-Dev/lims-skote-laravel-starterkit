@@ -35,11 +35,13 @@ class HomeController extends Controller
         return abort(404);
     }
 
+    public function rootIndex()
+    {
+        return view('index');
+    }
+
     public function root()
     {
-        // $menu_data = Menu::pluck('name')->toArray();
-        // dd($menu_data);
-        // return view('index', compact('menu_data'));
         return view('index');
     }
 

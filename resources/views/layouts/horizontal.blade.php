@@ -496,7 +496,7 @@
                     <li class="nav-item dropdown">
                         <a class="nav-link dropdown-toggle arrow-none" href="#" id="topnav-panel-lawyer"
                             role="button">
-                            <i class="bx bx-cog me-2"></i><span key="t-layouts">Panel Lawyers</span>
+                            <i class="bx bx-user me-2"></i><span key="t-layouts">Panel Lawyers</span>
                             <div class="arrow-down"></div>
                         </a>
                         <div class="dropdown-menu" aria-labelledby="topnav-panel-lawyer">

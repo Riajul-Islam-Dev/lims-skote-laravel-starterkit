@@ -76,7 +76,7 @@
                                 <x-lims.forms.input.label for="e_case_filling_date" label="Case Filling Date"
                                     star="*" />
                                 <x-lims.forms.input.datepicker name="e_case_filling_date" id="e_case_filling_date"
-                                    placeholder="Case Filling Date" />
+                                    placeholder="Case Filling Date" datepicker_id="e_case_filling_date_datepicker" />
                                 <span class="text-danger error-text e_case_filling_date_error"></span>
                             </div>
                             <div class="col-6">
@@ -88,7 +88,7 @@
                             </div>
                         </div>
                         <div class="row my-2">
-                            <div class="col-6">
+                            <div class="col-6" style="display: none">
                                 <x-lims.forms.input.label for="e_case_created_by" label="Case Created By"
                                     star="*" />
                                 <x-lims.forms.input.text name="e_case_created_by" id="e_case_created_by"
@@ -100,13 +100,13 @@
                                     star="*" />
                                 <x-lims.forms.input.toggle name="e_admin_approval" id="e_admin_approval" />
                             </div>
-                        </div>
-                        <div class="row my-2">
                             <div class="col-6">
                                 <x-lims.forms.input.label for="e_document_status" label="Document Status"
                                     star="*" />
                                 <x-lims.forms.input.toggle name="e_document_status" id="e_document_status" />
                             </div>
+                        </div>
+                        <div class="row my-2">
                             <div class="col-6">
                                 <x-lims.forms.input.label for="e_status" label="Status" star="*" />
                                 <x-lims.forms.input.toggle name="e_status" id="e_status" />
