@@ -172,8 +172,8 @@ class CriminalCaseController extends Controller
                 $criminal_case_log->division = $criminal_case->division;
                 $criminal_case_log->district = $criminal_case->district;
                 $criminal_case_log->region = $criminal_case->region;
-                $criminal_case_log->plaintiff_name = $criminal_case->plaintiff_name;
-                $criminal_case_log->defendant_name = $criminal_case->defendant_name;
+                $criminal_case_log->complainant_name = $request->complainant_name;
+                $criminal_case_log->accused_name = $request->accused_name;
                 $criminal_case_log->case_filling_date = $criminal_case->case_filling_date;
                 $criminal_case_log->assigned_lawyer_name = $criminal_case->assigned_lawyer_name;
                 $criminal_case_log->case_created_by = $criminal_case->case_created_by;
@@ -320,8 +320,8 @@ class CriminalCaseController extends Controller
                 $criminal_case_log->division = $criminal_case_log_data->division;
                 $criminal_case_log->district = $criminal_case_log_data->district;
                 $criminal_case_log->region = $criminal_case_log_data->region;
-                $criminal_case_log->plaintiff_name = $criminal_case_log_data->plaintiff_name;
-                $criminal_case_log->defendant_name = $criminal_case_log_data->defendant_name;
+                $criminal_case_log->complainant_name = $criminal_case_log_data->complainant_name;
+                $criminal_case_log->accused_name = $criminal_case_log_data->accused_name;
                 $criminal_case_log->case_filling_date = $criminal_case_log_data->case_filling_date;
                 $criminal_case_log->assigned_lawyer_name = $criminal_case_log_data->assigned_lawyer_name;
                 $criminal_case_log->case_created_by = $criminal_case_log_data->case_created_by;
