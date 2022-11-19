@@ -478,7 +478,6 @@
                         </a>
                         <div class="dropdown-menu" aria-labelledby="topnav-admin">
                             {{-- <a href="{{ route('posts.edit', ['id' => $post->id]) }}">Link</a> --}}
-                            <a class="dropdown-item" href="{{ route('showModule') }}">{{ __('Modules') }}</a>
                             <a class="dropdown-item" href="{{ route('indexUser') }}">{{ __('Users') }}</a>
                             <a class="dropdown-item" href="{{ route('showRole') }}">{{ __('Roles') }}</a>
                             <a class="dropdown-item"
@@ -506,6 +505,20 @@
                     </li>
 
                     <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle arrow-none" href="{{ route('indexMeeting') }}"
+                            id="topnav-meeting" role="button">
+                            <i class="bx bx-calendar-event me-2"></i><span key="t-layouts">Meetings</span>
+                        </a>
+                    </li>
+
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle arrow-none" href="{{ route('indexBilling') }}"
+                            id="topnav-billing" role="button">
+                            <i class="bx bx-calendar-event me-2"></i><span key="t-layouts">Billings</span>
+                        </a>
+                    </li>
+
+                    <li class="nav-item dropdown">
                         <a class="nav-link dropdown-toggle arrow-none" href="#" id="topnav-dynamic-menu"
                             role="button">
                             <i class="bx bx-collection me-2"></i><span key="t-layouts">Dynamic Menu</span>
@@ -522,15 +535,21 @@
                     </li>
 
                     <li class="nav-item dropdown">
-                        <a class="nav-link dropdown-toggle arrow-none" href="#" id="topnav-admin"
+                        <a class="nav-link dropdown-toggle arrow-none" href="#" id="topnav-under-development"
                             role="button">
                             <i class="bx bx-wrench me-2"></i><span key="t-layouts">Under Development</span>
                             <div class="arrow-down"></div>
                         </a>
-                        <div class="dropdown-menu" aria-labelledby="topnav-admin">
-                            <a class="dropdown-item" href="{{ route('indexMeeting') }}">{{ __('Meetings') }}</a>
+                        <div class="dropdown-menu" aria-labelledby="topnav-under-development">
                             <a class="dropdown-item" href="{{ route('indexBilling') }}">{{ __('Billings') }}</a>
                         </div>
+                    </li>
+
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle arrow-none" href="{{ route('indexIdeaBox') }}"
+                            id="topnav-idea-box" role="button">
+                            <i class="bx bx-calendar-event me-2"></i><span key="t-layouts">Idea Box</span>
+                        </a>
                     </li>
                 </ul>
             </div>

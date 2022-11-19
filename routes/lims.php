@@ -17,18 +17,10 @@ use App\Http\Controllers\Lims\DistrictController;
 use App\Http\Controllers\Lims\PanelLawyerController;
 use App\Http\Controllers\Lims\MeetingController;
 use App\Http\Controllers\Lims\BillingController;
+use App\Http\Controllers\Lims\NotificationController;
+use App\Http\Controllers\Lims\IdeaBoxController;
 
 // LIMS Routes
-
-// Module
-Route::group(['prefix' => '', 'middleware' => ['auth']], function () {
-    Route::get('show_module', [ModuleController::class, 'showModule'])->name('showModule');
-    Route::get('add_module', [ModuleController::class, 'addModule'])->name('addModule');
-    Route::post('save_module', [ModuleController::class, 'saveModule'])->name('saveModule');
-    Route::get('edit_module/{id}', [ModuleController::class, 'editModule'])->name('editModule');
-    Route::post('update_module/{id}', [ModuleController::class, 'updateModule'])->name('updateModule');
-    Route::post('delete_module/{id}', [ModuleController::class, 'deleteModule'])->name('deleteModule');
-});
 
 // User
 Route::group(['prefix' => '', 'middleware' => ['auth']], function () {
@@ -173,4 +165,26 @@ Route::group(['prefix' => '', 'middleware' => ['auth']], function () {
     Route::post('update_billing', [BillingController::class, 'updateBilling'])->name('updateBilling');
     Route::delete('delete_billing', [BillingController::class, 'deleteBilling'])->name('deleteBilling');
     Route::get('show_billing', [BillingController::class, 'showBilling'])->name('showBilling');
+});
+
+// Notification
+Route::group(['prefix' => '', 'middleware' => ['auth']], function () {
+    Route::get('index_notification', [NotificationController::class, 'indexNotification'])->name('indexNotification');
+    Route::get('fetch_all_notification', [NotificationController::class, 'fetchAllNotification'])->name('fetchAllNotification');
+    Route::post('save_notification', [NotificationController::class, 'saveNotification'])->name('saveNotification');
+    Route::get('edit_notification', [NotificationController::class, 'editNotification'])->name('editNotification');
+    Route::post('update_notification', [NotificationController::class, 'updateNotification'])->name('updateNotification');
+    Route::delete('delete_notification', [NotificationController::class, 'deleteNotification'])->name('deleteNotification');
+    Route::get('show_notification', [NotificationController::class, 'showNotification'])->name('showNotification');
+});
+
+// Idea Box
+Route::group(['prefix' => '', 'middleware' => ['auth']], function () {
+    Route::get('index_idea_box', [IdeaBoxController::class, 'indexIdeaBox'])->name('indexIdeaBox');
+    Route::get('fetch_all_idea_box', [IdeaBoxController::class, 'fetchAllIdeaBox'])->name('fetchAllIdeaBox');
+    Route::post('save_idea_box', [IdeaBoxController::class, 'saveIdeaBox'])->name('saveIdeaBox');
+    Route::get('edit_idea_box', [IdeaBoxController::class, 'editIdeaBox'])->name('editIdeaBox');
+    Route::post('update_idea_box', [IdeaBoxController::class, 'updateIdeaBox'])->name('updateIdeaBox');
+    Route::delete('delete_idea_box', [IdeaBoxController::class, 'deleteIdeaBox'])->name('deleteIdeaBox');
+    Route::get('show_idea_box', [IdeaBoxController::class, 'showIdeaBox'])->name('showIdeaBox');
 });
