@@ -35,12 +35,13 @@ Route::group(['prefix' => '', 'middleware' => ['auth']], function () {
 
 // Role
 Route::group(['prefix' => '', 'middleware' => ['auth']], function () {
-    Route::get('show_role', [RoleController::class, 'showRole'])->name('showRole');
-    Route::get('add_role', [RoleController::class, 'addRole'])->name('addRole');
+    Route::get('index_role', [RoleController::class, 'indexRole'])->name('indexRole');
+    Route::get('fetch_all_role', [RoleController::class, 'fetchAllRole'])->name('fetchAllRole');
     Route::post('save_role', [RoleController::class, 'saveRole'])->name('saveRole');
-    Route::get('edit_role/{id}', [RoleController::class, 'editRole'])->name('editRole');
-    Route::post('update_role/{id}', [RoleController::class, 'updateRole'])->name('updateRole');
-    Route::post('delete_role/{id}', [RoleController::class, 'deleteRole'])->name('deleteRole');
+    Route::get('edit_role', [RoleController::class, 'editRole'])->name('editRole');
+    Route::post('update_role', [RoleController::class, 'updateRole'])->name('updateRole');
+    Route::delete('delete_role', [RoleController::class, 'deleteRole'])->name('deleteRole');
+    Route::get('show_role', [RoleController::class, 'showRole'])->name('showRole');
 });
 
 // Role Section
