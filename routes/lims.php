@@ -19,18 +19,19 @@ use App\Http\Controllers\Lims\MeetingController;
 use App\Http\Controllers\Lims\BillingController;
 use App\Http\Controllers\Lims\NotificationController;
 use App\Http\Controllers\Lims\IdeaBoxController;
+use App\Http\Controllers\Lims\MailController;
 
 // LIMS Routes
 
 // User
-Route::group(['prefix' => '', 'middleware' => ['auth']], function () {
-    Route::get('index_user', [UserController::class, 'indexUser'])->name('indexUser');
-    Route::get('fetch_all_user', [UserController::class, 'fetchAllUser'])->name('fetchAllUser');
-    Route::post('save_user', [UserController::class, 'saveUser'])->name('saveUser');
-    Route::get('edit_user', [UserController::class, 'editUser'])->name('editUser');
-    Route::post('update_user', [UserController::class, 'updateUser'])->name('updateUser');
-    Route::delete('delete_user', [UserController::class, 'deleteUser'])->name('deleteUser');
-    Route::get('show_user', [UserController::class, 'showUser'])->name('showUser');
+Route::group(['prefix' => '/admin', 'middleware' => ['auth']], function () {
+    Route::get('/index_user', [UserController::class, 'indexUser'])->name('indexUser');
+    Route::get('/fetch_all_user', [UserController::class, 'fetchAllUser'])->name('fetchAllUser');
+    Route::post('/save_user', [UserController::class, 'saveUser'])->name('saveUser');
+    Route::get('/edit_user', [UserController::class, 'editUser'])->name('editUser');
+    Route::post('/update_user', [UserController::class, 'updateUser'])->name('updateUser');
+    Route::delete('/delete_user', [UserController::class, 'deleteUser'])->name('deleteUser');
+    Route::get('/show_user', [UserController::class, 'showUser'])->name('showUser');
 });
 
 // Role
@@ -188,4 +189,9 @@ Route::group(['prefix' => '', 'middleware' => ['auth']], function () {
     Route::post('update_idea_box', [IdeaBoxController::class, 'updateIdeaBox'])->name('updateIdeaBox');
     Route::delete('delete_idea_box', [IdeaBoxController::class, 'deleteIdeaBox'])->name('deleteIdeaBox');
     Route::get('show_idea_box', [IdeaBoxController::class, 'showIdeaBox'])->name('showIdeaBox');
+});
+
+// Mail
+Route::group(['prefix' => '', 'middleware' => ['auth']], function () {
+    Route::get('send_mail', [MailController::class, 'index'])->name('sendMail');
 });
