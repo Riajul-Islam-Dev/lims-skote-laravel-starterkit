@@ -20,6 +20,7 @@ use App\Http\Controllers\Lims\BillingController;
 use App\Http\Controllers\Lims\NotificationController;
 use App\Http\Controllers\Lims\IdeaBoxController;
 use App\Http\Controllers\Lims\MailController;
+use App\Http\Controllers\Lims\PDFController;
 
 // LIMS Routes
 
@@ -194,4 +195,9 @@ Route::group(['prefix' => '', 'middleware' => ['auth']], function () {
 // Mail
 Route::group(['prefix' => '', 'middleware' => ['auth']], function () {
     Route::get('send_mail', [MailController::class, 'index'])->name('sendMail');
+});
+
+// DOMPdf
+Route::group(['prefix' => '', 'middleware' => ['auth']], function () {
+    Route::get('generate_pdf', [PDFController::class, 'generatePDF'])->name('generatePdf');
 });

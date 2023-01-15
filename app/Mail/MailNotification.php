@@ -30,7 +30,7 @@ class MailNotification extends Mailable
     {
         return $this->from('info@leotech.tech', 'Leotech BD')
         ->subject($this->data['subject'])
-        ->view('emails.lims.index')
+        ->view('lims.email.testMail')
         ->with('data',$this->data);
     }
 }
