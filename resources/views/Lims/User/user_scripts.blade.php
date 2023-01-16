@@ -226,6 +226,7 @@
                     $(".user_name").text(response.name);
                     $(".user_email").text(response.email);
                     $(".user_dob").text(response.dob);
+                    $(".user_pdf").attr('value', response.id);
                     if (response.status == 1) {
                         $(".user_status").text("Active");
                     } else {

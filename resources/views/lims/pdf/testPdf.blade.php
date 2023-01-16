@@ -6,20 +6,66 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>Test PDF</title>
+    <style>
+        table,
+        th,
+        td {
+            border: 1px solid white;
+            border-collapse: collapse;
+            font-size: 18px;
+        }
+
+        th,
+        td {
+            background-color: #96D4D4;
+        }
+
+        td.bold {
+            font-weight: bold;
+        }
+
+        footer {
+            width: 100%;
+            position: absolute;
+            margin-left: auto;
+            margin-right: auto;
+            bottom: 0;
+            display: flex;
+            flex-direction: column;
+        }
+    </style>
 </head>
 
 <body>
-
-    <body>
-        <h1>{{ $title }}</h1>
-        <p>{{ $date }}</p>
-        <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod
-            tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam,
-            quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo
-            consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse
-            cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non
-            proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
-    </body>
+    <h1 style="margin-bottom: 50px; text-align: center">User Information</h1>
+    <table style="width:100%; margin-left: auto; margin-right: auto;">
+        <tr>
+            <td colspan="2"></td>
+            <td colspan="2">{{ $avatar }}</td>
+        </tr>
+        <tr>
+            <td class="bold">ID</td>
+            <td>{{ $id }}</td>
+            <td class="bold">Name</td>
+            <td>{{ $name }}</td>
+        </tr>
+        <tr>
+            <td class="bold">Email</td>
+            <td>{{ $email }}</td>
+            <td class="bold">Date of Birtd</td>
+            <td>{{ $dob }}</td>
+        </tr>
+        <tr>
+            <td class="bold">User Role</td>
+            <td>{{ $role_name }}</td>
+            <td class="bold">Status</td>
+            <td>{{ $status }}</td>
+        </tr>
+    </table>
+    <footer>
+        <p>2023 &copy; Leotech</p>
+        <p>Design & Develop by Riajul Islam</p>
+    </footer>
 </body>
 
 </html>

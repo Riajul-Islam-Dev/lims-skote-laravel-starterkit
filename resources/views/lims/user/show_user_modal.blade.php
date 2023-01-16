@@ -38,10 +38,18 @@
                                                     <p class="user_status"></p>
                                                 </div>
                                             </div>
-                                            <button type="button"
-                                                class="btn btn-sm btn-danger btn-label float-end mb-2"
+                                            <button type="button" class="btn btn-sm btn-danger btn-label float-end mb-2"
                                                 data-bs-dismiss="modal"><i class="bx bx-window-close label-icon"></i>
                                                 Close</button>
+                                            <form action="{{ route('viewPDF') }}" method="POST" target="_blank">
+                                                @csrf
+                                                <div>
+                                                    <input type="hidden" name="user_id" class="user_pdf">
+                                                    <button
+                                                        class="btn btn-sm btn-info waves-effect btn-label waves-light float-end mb-2 me-2"><i
+                                                            class="bx bx-printer label-icon"></i> View PDF</button>
+                                                </div>
+                                            </form>
                                         </div>
                                     </div>
                                 </div>

@@ -25,7 +25,7 @@ use App\Http\Controllers\Lims\PDFController;
 // LIMS Routes
 
 // User
-Route::group(['prefix' => '/admin', 'middleware' => ['auth']], function () {
+Route::group(['prefix' => '', 'middleware' => ['auth']], function () {
     Route::get('/index_user', [UserController::class, 'indexUser'])->name('indexUser');
     Route::get('/fetch_all_user', [UserController::class, 'fetchAllUser'])->name('fetchAllUser');
     Route::post('/save_user', [UserController::class, 'saveUser'])->name('saveUser');
@@ -199,5 +199,6 @@ Route::group(['prefix' => '', 'middleware' => ['auth']], function () {
 
 // DOMPdf
 Route::group(['prefix' => '', 'middleware' => ['auth']], function () {
-    Route::get('generate_pdf', [PDFController::class, 'generatePDF'])->name('generatePdf');
+    Route::get('generate_pdf', [PDFController::class, 'generatePDF'])->name('generatePDF');
+    Route::post('view_pdf', [PDFController::class, 'viewPDF'])->name('viewPDF');
 });
