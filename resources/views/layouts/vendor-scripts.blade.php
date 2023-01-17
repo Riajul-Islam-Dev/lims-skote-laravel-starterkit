@@ -1,17 +1,23 @@
-    <!-- JAVASCRIPT -->
-    <script src="{{ URL::asset('assets/libs/jquery/jquery.min.js') }}"></script>
-    <script src="{{ URL::asset('assets/libs/bootstrap/bootstrap.min.js') }}"></script>
-    <script src="{{ URL::asset('assets/libs/metismenu/metismenu.min.js') }}"></script>
-    <script src="{{ URL::asset('assets/libs/simplebar/simplebar.min.js') }}"></script>
-    <script src="{{ URL::asset('assets/libs/node-waves/node-waves.min.js') }}"></script>
+<!-- JAVASCRIPT -->
+<script src="{{ URL::asset('assets/libs/jquery/jquery.min.js') }}"></script>
+<script src="{{ URL::asset('assets/libs/bootstrap/bootstrap.min.js') }}"></script>
+<script src="{{ URL::asset('assets/libs/metismenu/metismenu.min.js') }}"></script>
+<script src="{{ URL::asset('assets/libs/simplebar/simplebar.min.js') }}"></script>
+<script src="{{ URL::asset('assets/libs/node-waves/node-waves.min.js') }}"></script>
 
-    <!-- form advanced init -->
-    <script src="{{ URL::asset('assets/js/pages/form-advanced.init.js') }}"></script>
-    <!-- Select2 -->
-    <script src="{{ URL::asset('/assets/libs/select2/select2.min.js') }}"></script>
+<!-- Select2 -->
+<script src="{{ URL::asset('/assets/libs/select2/select2.min.js') }}"></script>
+<script src="{{ URL::asset('/assets/libs/bootstrap-datepicker/bootstrap-datepicker.min.js') }}"></script>
+<script src="{{ URL::asset('/assets/libs/spectrum-colorpicker/spectrum-colorpicker.min.js') }}"></script>
+<script src="{{ URL::asset('/assets/libs/bootstrap-timepicker/bootstrap-timepicker.min.js') }}"></script>
+<script src="{{ URL::asset('/assets/libs/bootstrap-touchspin/bootstrap-touchspin.min.js') }}"></script>
+<script src="{{ URL::asset('/assets/libs/bootstrap-maxlength/bootstrap-maxlength.min.js') }}"></script>
+<script src="{{ URL::asset('/assets/libs/datepicker/datepicker.min.js') }}"></script>
+<!-- form advanced init -->
+<script src="{{ URL::asset('assets/js/pages/form-advanced.init.js') }}"></script>
 
-    <script>
-        $('#change-password').on('submit', function(event) {
+<script>
+    $('#change-password').on('submit', function(event) {
             event.preventDefault();
             var Id = $('#data_id').val();
             var current_password = $('#current-password').val();
@@ -49,12 +55,12 @@
                 }
             });
         });
-    </script>
-    @stack('custom-scripts')
+</script>
+@stack('custom-scripts')
 
-    <!-- owl.carousel js -->
-    <script src="{{ URL::asset('assets/libs/owl.carousel/owl.carousel.min.js') }}"></script>
-    <!-- auth-2-carousel init -->
-    <script src="{{ URL::asset('assets/js/pages/auth-2-carousel.init.js') }}"></script>
-    <!-- App js -->
-    <script src="{{ URL::asset('assets/js/app.min.js') }}"></script>
+<!-- owl.carousel js -->
+<script src="{{ URL::asset('assets/libs/owl.carousel/owl.carousel.min.js') }}"></script>
+<!-- auth-2-carousel init -->
+<script src="{{ URL::asset('assets/js/pages/auth-2-carousel.init.js') }}"></script>
+<!-- App js -->
+<script src="{{ URL::asset('assets/js/app.min.js') }}"></script>

@@ -1,6 +1,3 @@
-<!-- Date picker Js -->
-<script src="{{ URL::asset('/assets/libs/bootstrap-datepicker/bootstrap-datepicker.min.js') }}"></script>
-
 <!-- Required datatable js -->
 <script src="{{ URL::asset('/assets/libs/datatables/datatables.min.js') }}"></script>
 <script src="{{ URL::asset('/assets/libs/jszip/jszip.min.js') }}"></script>
