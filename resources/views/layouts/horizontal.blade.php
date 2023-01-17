@@ -530,7 +530,7 @@
                     <li class="nav-item dropdown">
                         <a class="nav-link dropdown-toggle arrow-none" href="{{ route('indexBilling') }}"
                             id="topnav-billing" role="button">
-                            <i class="bx bx-calendar-event me-2"></i><span key="t-layouts">Billings</span>
+                            <i class="bx bx-credit-card me-2"></i><span key="t-layouts">Billings</span>
                         </a>
                     </li>
 
