@@ -8,7 +8,8 @@
 
                 <!-- Button trigger modal -->
                 <button type="button" class="btn btn-success my-3 waves-effect btn-label waves-light"
-                    data-bs-toggle="modal" data-bs-target="#addBillingModal"><i class="bx bxs-credit-card label-icon"></i>
+                    data-bs-toggle="modal" data-bs-target="#addBillingModal"><i
+                        class="bx bxs-credit-card label-icon"></i>
                     Add new Billing</button>
 
                 <div id="show_all_billings"></div>

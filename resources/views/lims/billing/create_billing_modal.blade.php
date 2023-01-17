@@ -30,28 +30,16 @@
                             <div class="col-6">
                                 <x-lims.forms.input.label for="case_type" label="Case Type" star="*" />
                                 <div>
-                                    <select class="form-control select2" style="width:100% !important">
-                                        <option>Select</option>
-                                        <optgroup label="Alaskan/Hawaiian Time Zone">
-                                            <option value="AK">Alaska</option>
-                                            <option value="HI">Hawaii</option>
+                                    <x-lims.forms.input.select name="case_type" id="case_type">
+                                        <option value="case_type" disabled selected>Select Case Type</option>
+                                        <optgroup label="Civil">
+                                            <option value="1">Civil</option>
                                         </optgroup>
-                                        <optgroup label="Pacific Time Zone">
-                                            <option value="CA">California</option>
+                                        <optgroup label="Criminal">
+                                            <option value="2">Criminal</option>
                                         </optgroup>
-                                        <optgroup label="Mountain Time Zone">
-                                            <option value="AZ">Arizona</option>
-                                        </optgroup>
-                                        <optgroup label="Central Time Zone">
-                                            <option value="AL">Alabama</option>
-                                        </optgroup>
-                                        <optgroup label="Eastern Time Zone">
-                                            <option value="CT">Connecticut</option>
-                                        </optgroup>
-                                    </select>
+                                    </x-lims.forms.input.select>
                                 </div>
-                                {{--
-                                <x-lims.forms.input.text name="case_type" id="case_type" placeholder="Case Type" /> --}}
                                 <span class="text-danger error-text case_type_error"></span>
                             </div>
                             <div class="col-6">
