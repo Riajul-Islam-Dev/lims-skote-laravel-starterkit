@@ -232,5 +232,9 @@
                 }
             });
         });
+
+        $('.select2').select2({
+        dropdownParent: $('#addBillingModal')
+        });
     });
 </script>
