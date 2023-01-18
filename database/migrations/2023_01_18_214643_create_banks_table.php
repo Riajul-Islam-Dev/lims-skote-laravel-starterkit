@@ -17,6 +17,10 @@ class CreateBanksTable extends Migration
             $table->id();
             $table->string('bank_name');
             $table->string('bank_code');
+            $table->string('branch_name');
+            $table->string('branch_code');
+            $table->string('district');
+            $table->string('address');
             $table->string('created_by');
             $table->string('updated_by');
             $table->string('status');
