@@ -1,68 +1,107 @@
 <div class="container">
-    <div class="modal fade" id="editUserModal" tabindex="-1" aria-labelledby="editUserModalLabel" aria-hidden="true">
+    <div class="modal fade" id="editBillingModal" tabindex="-1" aria-labelledby="editBillingModalLabel" aria-hidden="true">
         <div class="modal-dialog modal-lg">
             <div class="modal-content">
                 <div class="modal-header">
-                    <h5 class="modal-title" id="editUserModalLabel">Edit new user:</h5>
+                    <h5 class="modal-title" id="editBillingModalLabel">Edit new user:</h5>
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
-                <h6 class="mt-2 ms-3">Please fill up the User form carefully to edit. Fields marked with <span
+                <h6 class="mt-2 ms-3">Please fill up the Billing form carefully to edit. Fields marked with <span
                         style="color: red">*</span>
                     are required.</h6>
-                <form action="{{ route('updateUser') }}" method="POST" id="edit_user_form"
+                <form action="{{ route('updateBilling') }}" method="POST" id="edit_user_form"
                     enctype="multipart/form-data">
                     @csrf
                     <div class="modal-body">
-                        <input type="hidden" id="e_user_id" name="e_user_id">
+                        <input type="hidden" id="e_bill_id" name="e_bill_id">
                         <div class="row my-2">
                             <div class="col-6">
-                                <x-lims.forms.input.label for="e_name" label="User Name" star="*" />
-                                <x-lims.forms.input.text name="e_name" id="e_name" placeholder="User Name" />
-                                <span class="text-danger error-text e_name_error"></span>
+                                <x-lims.forms.input.label for="e_invoice_id" label="Invoice ID" star="*" />
+                                <x-lims.forms.input.text name="e_invoice_id" id="e_invoice_id"
+                                    placeholder="Invoice ID" />
+                                <span class="text-danger error-text e_invoice_id_error"></span>
                             </div>
                             <div class="col-6">
-                                <x-lims.forms.input.label for="e_email" label="Email Address" star="*" />
-                                <x-lims.forms.input.email name="e_email" id="e_email" placeholder="Email Address" />
-                                <span class="text-danger error-text e_email_error"></span>
+                                <x-lims.forms.input.label for="e_case_id" label="Case ID" star="*" />
+                                <x-lims.forms.input.text name="e_case_id" id="e_case_id" placeholder="Case ID" />
+                                <span class="text-danger error-text e_case_id_error"></span>
                             </div>
                         </div>
                         <div class="row my-2">
                             <div class="col-6">
-                                <x-lims.forms.input.label for="e_user_password" label="Password" star="*" />
-                                <x-lims.forms.input.password name="e_user_password" id="e_user_password"
-                                    placeholder="Password" />
-                                <span class="text-danger error-text e_user_password_error"></span>
+                                <x-lims.forms.input.label for="e_case_type" label="Case Type" star="*" />
+                                <x-lims.forms.input.select name="e_case_type" id="e_case_type">
+                                    <option value="" disabled>Select Case Type</option>
+                                    <option value="1">Civil</option>
+                                    <option value="2">Criminal</option>
+                                </x-lims.forms.input.select>
+                                <span class="text-danger error-text e_case_type_error"></span>
                             </div>
                             <div class="col-6">
-                                <x-lims.forms.input.label for="e_dob" label="Date of Birth" star="*" />
-                                <x-lims.forms.input.datepicker name="e_dob" id="e_dob"
-                                    placeholder="Date of Birth" />
-                                <span class="text-danger error-text e_dob_error"></span>
-                            </div>
-                        </div>
-                        <div class="row my-2">
-                            <div class="col-6">
-                                <x-lims.forms.input.label for="e_avatar" label="Upload Avatar" star="*" />
-                                <x-lims.forms.input.file name="e_avatar" id="e_avatar" placeholder="Upload Avatar" />
-                                <span class="text-danger error-text e_avatar_error"></span>
-                                <div class="py-3 text-center bg-light" id="avatar_show"></div>
-                            </div>
-                            <div class="col-6">
-                                <x-lims.forms.input.label for="e_role_id" label="Select Role" star="*" />
-                                <x-lims.forms.input.select name="e_role_id" id="e_role_id">
-                                    <option value="option_select" disabled selected>Select Role</option>
-                                    @foreach ($show_role_data as $show_role_data_individual)
-                                        <option value="{{ $show_role_data_individual->id }}">
-                                            {{ $show_role_data_individual->role_name }}</option>
+                                <x-lims.forms.input.label for="e_lawyer_id" label="Lawyer Name" star="*" />
+                                <x-lims.forms.input.select name="e_lawyer_id" id="e_lawyer_id">
+                                    <option value="" disabled>Select Lawyer</option>
+                                    @foreach ($lawyer_data as $lawyer_data_individual)
+                                        @foreach ($user_data as $user_data_individual)
+                                            @if ($user_data_individual->id == $lawyer_data_individual->user_id)
+                                                <option value="{{ $user_data_individual->id }}">
+                                                    {{ $user_data_individual->name }}</option>
+                                            @endif
+                                        @endforeach
                                     @endforeach
                                 </x-lims.forms.input.select>
-                                <span class="text-danger error-text e_role_id_error"></span>
+                                <span class="text-danger error-text e_lawyer_id_error"></span>
                             </div>
                         </div>
                         <div class="row my-2">
                             <div class="col-6">
-                                <x-lims.forms.input.label for="e_status" label="Status" star="*" />
-                                <x-lims.forms.input.toggle name="e_status" id="e_status" />
+                                <x-lims.forms.input.label for="e_bill_amount" label="Bill Amount" star="*" />
+                                <x-lims.forms.input.text name="e_bill_amount" id="e_bill_amount"
+                                    placeholder="Bill Amount" />
+                                <span class="text-danger error-text e_bill_amount_error"></span>
+                            </div>
+                            <div class="col-6">
+                                <x-lims.forms.input.label for="e_bill_date" label="Bill Date" star="*" />
+                                <x-lims.forms.input.datepicker name="e_bill_date" id="e_bill_date"
+                                    placeholder="Bill Date" datepicker_id="e_bill_date_datepicker" />
+                                <span class="text-danger error-text e_bill_date_error"></span>
+                            </div>
+                        </div>
+                        <div class="row my-2">
+                            <div class="col-6">
+                                <x-lims.forms.input.label for="e_district" label="District" star="*" />
+                                <x-lims.forms.input.select name="e_district" id="e_district">
+                                    <option value="" disabled>Select District</option>
+                                    @foreach ($district_data as $district_data_individual)
+                                        <option value="{{ $district_data_individual->district_code }}">
+                                            {{ $district_data_individual->district_name }}</option>
+                                    @endforeach
+                                </x-lims.forms.input.select>
+                                <span class="text-danger error-text e_district_error"></span>
+                            </div>
+                            <div class="col-6">
+                                <x-lims.forms.input.label for="e_bank_name" label="Bank Name" star="*" />
+                                <x-lims.forms.input.select name="e_bank_name" id="e_bank_name">
+                                    <option value="" disabled>Select Bank</option>
+                                    @foreach ($bank_data as $bank_data_individual)
+                                        <option value="{{ $bank_data_individual->bank_code }}">
+                                            {{ $bank_data_individual->bank_name }}</option>
+                                    @endforeach
+                                </x-lims.forms.input.select>
+                                <span class="text-danger error-text e_bank_name_error"></span>
+                            </div>
+                            <div class="col-6">
+                                <x-lims.forms.input.label for="e_cheque_number" label="Cheque Number"
+                                    star="*" />
+                                <x-lims.forms.input.text name="e_cheque_number" id="e_cheque_number"
+                                    placeholder="Cheque Number" />
+                                <span class="text-danger error-text e_cheque_number_error"></span>
+                            </div>
+                        </div>
+                        <div class="row my-2">
+                            <div class="col-6">
+                                <x-lims.forms.input.label for="e_bill_status" label="Bill Status" star="*" />
+                                <x-lims.forms.input.toggle name="e_bill_status" id="e_bill_status" />
                             </div>
                         </div>
                     </div>
@@ -71,7 +110,7 @@
                             data-bs-dismiss="modal"><i class="bx bx-block label-icon"></i> Close</button>
                         <button type="submit" class="btn btn-success waves-effect btn-label waves-light"
                             id="edit_user_btn"><i class="bx bx-check-double label-icon"></i><span
-                                id="edit_user_btn_span"> Update User</span></button>
+                                id="edit_user_btn_span"> Update Bill</span></button>
                     </div>
                 </form>
             </div>

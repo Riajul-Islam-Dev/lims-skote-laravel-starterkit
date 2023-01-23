@@ -86,12 +86,12 @@
             });
         });
 
-        // Edit user ajax request
+        // Edit Billing ajax request
         $(document).on('click', '.edit_billing', function(e) {
             e.preventDefault();
             let id = $(this).attr('id');
             $.ajax({
-                url: '{{ route('editUser') }}',
+                url: '{{ route('editBilling') }}',
                 method: 'get',
                 data: {
                     id: id,
@@ -99,29 +99,30 @@
                 },
                 success: function(response) {
                     // console.log(response)
-                    $("#e_user_id").val(id);
-                    $("#e_name").val(response.name);
-                    $("#e_email").val(response.email);
-                    $("#e_user_password").val("");
-                    $("#e_dob").val(response.dob);
-                    $("#avatar_show").html('<img src="' + response.avatar +
-                        '" width="100" class="img-fluid img-thumbnail">'
-                    );
-                    $("#e_role_id").val(response.role_id);
-                    if (response.status == 1) {
-                        $("#e_status").attr("checked", true);
-                    } else if (response.status == 0) {
-                        $("#e_status").removeAttr("checked");
+                    $("#e_bill_id").val(id);
+                    $("#e_invoice_id").val(response.invoice_id);
+                    $("#e_case_id").val(response.case_id);
+                    $("#e_case_type").val(response.case_type).change();
+                    $("#e_lawyer_id").val(response.lawyer_id).change();
+                    $("#e_bill_amount").val(response.bill_amount);
+                    $("#e_bill_date").val(response.bill_date);
+                    $("#e_district").val(response.district).change();
+                    $("#e_bank_name").val(response.bank_name).change();
+                    $("#e_cheque_number").val(response.cheque_number);
+                    if (response.bill_status == 1) {
+                        $("#e_bill_status").attr("checked", true);
+                    } else if (response.bill_status == 0) {
+                        $("#e_bill_status").removeAttr("checked");
                     }
                 }
             });
         });
 
-        // Update user ajax request
-        $(document).on('submit', '#edit_user_form', function(e) {
+        // Update Billing ajax request
+        $(document).on('submit', '#edit_billing_form', function(e) {
             e.preventDefault();
             var form = this;
-            $("#edit_user_btn_span").text('Updating...');
+            $("#edit_billing_btn_span").text('Updating...');
             $.ajax({
                 url: $(form).attr('action'),
                 method: $(form).attr('method'),
@@ -134,6 +135,7 @@
                     $(form).find("span.error-text").text("");
                 },
                 success: function(data) {
+                    console.log(data)
                     if (data.code == 0) {
                         $.each(data.error, function(prefix, val) {
                             $(form).find("span." + prefix + "_error").text(val[0]);
@@ -142,21 +144,21 @@
                     } else if (data.code == 1) {
                         // console.log(data.Message)
                         $(form)[0].reset();
-                        $("#editUserModal").modal("hide");
+                        $("#editBillingModal").modal("hide");
                         Swal.fire(
                             'Added!',
-                            'User Edited Successfully!',
+                            'Billing Edited Successfully!',
                             'success'
                         )
-                        fetchAllUsers();
+                        fetchAllbillings();
                         toastr.success(data.Message);
                     }
-                    $("#edit_user_btn_span").text('Update User');
+                    $("#edit_billing_btn_span").text('Update Billing');
                 },
             });
         });
 
-        // Delete user ajax request
+        // Delete Billing ajax request
         $(document).on('click', '.delete_billing', function(e) {
             e.preventDefault();
             let id = $(this).attr('id');
@@ -205,7 +207,11 @@
         });
 
         $('.select2').select2({
-        dropdownParent: $('#addBillingModal')
+            dropdownParent: $('#addBillingModal')
+        });
+
+        $('.select2').select2({
+            dropdownParent: $('#editBillingModal')
         });
     });
 </script>

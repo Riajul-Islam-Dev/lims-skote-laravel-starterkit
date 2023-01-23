@@ -113,7 +113,6 @@ class BillingController extends Controller
                 <td>' . $data->cheque_number . '</td>
                 <td><div class="' . $bill_status_badge_class . '">' . $data->bill_status . '</div></td>
                 <td>
-                <a href="#" id="' . $data->id . '" class="btn btn-info waves-effect btn-label waves-light show_billing" data-bs-toggle="modal" data-bs-target="#showBillingModal"><i class="bx bx-user-circle label-icon"></i> View</a>
                 <a href="#" id="' . $data->id . '" class="btn btn-warning waves-effect btn-label waves-light edit_billing" data-bs-toggle="modal" data-bs-target="#editBillingModal"><i class="bx bx-pencil label-icon"></i> Edit</a>
                 <a href="#" id="' . $data->id . '" class="btn btn-danger waves-effect btn-label waves-light delete_billing"><i class="bx bx-trash label-icon"></i> Delete</a>
                 </td>
@@ -125,7 +124,7 @@ class BillingController extends Controller
             echo '<h1 class="text-center text-secondary my-5">No record present in the database!</h1>';
         }
     }
-
+    
     // Save Billing ajax request
     public function saveBilling(Request $request)
     {
@@ -138,6 +137,7 @@ class BillingController extends Controller
             'bill_date' => ['required', 'string', 'max:255'],
             'district' => ['required', 'string', 'max:255'],
             // 'generated_by' => ['required', 'string', 'max:255'],
+            // 'updated_by' => ['required', 'string', 'max:255'],
             'bank_name' => ['required', 'string', 'max:255'],
             'cheque_number' => ['required', 'string', 'max:255'],
             // 'bill_status' => ['required', 'string', 'max:255'],
@@ -192,67 +192,66 @@ class BillingController extends Controller
         }
     }
 
-    // handle edit an user ajax request
-    public function editUser(Request $request)
+    // handle edit an Billing ajax request
+    public function editBilling(Request $request)
     {
         $id = $request->id;
-        $edit_user_data = User::find($id);
+        $edit_billing_data = Billing::find($id);
+        $edit_billing_data->bill_date = date('d-m-Y', strtotime($edit_billing_data->bill_date));
 
-        return response()->json($edit_user_data);
+        return response()->json($edit_billing_data);
     }
 
-    // update user ajax request
-    public function updateUser(Request $request)
+    // Update Billing ajax request
+    public function updateBilling(Request $request)
     {
         $validator = Validator::make($request->all(), [
-            'e_name' => ['required', 'string', 'max:255'],
-            'e_email' => ['required', 'string', 'email', 'max:255'],
-            'e_user_password' => ['nullable', 'string', 'min:6'],
-            'e_dob' => ['required', 'date', 'before:today'],
-            'e_avatar' => ['nullable', 'image', 'mimes:jpg,jpeg,png', 'max:1024'],
-            'e_role_id' => ['required', 'string', 'max:255'],
-            // 'e_status' => ['string', 'max:255'],
+            'e_invoice_id' => ['required', 'string', 'max:255'],
+            'e_case_id' => ['required', 'string', 'max:255'],
+            'e_case_type' => ['required', 'string', 'max:255'],
+            'e_lawyer_id' => ['required', 'string', 'max:255'],
+            'e_bill_amount' => ['required', 'numeric', 'max:99999'],
+            'e_bill_date' => ['required', 'string', 'max:255'],
+            'e_district' => ['required', 'string', 'max:255'],
+            // 'generated_by' => ['required', 'string', 'max:255'],
+            // 'updated_by' => ['required', 'string', 'max:255'],
+            'e_bank_name' => ['required', 'string', 'max:255'],
+            'e_cheque_number' => ['required', 'string', 'max:255'],
+            // 'bill_status' => ['required', 'string', 'max:255'],
+        ],
+        [
+            'bill_amount.required' => 'The bill amount field is required, The bill amount must be a number, ( - _ , . / \ ) not allowed!',
         ]);
 
         if ($validator->passes()) {
 
-            $id = $request->e_user_id;
-            $user_old_data = User::find($id);
+            $id = $request->e_bill_id;
+            $billing_old_data = Billing::find($id);
 
-            if (!empty($request->e_avatar)) {
-                $image_path = public_path() . $user_old_data->avatar;  // Value is not URL but directory file path
-                if (File::exists($image_path)) {
-                    File::delete($image_path);
-                }
-                $avatar = $request->e_avatar;
-                $avatarName = time() . '.' . $avatar->getClientOriginalExtension();
-                $avatarPath = public_path('/images/');
-                $avatar->move($avatarPath, $avatarName);
-                $user_old_data->avatar = "/images/" . $avatarName;
-            }
+            $billing_old_data->invoice_id = $request->e_invoice_id;
+            $billing_old_data->case_id = $request->e_case_id;
+            $billing_old_data->case_type = $request->e_case_type;
+            $billing_old_data->lawyer_id = $request->e_lawyer_id;
+            $billing_old_data->bill_amount = $request->e_bill_amount;
+            $billing_old_data->bill_date = date('Y-m-d', strtotime($request->e_bill_date));
+            $billing_old_data->district = $request->e_district;
+            $billing_old_data->updated_by = Auth::user()->id;
+            $billing_old_data->bank_name = $request->e_bank_name;
+            $billing_old_data->cheque_number = $request->e_cheque_number;
 
-            if (!empty($request->e_user_password)) {
-                $user_old_data->password = Hash::make($request->e_user_password);
-            }
-
-            $user_old_data->name = $request->e_name;
-            $user_old_data->email = $request->e_email;
-            $user_old_data->dob = date('Y-m-d', strtotime($request->e_dob));
-            $user_old_data->role_id = $request->e_role_id;
-
-            if ($request->e_status == "on") {
-                $request->e_status = "1";
+            if ($request->e_bill_status == "on") {
+                $request->e_bill_status = "1";
             } else {
-                $request->e_status = "0";
+                $request->e_bill_status = "0";
             }
-            $user_old_data->status = $request->e_status;
+            $billing_old_data->bill_status = $request->e_bill_status;
 
-            $query = $user_old_data->save();
+            $query = $billing_old_data->save();
 
             if ($query) {
                 return response()->json([
                     'isSuccess' => true,
-                    'Message' => "User Details Updated successfully!",
+                    'Message' => "Billing Details Updated successfully!",
                     'code' => 1
                 ], 200); // Status code here
             } else {
@@ -276,7 +275,6 @@ class BillingController extends Controller
     public function deleteBilling(Request $request)
     {
         $id = $request->id;
-        $delete_user_data = Billing::find($id);
 
         if (Billing::destroy($id)) {
             return response()->json([

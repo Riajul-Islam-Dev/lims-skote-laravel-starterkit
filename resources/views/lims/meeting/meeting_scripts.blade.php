@@ -101,7 +101,7 @@
                     _token: '{{ csrf_token() }}'
                 },
                 success: function(response) {
-                    console.log(response)
+                    // console.log(response)
                     $("#e_meeting_id").val(id);
                     $("#e_division").val($("#e_division option").eq(response.division)
                         .val());
@@ -137,6 +137,7 @@
                     $(form).find("span.error-text").text("");
                 },
                 success: function(data) {
+                    console.log(data)
                     if (data.code == 0) {
                         $.each(data.error, function(prefix, val) {
                             $(form).find("span." + prefix + "_error").text(val[0]);

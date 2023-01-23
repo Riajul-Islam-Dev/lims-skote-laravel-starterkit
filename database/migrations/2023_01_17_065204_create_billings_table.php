@@ -23,6 +23,7 @@ class CreateBillingsTable extends Migration
             $table->string('bill_date');
             $table->string('district');
             $table->string('generated_by');
+            $table->string('updated_by')->nullable();
             $table->string('bank_name');
             $table->string('cheque_number');
             $table->string('bill_status');

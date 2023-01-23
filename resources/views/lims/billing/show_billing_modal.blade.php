@@ -38,7 +38,8 @@
                                                     <p class="user_status"></p>
                                                 </div>
                                             </div>
-                                            <button type="button" class="btn btn-sm btn-danger btn-label float-end mb-2"
+                                            <button type="button"
+                                                class="btn btn-sm btn-danger btn-label float-end mb-2"
                                                 data-bs-dismiss="modal"><i class="bx bx-window-close label-icon"></i>
                                                 Close</button>
                                             <form action="{{ route('viewPDF') }}" method="POST" target="_blank">
