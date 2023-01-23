@@ -20,7 +20,6 @@
                 url: '{{ route('fetchAllBilling') }}',
                 method: 'get',
                 success: function(response) {
-                    console.log(response)
                     $("#show_all_billings").html(response);
                     var table = $('#datatable-buttons').DataTable({
                         // lengthChange: false,
@@ -88,7 +87,7 @@
         });
 
         // Edit user ajax request
-        $(document).on('click', '.edit_user', function(e) {
+        $(document).on('click', '.edit_billing', function(e) {
             e.preventDefault();
             let id = $(this).attr('id');
             $.ajax({
@@ -158,7 +157,7 @@
         });
 
         // Delete user ajax request
-        $(document).on('click', '.delete_user', function(e) {
+        $(document).on('click', '.delete_billing', function(e) {
             e.preventDefault();
             let id = $(this).attr('id');
             let csrf = '{{ csrf_token() }}';
@@ -173,7 +172,7 @@
             }).then((result) => {
                 if (result.isConfirmed) {
                     $.ajax({
-                        url: '{{ url('delete_user') }}',
+                        url: '{{ url('delete_billing') }}',
                         method: 'delete',
                         data: {
                             id: id,
@@ -187,51 +186,22 @@
                                     'Something went wrong!',
                                     'error'
                                 )
-                                fetchAllUsers();
+                                fetchAllBillings();
                                 toastr.error(response.Message);
                             } else if (response.code == 1) {
                                 console.log(response);
                                 Swal.fire(
                                     'Deleted!',
-                                    'User has been deleted.',
+                                    'Billing has been deleted.',
                                     'success'
                                 )
-                                fetchAllUsers();
+                                fetchAllBillings();
                                 toastr.success(response.Message);
                             }
                         }
                     });
                 }
             })
-        });
-
-        // Show User ajax request
-        $(document).on('click', '.show_user', function(e) {
-            e.preventDefault();
-            let id = $(this).attr('id');
-            $.ajax({
-                url: '{{ route('showUser') }}',
-                method: 'get',
-                data: {
-                    id: id,
-                    _token: '{{ csrf_token() }}'
-                },
-                success: function(response) {
-                    // console.log(response)
-                    $(".user_avatar").attr('src', response.avatar);
-                    $(".user_role_name").text(response.role_name);
-                    $(".user_id").text(response.id);
-                    $(".user_name").text(response.name);
-                    $(".user_email").text(response.email);
-                    $(".user_dob").text(response.dob);
-                    $(".user_pdf").attr('value', response.id);
-                    if (response.status == 1) {
-                        $(".user_status").text("Active");
-                    } else {
-                        $(".user_status").text("Inactive");
-                    }
-                }
-            });
         });
 
         $('.select2').select2({

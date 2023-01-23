@@ -272,47 +272,24 @@ class BillingController extends Controller
         }
     }
 
-    // Delete user ajax request
-    public function deleteUser(Request $request)
+    // Delete Billing ajax request
+    public function deleteBilling(Request $request)
     {
         $id = $request->id;
-        $delete_user_data = User::find($id);
+        $delete_user_data = Billing::find($id);
 
-        $image_path = public_path() . $delete_user_data->avatar;  // Value is not URL but directory file path
-        if (File::exists($image_path)) {
-            if (File::delete($image_path)) {
-                User::destroy($id);
-                return response()->json([
-                    'isSuccess' => true,
-                    'Message' => 'User deleted successfully!',
-                    'code' => 1
-                ], 200); // Status code here
-            } else {
-                return response()->json([
-                    'isSuccess' => false,
-                    'Message' => 'Something went wrong!',
-                    'code' => 0
-                ], 200); // Status code here
-            }
+        if (Billing::destroy($id)) {
+            return response()->json([
+                'isSuccess' => true,
+                'Message' => 'Billing deleted successfully!',
+                'code' => 1
+            ], 200); // Status code here
         } else {
             return response()->json([
                 'isSuccess' => false,
-                'Message' => 'No Avatar found!',
+                'Message' => 'Something went wrong!',
                 'code' => 0
             ], 200); // Status code here
         }
-    }
-
-    // Show User ajax request
-    public function showUser(Request $request)
-    {
-        $id = $request->id;
-        $show_user_data = User::find($id);
-
-        $role_data = Role::find($show_user_data->role_id);
-
-        $show_user_data->role_name = $role_data->role_name;
-
-        return response()->json($show_user_data);
     }
 }
