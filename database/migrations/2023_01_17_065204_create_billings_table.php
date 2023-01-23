@@ -23,9 +23,9 @@ class CreateBillingsTable extends Migration
             $table->string('bill_date');
             $table->string('district');
             $table->string('generated_by');
-            $table->string('cheque_number');
             $table->string('bank_name');
-            $table->string('status');
+            $table->string('cheque_number');
+            $table->string('bill_status');
             $table->timestamps();
         });
     }

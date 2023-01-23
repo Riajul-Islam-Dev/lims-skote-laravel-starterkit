@@ -20,6 +20,7 @@
                 url: '{{ route('fetchAllBilling') }}',
                 method: 'get',
                 success: function(response) {
+                    console.log(response)
                     $("#show_all_billings").html(response);
                     var table = $('#datatable-buttons').DataTable({
                         // lengthChange: false,

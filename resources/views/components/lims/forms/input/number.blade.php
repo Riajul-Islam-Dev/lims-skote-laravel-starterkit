@@ -1,3 +1,3 @@
 <div>
-    <!-- Act only according to that maxim whereby you can, at the same time, will that it should become a universal law. - Immanuel Kant -->
+    <input type="number" {{ $attributes->merge(['class' => 'form-control']) }} @error('name') is-invalid @enderror>
 </div>

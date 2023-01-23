@@ -15,8 +15,7 @@ class PanelLawyerController extends Controller
     // Panel Lawyer data table page view
     public function indexPanelLawyer()
     {
-        $condition = ['role_id' => 3];
-        $show_user_data = User::where($condition)->get();
+        $show_user_data = User::where('role_id','=', '5')->get();
         return view('Lims/panel_lawyer/show_panel_lawyer', compact('show_user_data'));
     }
 
@@ -53,7 +52,7 @@ class PanelLawyerController extends Controller
 
                 $user_details = 'Data not found';
                 foreach ($show_user_data as $user_data) {
-                    if ($user_data->id == $data->user_id && $user_data->role_id == 3) {
+                    if ($user_data->id == $data->user_id && $user_data->role_id == 5) {
                         $user_details = $user_data;
                     }
                 }
