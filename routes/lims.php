@@ -17,6 +17,7 @@ use App\Http\Controllers\Lims\DistrictController;
 use App\Http\Controllers\Lims\PanelLawyerController;
 use App\Http\Controllers\Lims\MeetingController;
 use App\Http\Controllers\Lims\BillingController;
+use App\Http\Controllers\Lims\BillReportController;
 use App\Http\Controllers\Lims\NotificationController;
 use App\Http\Controllers\Lims\IdeaBoxController;
 use App\Http\Controllers\Lims\MailController;
@@ -168,6 +169,20 @@ Route::group(['prefix' => '', 'middleware' => ['auth']], function () {
     Route::post('update_billing', [BillingController::class, 'updateBilling'])->name('updateBilling');
     Route::delete('delete_billing', [BillingController::class, 'deleteBilling'])->name('deleteBilling');
     Route::get('show_billing', [BillingController::class, 'showBilling'])->name('showBilling');
+});
+
+// Bill Report
+Route::group(['prefix' => '', 'middleware' => ['auth']], function () {
+    Route::get('index_bill_report', [BillReportController::class, 'index'])->name('indexBillReport');
+    Route::get('fetch_all_bill_report', [BillReportController::class, 'fetchAllBillReport'])->name('fetchAllBillReport');
+    Route::get('create_bill_report', [BillReportController::class, 'create'])->name('createBillReport');
+    Route::get('store_bill_report', [BillReportController::class, 'store'])->name('storeBillReport');
+    Route::get('show_bill_report', [BillReportController::class, 'show'])->name('showBillReport');
+    Route::get('edit_bill_report', [BillReportController::class, 'edit'])->name('editBillReport');
+    Route::post('update_bill_report', [BillReportController::class, 'update'])->name('updateBillReport');
+    Route::post('destroy_bill_report', [BillReportController::class, 'destroy'])->name('destroyBillReport');
+    Route::delete('delete_bill_report', [BillReportController::class, 'delete'])->name('deleteBillReport');
+    Route::post('save_bill_report', [BillReportController::class, 'save'])->name('saveBillReport');
 });
 
 // Notification

@@ -528,10 +528,16 @@
                     </li>
 
                     <li class="nav-item dropdown">
-                        <a class="nav-link dropdown-toggle arrow-none" href="{{ route('indexBilling') }}"
-                            id="topnav-billing" role="button">
+                        <a class="nav-link dropdown-toggle arrow-none" href="#" id="topnav-bills" role="button">
                             <i class="bx bx-credit-card me-2"></i><span key="t-layouts">Billings</span>
+                            <div class="arrow-down"></div>
                         </a>
+
+                        <div class="dropdown-menu" aria-labelledby="topnav-bills">
+                            <a class="dropdown-item" href="{{ route('indexBilling') }}">{{ __('Bills') }}</a>
+                            <a class="dropdown-item" href="{{ route('indexBillReport') }}">{{ __('Bill Report')
+                                }}</a>
+                        </div>
                     </li>
 
                     <li class="nav-item dropdown">
