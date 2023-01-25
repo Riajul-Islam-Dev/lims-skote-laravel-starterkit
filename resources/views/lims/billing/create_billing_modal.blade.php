@@ -1,5 +1,6 @@
 <div class="container">
-    <div class="modal fade" id="addBillingModal" tabindex="-1" aria-labelledby="addBillingModalLabel" aria-hidden="true">
+    <div class="modal fade" id="addBillingModal" tabindex="-1" aria-labelledby="addBillingModalLabel"
+        aria-hidden="true">
         <div class="modal-dialog modal-lg">
             <div class="modal-content">
                 <div class="modal-header">
@@ -28,7 +29,7 @@
                         <div class="row my-2">
                             <div class="col-6">
                                 <x-lims.forms.input.label for="case_type" label="Case Type" star="*" />
-                                <x-lims.forms.input.select name="case_type" id="case_type">
+                                <x-lims.forms.input.select name="case_type" id="case_type" class="add_select">
                                     <option value="case_type" disabled selected>Select Case Type</option>
                                     <option value="1">Civil</option>
                                     <option value="2">Criminal</option>
@@ -37,15 +38,15 @@
                             </div>
                             <div class="col-6">
                                 <x-lims.forms.input.label for="lawyer_id" label="Lawyer Name" star="*" />
-                                <x-lims.forms.input.select name="lawyer_id" id="lawyer_id">
+                                <x-lims.forms.input.select name="lawyer_id" id="lawyer_id" class="add_select">
                                     <option value="option_select" disabled selected>Select Lawyer</option>
                                     @foreach ($lawyer_data as $lawyer_data_individual)
-                                        @foreach ($user_data as $user_data_individual)
-                                            @if ($user_data_individual->id == $lawyer_data_individual->user_id)
-                                                <option value="{{ $user_data_individual->id }}">
-                                                    {{ $user_data_individual->name }}</option>
-                                            @endif
-                                        @endforeach
+                                    @foreach ($user_data as $user_data_individual)
+                                    @if ($user_data_individual->id == $lawyer_data_individual->user_id)
+                                    <option value="{{ $user_data_individual->id }}">
+                                        {{ $user_data_individual->name }}</option>
+                                    @endif
+                                    @endforeach
                                     @endforeach
                                 </x-lims.forms.input.select>
                                 <span class="text-danger error-text lawyer_id_error"></span>
@@ -68,22 +69,22 @@
                         <div class="row my-2">
                             <div class="col-6">
                                 <x-lims.forms.input.label for="district" label="District" star="*" />
-                                <x-lims.forms.input.select name="district" id="district">
+                                <x-lims.forms.input.select name="district" id="district" class="add_select">
                                     <option value="option_select" disabled selected>Select District</option>
                                     @foreach ($district_data as $district_data_individual)
-                                        <option value="{{ $district_data_individual->district_code }}">
-                                            {{ $district_data_individual->district_name }}</option>
+                                    <option value="{{ $district_data_individual->district_code }}">
+                                        {{ $district_data_individual->district_name }}</option>
                                     @endforeach
                                 </x-lims.forms.input.select>
                                 <span class="text-danger error-text district_error"></span>
                             </div>
                             <div class="col-6">
                                 <x-lims.forms.input.label for="bank_name" label="Bank Name" star="*" />
-                                <x-lims.forms.input.select name="bank_name" id="bank_name">
+                                <x-lims.forms.input.select name="bank_name" id="bank_name" class="add_select">
                                     <option value="option_select" disabled selected>Select Bank</option>
                                     @foreach ($bank_data as $bank_data_individual)
-                                        <option value="{{ $bank_data_individual->bank_code }}">
-                                            {{ $bank_data_individual->bank_name }}</option>
+                                    <option value="{{ $bank_data_individual->bank_code }}">
+                                        {{ $bank_data_individual->bank_name }}</option>
                                     @endforeach
                                 </x-lims.forms.input.select>
                                 <span class="text-danger error-text bank_name_error"></span>

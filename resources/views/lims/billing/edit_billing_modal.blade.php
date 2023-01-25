@@ -30,7 +30,7 @@
                         <div class="row my-2">
                             <div class="col-6">
                                 <x-lims.forms.input.label for="e_case_type" label="Case Type" star="*" />
-                                <x-lims.forms.input.select name="e_case_type" id="e_case_type">
+                                <x-lims.forms.input.select name="e_case_type" id="e_case_type" class="edit_select">
                                     <option value="" disabled>Select Case Type</option>
                                     <option value="1">Civil</option>
                                     <option value="2">Criminal</option>
@@ -39,7 +39,7 @@
                             </div>
                             <div class="col-6">
                                 <x-lims.forms.input.label for="e_lawyer_id" label="Lawyer Name" star="*" />
-                                <x-lims.forms.input.select name="e_lawyer_id" id="e_lawyer_id">
+                                <x-lims.forms.input.select name="e_lawyer_id" id="e_lawyer_id" class="edit_select">
                                     <option value="" disabled>Select Lawyer</option>
                                     @foreach ($lawyer_data as $lawyer_data_individual)
                                         @foreach ($user_data as $user_data_individual)
@@ -70,7 +70,7 @@
                         <div class="row my-2">
                             <div class="col-6">
                                 <x-lims.forms.input.label for="e_district" label="District" star="*" />
-                                <x-lims.forms.input.select name="e_district" id="e_district">
+                                <x-lims.forms.input.select name="e_district" id="e_district" class="edit_select">
                                     <option value="" disabled>Select District</option>
                                     @foreach ($district_data as $district_data_individual)
                                         <option value="{{ $district_data_individual->district_code }}">
@@ -81,7 +81,7 @@
                             </div>
                             <div class="col-6">
                                 <x-lims.forms.input.label for="e_bank_name" label="Bank Name" star="*" />
-                                <x-lims.forms.input.select name="e_bank_name" id="e_bank_name">
+                                <x-lims.forms.input.select name="e_bank_name" id="e_bank_name" class="edit_select">
                                     <option value="" disabled>Select Bank</option>
                                     @foreach ($bank_data as $bank_data_individual)
                                         <option value="{{ $bank_data_individual->bank_code }}">

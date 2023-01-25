@@ -206,11 +206,11 @@
             })
         });
 
-        $('.select2').select2({
+        $('.add_select').select2({
             dropdownParent: $('#addBillingModal')
         });
 
-        $('.select2').select2({
+        $('.edit_select').select2({
             dropdownParent: $('#editBillingModal')
         });
     });
