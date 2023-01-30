@@ -458,9 +458,9 @@
         <nav class="navbar navbar-light navbar-expand-lg topnav-menu">
 
             <div class="collapse navbar-collapse" id="topnav-menu-content">
-                <ul class="navbar-nav">
+                <ul class="navbar-nav" style="flex-wrap: wrap">
 
-                    <li class="nav-item dropdown">
+                    <li class="nav-item dropdown" style="padding-left: 20px !important">
                         <a class="nav-link dropdown-toggle arrow-none" href="#" id="topnav-dashboard" role="button">
                             <i class="bx bx-home-circle me-2"></i><span
                                 key="t-dashboards">@lang('translation.Dashboards')</span>

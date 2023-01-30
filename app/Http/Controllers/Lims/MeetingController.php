@@ -51,8 +51,8 @@ class MeetingController extends Controller
                         <th>ID</th>
                         <th>Division</th>
                         <th>District</th>
-                        <th>Start_date</th>
-                        <th>End_date</th>
+                        <th>Start Date</th>
+                        <th>End Date</th>
                         <th>Month</th>
                         <th>Year</th>
                         <th>Meeting Held Status</th>

@@ -6,6 +6,8 @@ use App\Http\Controllers\Controller;
 use App\Models\Lims\BillReport;
 use App\Http\Requests\StoreBillReportRequest;
 use App\Http\Requests\UpdateBillReportRequest;
+use App\Models\Lims\PanelLawyer;
+use App\Models\Lims\User;
 
 class BillReportController extends Controller
 {
@@ -16,9 +18,12 @@ class BillReportController extends Controller
      */
     public function index()
     {
+        $lawyer_data = PanelLawyer::all();
+        $user_data = User::all();
+        
         // $show_bill_report_data = BillReport::all();
         // return view('Lims/idea_box/show_idea_box', compact("show_bill_report_data"));
-        return view('Lims/bill_report/show_bill_report');
+        return view('Lims/bill_report/show_bill_report', compact('lawyer_data','user_data'));
     }
 
     /**
