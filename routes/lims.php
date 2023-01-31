@@ -176,6 +176,8 @@ Route::group(['prefix' => '', 'middleware' => ['auth']], function () {
     Route::get('index_bill_report', [BillReportController::class, 'index'])->name('indexBillReport');
     Route::get('fetch_all_bill_report', [BillReportController::class, 'fetchAllBillReport'])->name('fetchAllBillReport');
     Route::get('create_bill_report', [BillReportController::class, 'create'])->name('createBillReport');
+    Route::post('search_by_case', [BillReportController::class, 'searchByCase'])->name('searchByCase');
+    Route::post('search_by_lawyer', [BillReportController::class, 'searchByLawyer'])->name('searchByLawyer');
     Route::get('store_bill_report', [BillReportController::class, 'store'])->name('storeBillReport');
     Route::get('show_bill_report', [BillReportController::class, 'show'])->name('showBillReport');
     Route::get('edit_bill_report', [BillReportController::class, 'edit'])->name('editBillReport');
